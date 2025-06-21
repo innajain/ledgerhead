@@ -1,4 +1,9 @@
 import { useState } from 'react';
+// import { ExpenseFormInitial } from '../forms/ExpenseForm';
+// import { IncomeFormInitial } from '../forms/IncomeForm';
+// import { InvestmentFormInitial } from '../forms/InvestmentForm';
+// import { RedemptionFormInitial } from '../forms/RedemptionForm';
+// import { TransferFormInitial } from '../forms/TransferForm';
 
 /**
  * Shared hook for managing form state, error, and success messages.
@@ -25,3 +30,5 @@ export function useFormState<T extends Record<string, any>>(initialForm: T) {
     resetForm,
   };
 }
+
+// type FormType = ExpenseFormInitial | IncomeFormInitial | InvestmentFormInitial | RedemptionFormInitial | TransferFormInitial;

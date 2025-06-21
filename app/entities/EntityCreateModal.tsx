@@ -144,7 +144,6 @@ export function EntityCreateModal({
         setForm={f => setForms({ ...forms, ACCOUNT: f })}
         onSubmit={async data => {
           if (editId) {
-            // @ts-ignore
             await updateAccount(editId, { name: data.name, group: data.group });
           } else {
             await createAccount({ name: data.name, group: data.group });

@@ -9,11 +9,6 @@ import { getTodayDDMMYYYY, toDDMMYYYY, toHHMM } from '../components/dateUtils';
 import { useFormState } from '../components/useFormState';
 import { FormStatusMessages } from '../components/FormStatusMessages';
 
-function formatDateForDisplay(dateString: string) {
-  const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
-  return new Date(dateString).toLocaleDateString(undefined, options);
-}
-
 export interface ExpenseFormInitial {
   id?: string;
   account_id?: string;
@@ -25,7 +20,7 @@ export interface ExpenseFormInitial {
 }
 
 export function ExpenseForm({ onSuccess, initial }: { onSuccess: () => void; initial?: ExpenseFormInitial }) {
-  const { accounts, expenseItems, loading, refreshEntities } = useLedgerData();
+  const { accounts, expenseItems, loading } = useLedgerData();
   const initialForm = {
     fromAccount: '',
     toSink: '',
@@ -96,7 +91,7 @@ export function ExpenseForm({ onSuccess, initial }: { onSuccess: () => void; ini
         setSuccess('');
         onSuccess();
       }, 1000);
-    } catch (err: unknown) {
+    } catch {
       setError('Failed to save expense transaction.');
     }
   };

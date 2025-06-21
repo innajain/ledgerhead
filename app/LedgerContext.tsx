@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react';
 import { getAccounts, getExpenseItems, getIncomeSources, getMutualFunds, getTransactions, MutualFundWithUnits } from '@/server actions/db';
 import type { account, expense_item, income_source, transaction } from '@/generated/prisma';
 import { usePreview } from './PreviewContext';
@@ -32,7 +32,7 @@ export function LedgerDataProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const { preview, inPreview } = usePreview();
 
-  const refreshEntities = async () => {
+  const refreshEntities = useCallback(async () => {
     if (inPreview) return; // Don't refresh in preview mode
     setLoading(true);
     const [acc, exp, inc, mf, txs] = await Promise.all([getAccounts(), getExpenseItems(), getIncomeSources(), getMutualFunds(), getTransactions()]);
@@ -42,7 +42,7 @@ export function LedgerDataProvider({ children }: { children: ReactNode }) {
     setMutualFunds(mf);
     setTransactions(txs);
     setLoading(false);
-  };
+  }, [inPreview]);
 
   React.useEffect(() => {
     if (!inPreview) refreshEntities();
@@ -79,7 +79,7 @@ export function LedgerDataProvider({ children }: { children: ReactNode }) {
       setTransactions(preview.transaction);
       setLoading(false);
     }
-  }, [inPreview, preview]);
+  }, [inPreview, preview, refreshEntities]);
 
   return (
     <LedgerContext.Provider value={{ accounts, expenseItems, incomeSources, mutualFunds, transactions, refreshEntities, loading }}>

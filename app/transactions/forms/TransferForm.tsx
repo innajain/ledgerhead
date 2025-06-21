@@ -1,18 +1,12 @@
 import React from 'react';
-import { AccountSelector, filterAccounts } from '../components/AccountSelector';
+import { AccountSelector } from '../components/AccountSelector';
 import { CustomDatePicker } from '../components/CustomDatePicker';
 import { updateTransferTransaction, createTransferTransaction } from '@/server actions/db';
 import { NoteField } from '../components/NoteField';
 import { FormButtonStack } from '../components/FormButtonStack';
-import type { account } from '@/generated/prisma';
 import { useLedgerData } from '../../LedgerContext';
 import { getTodayDDMMYYYY, toDDMMYYYY, toHHMM } from '../components/dateUtils';
 import { useFormState } from '../components/useFormState';
-import { FormStatusMessages } from '../components/FormStatusMessages';
-import { AmountDateTimeFields, FormRow } from '../components/AmountDateTimeFields';
-
-// Example account type: { id: string; name: string; group: string }
-// const accounts: { id: string; name: string; group: string }[] = [];
 
 export interface TransferFormInitial {
   id?: string;
@@ -25,7 +19,7 @@ export interface TransferFormInitial {
 }
 
 export function TransferForm({ onSuccess, initial }: { onSuccess: () => void; initial?: TransferFormInitial }) {
-  const { accounts, loading, refreshEntities } = useLedgerData();
+  const { accounts, loading } = useLedgerData();
   const initialForm = {
     fromAccount: '',
     toAccount: '',
@@ -34,7 +28,7 @@ export function TransferForm({ onSuccess, initial }: { onSuccess: () => void; in
     time: '',
     note: '',
   };
-  const { form, setForm, error, setError, success, setSuccess, resetForm } = useFormState(initialForm);
+  const { form, setForm, setError, setSuccess, resetForm } = useFormState(initialForm);
 
   // Track if editing
   const isEdit = !!(initial && initial.id);
@@ -123,7 +117,7 @@ export function TransferForm({ onSuccess, initial }: { onSuccess: () => void; in
         setSuccess('');
         onSuccess();
       }, 1000);
-    } catch (err: unknown) {
+    } catch {
       setError('Failed to save transfer transaction.');
     }
   };

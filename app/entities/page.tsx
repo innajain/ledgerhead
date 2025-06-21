@@ -21,7 +21,6 @@ export default function EntitiesPage() {
   >("ACCOUNT");
   const [editId, setEditId] = React.useState<string | null>(null);
   const [error, setError] = React.useState("");
-  const [success, setSuccess] = React.useState("");
 
   const handleEdit = (
     type: 'ACCOUNT' | 'INCOME_SOURCE' | 'EXPENSE_ITEM' | 'MUTUAL_FUND',
@@ -90,7 +89,6 @@ export default function EntitiesPage() {
         }}
       />
       {error && <div className="text-red-600 text-sm mb-2">{error}</div>}
-      {success && <div className="text-green-600 text-sm mb-2">{success}</div>}
       <div className="border rounded bg-gray-50 p-4 overflow-x-auto">
         {loading ? (
           <p className="italic text-sm text-gray-500 p-4">Loading entities...</p>

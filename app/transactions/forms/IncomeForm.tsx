@@ -8,7 +8,6 @@ import { useLedgerData } from '../../LedgerContext';
 import { getTodayDDMMYYYY, toDDMMYYYY, toHHMM } from '../components/dateUtils';
 import { useFormState } from '../components/useFormState';
 import { FormStatusMessages } from '../components/FormStatusMessages';
-import { AmountDateTimeFields, FormRow } from '../components/AmountDateTimeFields';
 
 export interface IncomeFormInitial {
   id?: string;
@@ -21,7 +20,7 @@ export interface IncomeFormInitial {
 }
 
 export function IncomeForm({ onSuccess, initial }: { onSuccess: () => void; initial?: IncomeFormInitial }) {
-  const { accounts, incomeSources, loading, refreshEntities } = useLedgerData();
+  const { accounts, incomeSources, loading } = useLedgerData();
   const initialForm = {
     fromSource: '',
     toAccount: '',
@@ -129,7 +128,7 @@ export function IncomeForm({ onSuccess, initial }: { onSuccess: () => void; init
         setSuccess('');
         onSuccess();
       }, 1000);
-    } catch (err: unknown) {
+    } catch {
       setError('Failed to save income transaction.');
     }
   };

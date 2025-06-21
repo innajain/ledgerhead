@@ -9,14 +9,13 @@ import { useLedgerData } from '../../LedgerContext';
 import { getTodayDDMMYYYY, toDDMMYYYY, toHHMM } from '../components/dateUtils';
 import { useFormState } from '../components/useFormState';
 import { FormStatusMessages } from '../components/FormStatusMessages';
-import { AmountDateTimeFields, FormRow } from '../components/AmountDateTimeFields';
 
 export type InvestmentFormInitial = transaction & {
   investment_transaction: investment_transaction & { mutual_fund_units_lot: mutual_fund_units_lot };
 };
 
 export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; initial?: InvestmentFormInitial }) {
-  const { accounts, mutualFunds, loading, refreshEntities } = useLedgerData();
+  const { accounts, mutualFunds, loading } = useLedgerData();
   const initialForm = {
     fromAccount: '',
     toMutualFund: '',
@@ -135,7 +134,7 @@ export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; 
         setSuccess('');
         onSuccess();
       }, 1000);
-    } catch (err: unknown) {
+    } catch {
       setError('Failed to save investment transaction.');
     }
   };

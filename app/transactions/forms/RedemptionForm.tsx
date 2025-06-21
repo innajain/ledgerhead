@@ -4,17 +4,10 @@ import { CustomDatePicker } from '../components/CustomDatePicker';
 import { createRedemptionTransaction, updateRedemptionTransaction } from '@/server actions/db';
 import { NoteField } from '../components/NoteField';
 import { FormButtonStack } from '../components/FormButtonStack';
-import type { account, mutual_fund } from '@/generated/prisma';
 import { useLedgerData } from '../../LedgerContext';
 import { getTodayDDMMYYYY, toDDMMYYYY, toHHMM } from '../components/dateUtils';
 import { useFormState } from '../components/useFormState';
 import { FormStatusMessages } from '../components/FormStatusMessages';
-import { AmountDateTimeFields, FormRow } from '../components/AmountDateTimeFields';
-
-function formatDateForDisplay(dateString: string) {
-  const [year, month, day] = dateString.split('-');
-  return `${day}/${month}/${year}`;
-}
 
 export interface RedemptionFormInitial {
   id?: string;
@@ -29,7 +22,7 @@ export interface RedemptionFormInitial {
 }
 
 export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; initial?: RedemptionFormInitial }) {
-  const { accounts, mutualFunds, loading, refreshEntities } = useLedgerData();
+  const { accounts, mutualFunds, loading } = useLedgerData();
   const initialForm = {
     fromMutualFund: '',
     toAccount: '',
@@ -111,7 +104,7 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
         setSuccess('');
         onSuccess();
       }, 1000);
-    } catch (err: unknown) {
+    } catch {
       setError('Failed to save redemption transaction.');
     }
   };
