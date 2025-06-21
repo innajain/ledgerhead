@@ -1,103 +1,268 @@
-import Image from "next/image";
+'use client';
+
+import type { MutualFundWithUnits } from '@/server actions/db';
+import { getNAVFromISIN } from '@/server actions/nav';
+import { useLedgerData } from './LedgerContext';
+import { usePreview } from "./PreviewContext";
+import React from 'react';
+
+type TransactionWithRelations = {
+  id: string;
+  created_at: Date;
+  date: Date;
+  time: Date | null;
+  amount: number;
+  type: string;
+  note: string | null;
+  income_transaction?: { account_id: string } | null;
+  expense_transaction?: { account_id: string } | null;
+  transfer_transaction?: { from_account_id: string; to_account_id: string } | null;
+  investment_transaction?: { from_account_id: string } | null;
+  redemption_transaction?: { to_account_id: string } | null;
+};
+
+// If import still fails, define the type inline as a workaround
+// type MutualFundWithUnits = any;
+
+function getAccountBalances(accounts: any[], transactions: TransactionWithRelations[]): Record<string, number> {
+  const balances: Record<string, number> = {};
+  accounts.forEach((acc: any) => {
+    balances[acc.id] = 0;
+  });
+  transactions.forEach((tx: TransactionWithRelations) => {
+    switch (tx.type) {
+      case 'INCOME':
+        if (tx.income_transaction) {
+          balances[tx.income_transaction.account_id] += tx.amount;
+        }
+        break;
+      case 'EXPENSE':
+        if (tx.expense_transaction) {
+          balances[tx.expense_transaction.account_id] -= tx.amount;
+        }
+        break;
+      case 'TRANSFER':
+        if (tx.transfer_transaction) {
+          balances[tx.transfer_transaction.from_account_id] -= tx.amount;
+          balances[tx.transfer_transaction.to_account_id] += tx.amount;
+        }
+        break;
+      case 'MF_INVESTMENT':
+        if (tx.investment_transaction) {
+          balances[tx.investment_transaction.from_account_id] -= tx.amount;
+        }
+        break;
+      case 'MF_REDEMPTION':
+        if (tx.redemption_transaction) {
+          balances[tx.redemption_transaction.to_account_id] += tx.amount;
+        }
+        break;
+      default:
+        break;
+    }
+  });
+  return balances;
+}
+
+function getMonthwisePL(transactions: TransactionWithRelations[]): [string, { income: number, expenses: number }][] {
+  const pl: Record<string, { income: number, expenses: number }> = {};
+  transactions.forEach((tx: TransactionWithRelations) => {
+    const date = new Date(tx.date);
+    const month = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+    if (!pl[month]) pl[month] = { income: 0, expenses: 0 };
+    if (tx.type === 'INCOME') {
+      pl[month].income += tx.amount;
+    } else if (tx.type === 'EXPENSE') {
+      pl[month].expenses += tx.amount;
+    }
+  });
+  return Object.entries(pl).sort((a, b) => b[0].localeCompare(a[0]));
+}
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const { accounts, transactions, mutualFunds, loading } = useLedgerData();
+  const { inPreview } = usePreview();
+  const txs = transactions as unknown as TransactionWithRelations[];
+  const balances = getAccountBalances(accounts, txs);
+  const totalBalance = Object.values(balances).reduce((a, b) => (a as number) + (b as number), 0);
+  const monthwisePL = getMonthwisePL(txs);
+  const [navs, setNavs] = React.useState<Record<string, { nav: string; date: string } | null>>({});
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  React.useEffect(() => {
+    async function fetchNAVs() {
+      const navResults: Record<string, { nav: string; date: string } | null> = {};
+      for (const mf of mutualFunds) {
+        if (mf.isin) {
+          navResults[mf.id] = await getNAVFromISIN(mf.isin);
+        }
+      }
+      setNavs(navResults);
+    }
+    if (!loading && mutualFunds.length > 0) fetchNAVs();
+    // eslint-disable-next-line
+  }, [loading, mutualFunds.length]);
+
+  // Mutual Fund Holdings Calculation
+  function getUnitsHeld(mf: MutualFundWithUnits) {
+    let bought = 0;
+    let redeemed = 0;
+    mf.units.forEach((lot: any) => {
+      bought += lot.investment_transaction.units_bought;
+      redeemed += lot.redemption_buckets.reduce((sum: number, b: any) => sum + b.units_redeemed, 0);
+    });
+    return bought - redeemed;
+  }
+
+  function getAmountInvested(mf: MutualFundWithUnits) {
+    const invested = mf.units.reduce((total: number, lot: any) => total + lot.investment_transaction.transaction.amount, 0);
+    const redeemed = mf.units.reduce((total: number, lot: any) => {
+      return total + lot.redemption_buckets.reduce((sum: number, b: any) => sum + b.redemption_transaction.transaction.amount, 0);
+    }, 0);
+    return invested - redeemed;
+  }
+
+  function formatMonth(month: string) {
+    // month is in 'YYYY-MM' format
+    const [year, m] = month.split('-');
+    const date = new Date(Number(year), Number(m) - 1);
+    return date.toLocaleString('default', { month: 'long', year: 'numeric' });
+  }
+
+  // State to track which mutual funds have details open
+  const [openDetails, setOpenDetails] = React.useState<Set<string>>(new Set());
+  const toggleDetails = (id: string) => {
+    setOpenDetails(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      return next;
+    });
+  };
+
+  // Disable all editing in preview mode
+  return (
+    <div className="max-w-5xl mx-auto p-4">
+      {inPreview && (
+        <div className="mb-4 p-2 bg-yellow-100 border border-yellow-400 text-yellow-800 rounded">
+          <b>Preview mode:</b> You are viewing a snapshot. Editing is disabled.
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      )}
+      <h1 className="text-4xl font-bold mb-8 text-gray-900">Welcome to LedgerHead</h1>
+      {/* Balance Sheet Section */}
+      <div className="w-full max-w-3xl bg-white rounded-lg shadow p-6 mb-8">
+        <h2 className="text-xl font-bold mb-4 text-gray-800">Balance Sheet</h2>
+        {loading ? (
+          <div className="text-gray-500">Loading...</div>
+        ) : (
+          <table className="w-full text-left">
+            <thead>
+              <tr className="border-b">
+                <th className="py-2 pr-4">Account</th>
+                <th className="py-2 pr-4">Group</th>
+                <th className="py-2 pr-4 text-right">Balance</th>
+              </tr>
+            </thead>
+            <tbody>
+              {accounts.filter(acc => balances[acc.id] !== 0)
+              .map(acc => (
+                <tr key={acc.id} className="border-b last:border-0">
+                  <td className="py-2 pr-4">{acc.name}</td>
+                  <td className="py-2 pr-4">{acc.group}</td>
+                  <td className="py-2 pr-4 text-right">₹{(balances[acc.id]).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                </tr>
+              ))}
+              <tr className="font-bold">
+                <td className="py-2 pr-4">Total</td>
+                <td className="py-2 pr-4"></td>
+                <td className="py-2 pr-4 text-right">₹{(totalBalance).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+              </tr>
+            </tbody>
+          </table>
+        )}
+      </div>
+
+      {/* Mutual Fund Holdings Section */}
+      <div className="w-full max-w-3xl bg-white rounded-lg shadow p-6 mb-8">
+        <h2 className="text-xl font-bold mb-4 text-gray-800">Mutual Fund Holdings</h2>
+        {loading ? (
+          <div className="text-gray-500">Loading...</div>
+        ) : mutualFunds.length === 0 ? (
+          <div className="text-gray-500">No mutual funds yet.</div>
+        ) : (
+          <table className="w-full text-left">
+            <thead>
+              <tr className="border-b">
+                <th className="py-2 pr-4">Mutual Fund</th>
+                <th className="py-2 pr-4 text-right">Amount Invested</th>
+                <th className="py-2 pr-4 text-right">Current Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              {mutualFunds
+                .filter(mf => getUnitsHeld(mf) > 0)
+                .map(mf => {
+                  const navInfo = navs[mf.id];
+                  const units = getUnitsHeld(mf);
+                  const nav = navInfo && navInfo.nav ? parseFloat(navInfo.nav) : null;
+                  const currentValue = nav !== null ? units * nav : null;
+                  const showDetails = openDetails.has(mf.id);
+                  return (
+                    <React.Fragment key={mf.id}>
+                      <tr className="border-b last:border-0 cursor-pointer hover:bg-blue-50 transition"
+                          onClick={() => toggleDetails(mf.id)}>
+                        <td className="py-2 pr-4">{mf.name}</td>
+                        <td className="py-2 pr-4 text-right">₹{getAmountInvested(mf).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                        <td className="py-2 pr-4 text-right font-bold">{currentValue !== null ? `₹${currentValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}` : '—'}</td>
+                      </tr>
+                      {showDetails && (
+                        <tr>
+                          <td colSpan={3} className="bg-gray-50 px-4 py-3">
+                            <div className="flex flex-col gap-2">
+                              <div><span className="font-semibold">Units Held:</span> {units}</div>
+                              <div><span className="font-semibold">Current NAV:</span> {navInfo ? navInfo.nav : '—'}</div>
+                              <div><span className="font-semibold">NAV Date:</span> {navInfo ? navInfo.date : '—'}</div>
+                              {mf.isin && <div><span className="font-semibold">ISIN:</span> {mf.isin}</div>}
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                    </React.Fragment>
+                  );
+                })}
+            </tbody>
+          </table>
+        )}
+      </div>
+
+      {/* Monthwise P&L Section */}
+      <div className="w-full max-w-3xl bg-white rounded-lg shadow p-6 mb-8">
+        <h2 className="text-xl font-bold mb-4 text-gray-800">Monthwise P&amp;L</h2>
+        {loading ? (
+          <div className="text-gray-500">Loading...</div>
+        ) : monthwisePL.length === 0 ? (
+          <div className="text-gray-500">No income or expenses yet.</div>
+        ) : (
+          <table className="w-full text-left">
+            <thead>
+              <tr className="border-b">
+                <th className="py-2 pr-4">Month</th>
+                <th className="py-2 pr-4 text-right">Income</th>
+                <th className="py-2 pr-4 text-right">Expenses</th>
+                <th className="py-2 pr-4 text-right">Net</th>
+              </tr>
+            </thead>
+            <tbody>
+              {monthwisePL.map(([month, { income, expenses }]) => (
+                <tr key={month} className="border-b last:border-0">
+                  <td className="py-2 pr-4">{formatMonth(month)}</td>
+                  <td className="py-2 pr-4 text-right">₹{income.toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                  <td className="py-2 pr-4 text-right">₹{expenses.toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                  <td className="py-2 pr-4 text-right font-bold {net >= 0 ? 'text-green-600' : 'text-red-600'}">₹{(income - expenses).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
     </div>
   );
 }
