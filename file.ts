@@ -26,6 +26,3 @@ async function getNAVFromISIN(
     return null;
   }
 }
-
-// 🧪 Example usage
-getNAVFromISIN("INF879O01027").then(console.log);
