@@ -30,6 +30,3 @@ async function getNAVFromISIN(
 }
 
 export { getNAVFromISIN };
-
-// 🧪 Example usage
-getNAVFromISIN("INF879O01027").then(console.log);

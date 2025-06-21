@@ -1,7 +1,7 @@
 'use client';
 
 import type { MutualFundWithUnits } from '@/server actions/db';
-import { getNAVFromISIN } from '@/server actions/nav';
+import { getNAVFromISIN } from '@/server actions/getNAVFromISIN';
 import { useLedgerData } from './LedgerContext';
 import { usePreview } from "./PreviewContext";
 import React from 'react';
