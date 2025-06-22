@@ -6,13 +6,15 @@ import { ExpenseForm } from './forms/ExpenseForm';
 import { IncomeForm } from './forms/IncomeForm';
 import { InvestmentForm } from './forms/InvestmentForm';
 import { RedemptionForm } from './forms/RedemptionForm';
-import type { TransferFormInitial } from './forms/TransferForm';
-import type { ExpenseFormInitial } from './forms/ExpenseForm';
-import type { IncomeFormInitial } from './forms/IncomeForm';
-import type { InvestmentFormInitial } from './forms/InvestmentForm';
-import type { RedemptionFormInitial } from './forms/RedemptionForm';
-import type { transaction } from '@/generated/prisma';
-import { useLedgerData } from '@/app/LedgerContext';
+import {
+  LedgerExpenseTransaction,
+  LedgerIncomeTransaction,
+  LedgerInvestmentTransaction,
+  LedgerRedemptionTransaction,
+  LedgerTransaction,
+  LedgerTransferTransaction,
+  useLedgerData,
+} from '@/app/LedgerContext';
 import { usePreview } from '@/app/PreviewContext';
 import { TransactionsList } from './TransactionsList';
 
@@ -38,63 +40,16 @@ function Modal({ open, onClose, children }: { open: boolean; onClose: () => void
   );
 }
 
-type EditTxType = TransferFormInitial | ExpenseFormInitial | IncomeFormInitial | InvestmentFormInitial | RedemptionFormInitial;
-
 export default function TransactionsPage() {
   const { transactions, loading, refreshEntities } = useLedgerData();
   const { inPreview } = usePreview();
   const [type, setType] = useState<string>('EXPENSE');
   const [modalOpen, setModalOpen] = useState(false);
-  const [editTx, setEditTx] = useState<EditTxType | null>(null);
+  const [editTx, setEditTx] = useState<LedgerTransaction | null>(null);
 
-  // Helper to map transaction to form initial values
-  function mapTxToFormInitial(tx: transaction): EditTxType {
-    if (!tx) return tx as EditTxType;
-    const safeTime = (t: string | Date | null | undefined) => (t === null ? undefined : t);
-    const safeNote = (n: string | null | undefined) => (n === null ? undefined : n);
-    if (tx.type === 'EXPENSE') {
-      const expenseTx = tx as transaction & { expense_transaction?: { account_id?: string; expense_item_id?: string } };
-      return {
-        id: tx.id,
-        account_id: expenseTx.expense_transaction?.account_id,
-        expense_item_id: expenseTx.expense_transaction?.expense_item_id,
-        date: tx.date,
-        time: safeTime(tx.time),
-        note: safeNote(tx.note),
-        amount: tx.amount,
-      } as ExpenseFormInitial;
-    }
-    if (tx.type === 'INCOME') {
-      const incomeTx = tx as transaction & { income_transaction?: { income_source_id?: string; account_id?: string } };
-      return {
-        id: tx.id,
-        income_source_id: incomeTx.income_transaction?.income_source_id,
-        account_id: incomeTx.income_transaction?.account_id,
-        date: tx.date,
-        time: safeTime(tx.time),
-        note: safeNote(tx.note),
-        amount: tx.amount,
-      } as IncomeFormInitial;
-    }
-    if (tx.type === 'TRANSFER') {
-      const transferTx = tx as transaction & { transfer_transaction?: { from_account_id?: string; to_account_id?: string } };
-      return {
-        id: tx.id,
-        from_account_id: transferTx.transfer_transaction?.from_account_id,
-        to_account_id: transferTx.transfer_transaction?.to_account_id,
-        date: tx.date,
-        time: safeTime(tx.time),
-        note: safeNote(tx.note),
-        amount: tx.amount,
-      } as TransferFormInitial;
-    }
-    // Add similar mapping for MF_INVESTMENT and MF_REDEMPTION if needed
-    return tx as EditTxType;
-  }
-
-  const handleEdit = (tx: transaction) => {
+  const handleEdit = (tx: LedgerTransaction) => {
     setType(tx.type);
-    setEditTx(mapTxToFormInitial(tx));
+    setEditTx(tx);
     setModalOpen(true);
   };
 
@@ -102,7 +57,7 @@ export default function TransactionsPage() {
   if (type === 'TRANSFER') {
     const formProps = editTx
       ? {
-          initial: editTx as TransferFormInitial,
+          initial: editTx as LedgerTransferTransaction,
           onSuccess: () => {
             setModalOpen(false);
             setEditTx(null);
@@ -119,7 +74,7 @@ export default function TransactionsPage() {
   } else if (type === 'EXPENSE') {
     const formProps = editTx
       ? {
-          initial: editTx as ExpenseFormInitial,
+          initial: editTx as LedgerExpenseTransaction,
           onSuccess: () => {
             setModalOpen(false);
             setEditTx(null);
@@ -136,7 +91,7 @@ export default function TransactionsPage() {
   } else if (type === 'INCOME') {
     const formProps = editTx
       ? {
-          initial: editTx as IncomeFormInitial,
+          initial: editTx as LedgerIncomeTransaction,
           onSuccess: () => {
             setModalOpen(false);
             setEditTx(null);
@@ -153,7 +108,7 @@ export default function TransactionsPage() {
   } else if (type === 'MF_INVESTMENT') {
     const formProps = editTx
       ? {
-          initial: editTx as InvestmentFormInitial,
+          initial: editTx as LedgerInvestmentTransaction,
           onSuccess: () => {
             setModalOpen(false);
             setEditTx(null);
@@ -170,7 +125,7 @@ export default function TransactionsPage() {
   } else if (type === 'MF_REDEMPTION') {
     const formProps = editTx
       ? {
-          initial: editTx as RedemptionFormInitial,
+          initial: editTx as LedgerRedemptionTransaction,
           onSuccess: () => {
             setModalOpen(false);
             setEditTx(null);

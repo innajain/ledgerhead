@@ -2,19 +2,13 @@ import React from 'react';
 import { AccountSelector } from '../components/AccountSelector';
 import { CustomDatePicker } from '../components/CustomDatePicker';
 import { createInvestmentTransaction, updateInvestmentTransaction } from '@/server actions/db';
-import { NoteField } from '../components/NoteField';
 import { FormButtonStack } from '../components/FormButtonStack';
-import type { transaction, investment_transaction, mutual_fund_units_lot } from '@/generated/prisma';
-import { useLedgerData } from '../../LedgerContext';
+import { LedgerInvestmentTransaction, useLedgerData } from '../../LedgerContext';
 import { getTodayDDMMYYYY, toDDMMYYYY, toHHMM } from '../components/dateUtils';
 import { useFormState } from '../components/useFormState';
 import { FormStatusMessages } from '../components/FormStatusMessages';
 
-export type InvestmentFormInitial = transaction & {
-  investment_transaction: investment_transaction & { mutual_fund_units_lot: mutual_fund_units_lot };
-};
-
-export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; initial?: InvestmentFormInitial }) {
+export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; initial?: LedgerInvestmentTransaction }) {
   const { accounts, mutualFunds, loading } = useLedgerData();
   const initialForm = {
     fromAccount: '',
@@ -23,6 +17,7 @@ export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; 
     buyNav: '',
     date: '',
     time: '',
+    allotmentDate: '',
     note: '',
     amount: '',
   };
@@ -34,6 +29,7 @@ export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; 
     buyNav: form.buyNav ?? '',
     date: form.date ?? '',
     time: form.time ?? '',
+    allotmentDate: form.allotmentDate ?? '',
     note: form.note ?? '',
     amount: form.amount ?? '',
   };
@@ -42,11 +38,12 @@ export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; 
     if (initial) {
       setForm({
         fromAccount: initial.investment_transaction.from_account_id || '',
-        toMutualFund: initial.investment_transaction.mutual_fund_units_lot.mutual_fund_id || '',
+        toMutualFund: initial.investment_transaction.units_lot.mutual_fund_id || '',
         units: initial.investment_transaction.units_bought.toString() || '',
         buyNav: initial.investment_transaction.buy_nav.toString() || '',
         date: toDDMMYYYY(initial.date),
         time: toHHMM(initial.time),
+        allotmentDate: toDDMMYYYY(initial.investment_transaction.allotment_date),
         note: initial.note || '',
         amount: initial.amount?.toString() || '',
       });
@@ -58,6 +55,7 @@ export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; 
         buyNav: '',
         date: getTodayDDMMYYYY(),
         time: '',
+        allotmentDate: getTodayDDMMYYYY(),
         note: '',
         amount: '',
       });
@@ -83,6 +81,10 @@ export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; 
     setForm({ ...form, date: val });
   };
 
+  const handleAllotmentDateChange = (val: string) => {
+    setForm({ ...form, allotmentDate: val });
+  };
+
   const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, time: e.target.value });
   };
@@ -99,13 +101,23 @@ export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; 
     e.preventDefault();
     setError('');
     setSuccess('');
-    if (!safeForm.fromAccount || !safeForm.toMutualFund || !safeForm.units || !safeForm.buyNav || !safeForm.date || !safeForm.amount) {
+    if (
+      !safeForm.fromAccount ||
+      !safeForm.toMutualFund ||
+      !safeForm.units ||
+      !safeForm.buyNav ||
+      !safeForm.date ||
+      !safeForm.allotmentDate ||
+      !safeForm.amount
+    ) {
       setError('All fields are required.');
       return;
     }
     try {
       const [day, month, year] = safeForm.date.split('/');
       const dateISO = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+      const [allotDay, allotMonth, allotYear] = safeForm.allotmentDate.split('/');
+      const allotmentDateISO = `${allotYear}-${allotMonth.padStart(2, '0')}-${allotDay.padStart(2, '0')}`;
       if (initial && initial.id) {
         await updateInvestmentTransaction(initial.id, {
           date: dateISO,
@@ -127,6 +139,7 @@ export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; 
           from_account_id: safeForm.fromAccount,
           units_bought: parseFloat(safeForm.units),
           buy_nav: parseFloat(safeForm.buyNav),
+          allotment_date: new Date(allotmentDateISO),
         });
         setSuccess('Investment transaction saved!');
       }
@@ -230,7 +243,7 @@ export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; 
       <div className="flex gap-3 sm:gap-4">
         <div className="flex-[2] min-w-0">
           <label htmlFor="date" className="block text-sm font-medium mb-1">
-            Date
+            Transaction Date
           </label>
           <CustomDatePicker value={safeForm.date} onChange={handleCustomDateChange} />
         </div>
@@ -249,10 +262,31 @@ export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; 
         </div>
       </div>
 
+      {/* Allotment Date */}
+      <div>
+        <label htmlFor="allotmentDate" className="block text-sm font-medium mb-1">
+          Allotment Date
+        </label>
+        <CustomDatePicker value={safeForm.allotmentDate} onChange={handleAllotmentDateChange} />
+      </div>
+
       {/* Note and Buttons - Stack on mobile, side-by-side on desktop */}
       <div className="flex flex-col lg:flex-row lg:items-end gap-3 sm:gap-4">
         <div className="flex-1">
-          <NoteField value={safeForm.note} onChange={handleNoteChange} />
+          <div className="flex items-center gap-2">
+            <label htmlFor="note" className="block text-sm font-medium flex-shrink-0 w-12 sm:w-16">
+              Note
+            </label>
+            <textarea
+              id="note"
+              name="note"
+              value={safeForm.note}
+              onChange={handleNoteChange}
+              rows={2}
+              className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm resize-none"
+              placeholder="Optional note..."
+            />
+          </div>
         </div>
         <div className="flex-shrink-0">
           <FormButtonStack

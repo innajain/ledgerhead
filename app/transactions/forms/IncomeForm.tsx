@@ -2,24 +2,13 @@ import React from 'react';
 import { AccountSelector } from '../components/AccountSelector';
 import { CustomDatePicker } from '../components/CustomDatePicker';
 import { updateIncomeTransaction, createIncomeTransaction } from '@/server actions/db';
-import { NoteField } from '../components/NoteField';
 import { FormButtonStack } from '../components/FormButtonStack';
-import { useLedgerData } from '../../LedgerContext';
+import { LedgerIncomeTransaction, useLedgerData } from '../../LedgerContext';
 import { getTodayDDMMYYYY, toDDMMYYYY, toHHMM } from '../components/dateUtils';
 import { useFormState } from '../components/useFormState';
 import { FormStatusMessages } from '../components/FormStatusMessages';
 
-export interface IncomeFormInitial {
-  id?: string;
-  income_source_id?: string;
-  account_id?: string;
-  date?: string | Date;
-  time?: string | Date;
-  note?: string;
-  amount?: number;
-}
-
-export function IncomeForm({ onSuccess, initial }: { onSuccess: () => void; initial?: IncomeFormInitial }) {
+export function IncomeForm({ onSuccess, initial }: { onSuccess: () => void; initial?: LedgerIncomeTransaction }) {
   const { accounts, incomeSources, loading } = useLedgerData();
   const initialForm = {
     fromSource: '',
@@ -42,8 +31,8 @@ export function IncomeForm({ onSuccess, initial }: { onSuccess: () => void; init
   React.useEffect(() => {
     if (initial) {
       setForm({
-        fromSource: initial.income_source_id || '',
-        toAccount: initial.account_id || '',
+        fromSource: initial.income_transaction.income_source_id || '',
+        toAccount: initial.income_transaction.account_id || '',
         date: toDDMMYYYY(initial.date),
         time: toHHMM(initial.time),
         note: initial.note || '',
@@ -139,7 +128,7 @@ export function IncomeForm({ onSuccess, initial }: { onSuccess: () => void; init
   if (loading) return <div>Loading...</div>;
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:gap-4">      
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:gap-4">
       {/* Income Source and Account Selection - Stack on mobile, side-by-side on desktop */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
         <AccountSelector
@@ -194,17 +183,27 @@ export function IncomeForm({ onSuccess, initial }: { onSuccess: () => void; init
           <label htmlFor="date" className="block text-sm font-medium mb-1">
             Date
           </label>
-          <CustomDatePicker
-            value={safeForm.date}
-            onChange={handleCustomDateChange}
-          />
+          <CustomDatePicker value={safeForm.date} onChange={handleCustomDateChange} />
         </div>
       </div>
 
       {/* Note and Buttons - Stack on mobile, side-by-side on desktop */}
       <div className="flex flex-col lg:flex-row lg:items-end gap-3 sm:gap-4">
         <div className="flex-1">
-          <NoteField value={safeForm.note} onChange={handleNoteChange} />
+          <div className="flex items-center gap-2">
+            <label htmlFor="note" className="block text-sm font-medium flex-shrink-0 w-12 sm:w-16">
+              Note
+            </label>
+            <textarea
+              id="note"
+              name="note"
+              value={safeForm.note}
+              onChange={handleNoteChange}
+              rows={2}
+              className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm resize-none"
+              placeholder="Optional note..."
+            />
+          </div>
         </div>
         <div className="flex-shrink-0">
           <FormButtonStack

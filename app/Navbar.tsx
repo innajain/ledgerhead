@@ -47,6 +47,12 @@ export default function Navbar() {
         >
           Entities
         </Link>
+        <Link
+          href="/mutual_funds"
+          className={`${pathname.startsWith('/mutual_funds') ? 'text-blue-400 font-bold' : 'hover:text-blue-400'} transition-colors`}
+        >
+          Mutual Funds
+        </Link>
         <Link href="/history" className={`${pathname.startsWith('/history') ? 'text-blue-400 font-bold' : 'hover:text-blue-400'} transition-colors`}>
           History
         </Link>
@@ -83,6 +89,13 @@ export default function Navbar() {
             onClick={() => setMenuOpen(false)}
           >
             Entities
+          </Link>
+          <Link
+            href="/mutual_funds"
+            className={`${pathname.startsWith('/mutual_funds') ? 'text-blue-400 font-bold' : 'hover:text-blue-400'} transition-colors`}
+            onClick={() => setMenuOpen(false)}
+          >
+            Mutual Funds
           </Link>
           <Link
             href="/history"

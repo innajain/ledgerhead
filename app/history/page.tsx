@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState } from 'react';
 import { usePreview } from '../PreviewContext';
-import { getDbHistory } from '@/server actions/db';
+import { getDbHistory, deleteLatestDbHistory } from '@/server actions/db';
 import { db_history } from '@/generated/prisma';
-import { restoreDbFromSnapshot } from '@/server actions/db/restoreDbFromSnapshot';
+import { restoreDbFromSnapshot } from '@/server actions/db/history/db_history';
 
 function renderTable(name: string, rows: any[], key?: string) {
   if (!Array.isArray(rows) || rows.length === 0) return null;
@@ -56,9 +56,32 @@ export default function HistoryPage() {
     window.location.reload();
   };
 
+  const handleDeleteLatest = async () => {
+    if (!window.confirm('Are you sure you want to delete the latest history entry? This action cannot be undone.')) return;
+    try {
+      await deleteLatestDbHistory();
+      // Refresh the history list
+      const updatedHistory = await getDbHistory();
+      setHistory(updatedHistory);
+    } catch (error) {
+      alert('Failed to delete latest history entry: ' + (error as Error).message);
+    }
+  };
+
   return (
     <div className="w-full max-w-7xl mx-auto p-3 md:p-6">
-      <h1 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">Database History</h1>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 md:mb-6">
+        <h1 className="text-xl md:text-2xl font-bold mb-2 sm:mb-0">Database History</h1>
+        {history.length > 0 && (
+          <button
+            onClick={handleDeleteLatest}
+            disabled={inPreview}
+            className="bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
+          >
+            Delete Latest Entry
+          </button>
+        )}
+      </div>
       
       {inPreview && (
         <div className="mb-4 p-3 bg-yellow-100 border border-yellow-400 text-yellow-800 rounded text-sm md:text-base">

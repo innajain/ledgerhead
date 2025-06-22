@@ -1,4 +1,4 @@
-import { ensureDbHistoryInit } from '@/server actions/db/ensureDbHistoryInit';
+import { ensureDbHistoryInit } from '@/server actions/db/history/ensureDbHistoryInit';
 
 export default async function CheckDbHistoryInit({ children }: { children: React.ReactNode }) {
   await ensureDbHistoryInit();

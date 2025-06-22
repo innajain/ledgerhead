@@ -2,7 +2,19 @@
 
 import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react';
 import { getAccounts, getExpenseItems, getIncomeSources, getMutualFunds, getTransactions, MutualFundWithUnits } from '@/server actions/db';
-import type { account, expense_item, income_source, transaction } from '@/generated/prisma';
+import type {
+  account,
+  expense_item,
+  expense_transaction,
+  income_source,
+  income_transaction,
+  investment_transaction,
+  redemption_bucket,
+  redemption_transaction,
+  transaction,
+  transfer_transaction,
+  units_lot,
+} from '@/generated/prisma';
 import { usePreview } from './PreviewContext';
 
 interface LedgerContextType {
@@ -14,6 +26,34 @@ interface LedgerContextType {
   refreshEntities: () => Promise<void>;
   loading: boolean;
 }
+
+export type LedgerExpenseTransaction = transaction & {
+  expense_transaction: expense_transaction;
+};
+export type LedgerIncomeTransaction = transaction & {
+  income_transaction: income_transaction;
+};
+export type LedgerTransferTransaction = transaction & {
+  transfer_transaction: transfer_transaction;
+};
+export type LedgerInvestmentTransaction = transaction & {
+  investment_transaction: investment_transaction & {
+    units_lot: units_lot;
+  };
+};
+export type LedgerRedemptionTransaction = transaction & {
+  redemption_transaction: redemption_transaction & {
+    redemption_buckets: (redemption_bucket & {
+      units_lot: units_lot;
+    })[];
+  };
+};
+export type LedgerTransaction =
+  | LedgerExpenseTransaction
+  | LedgerIncomeTransaction
+  | LedgerTransferTransaction
+  | LedgerInvestmentTransaction
+  | LedgerRedemptionTransaction;
 
 const LedgerContext = createContext<LedgerContextType | undefined>(undefined);
 
@@ -47,10 +87,10 @@ export function LedgerDataProvider({ children }: { children: ReactNode }) {
   React.useEffect(() => {
     if (!inPreview) refreshEntities();
     else if (preview) {
-      const mutual_fund_with_units = preview.mutual_fund.map(mf => {
+      const mutual_fund_with_units: MutualFundWithUnits[] = preview.mutual_fund.map(mf => {
         const redemption_transactions_with_transaction = preview.redemption_transaction.map(rt => ({
           ...rt,
-          transaction: preview.transaction.find(t => t.id === rt.id)!,
+          transaction: preview.transaction.find(t => t.id === rt.transaction_id)!,
         }));
         const redemption_buckets_with_redemption_transaction = preview.redemption_bucket.map(rb => ({
           ...rb,
@@ -58,17 +98,17 @@ export function LedgerDataProvider({ children }: { children: ReactNode }) {
         }));
         const investment_transactions_with_transaction = preview.investment_transaction.map(it => ({
           ...it,
-          transaction: preview.transaction.find(t => t.id === it.id)!,
+          transaction: preview.transaction.find(t => t.id === it.transaction_id)!,
         }));
-        const units = preview.mutual_fund_units_lot.filter(u => u.mutual_fund_id === mf.id);
+        const units = preview.units_lot.filter(u => u.mutual_fund_id === mf.id);
         const units_with_investment_transaction_and_redemption_buckets = units.map(u => ({
           ...u,
-          investment_transaction: investment_transactions_with_transaction.find(it => it.id === u.id)!,
-          redemption_buckets: redemption_buckets_with_redemption_transaction.filter(rb => rb.mutual_fund_units_lot_id === u.id),
+          investment_transaction: investment_transactions_with_transaction.find(it => it.transaction_id === u.id)!,
+          redemption_buckets: redemption_buckets_with_redemption_transaction.filter(rb => rb.units_lot_id === u.id),
         }));
         return {
           ...mf,
-          units: units_with_investment_transaction_and_redemption_buckets,
+          units_lots: units_with_investment_transaction_and_redemption_buckets,
         };
       });
 

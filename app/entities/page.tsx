@@ -13,7 +13,7 @@ export default function EntitiesPage() {
     ACCOUNT: { name: "", group: "" },
     INCOME_SOURCE: { name: "", group: "" },
     EXPENSE_ITEM: { name: "", group: "" },
-    MUTUAL_FUND: { name: "" },
+    MUTUAL_FUND: { name: "", isin: "" },
   });
   const [entityModalOpen, setEntityModalOpen] = React.useState(false);
   const [entityType, setEntityType] = React.useState<
@@ -31,7 +31,7 @@ export default function EntitiesPage() {
     setForms(f => ({
       ...f,
       [type]: type === 'MUTUAL_FUND'
-        ? { name: entity.name }
+        ? { name: entity.name, isin: (entity as mutual_fund).isin }
         : { name: entity.name, group: (entity as account | income_source | expense_item).group },
     }));
     setEntityModalOpen(true);

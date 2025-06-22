@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createAccount, createIncomeSource, createExpenseItem, createMutualFund, updateAccount } from '@/server actions/db';
+import { createAccount, createIncomeSource, createExpenseItem, createMutualFund, updateAccount, updateMutualFund } from '@/server actions/db';
 
 const ENTITY_TYPES = [
   { label: 'Account', value: 'ACCOUNT' },
@@ -32,12 +32,13 @@ function SimpleForm<T extends Record<string, string>>({
   submitLabel,
 }: {
   label: string;
-  fields: { name: string; label: string; type?: string }[];
+  fields: { name: string; label: string; type?: string; readonly?: boolean }[];
   form: T;
   setForm: (f: T) => void;
   onSubmit: (data: T) => Promise<any>;
   onSuccess?: () => void;
   submitLabel?: string;
+  editMode?: boolean;
 }) {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -50,8 +51,8 @@ function SimpleForm<T extends Record<string, string>>({
     e.preventDefault();
     setError('');
     setSuccess('');
-    if (fields.some(f => !form[f.name])) {
-      setError('All fields are required.');
+    if (fields.some(f => !f.readonly && !form[f.name])) {
+      setError('All required fields must be filled.');
       return;
     }
     try {
@@ -77,12 +78,13 @@ function SimpleForm<T extends Record<string, string>>({
         <div key={f.name}>
           <label className="block mb-1">{f.label}</label>
           <input
-            className="border rounded px-2 py-1 w-full"
+            className={`border rounded px-2 py-1 w-full ${f.readonly ? 'bg-gray-100' : ''}`}
             name={f.name}
             value={form[f.name]}
             onChange={handleChange}
             type={f.type || 'text'}
-            required
+            required={!f.readonly}
+            readOnly={f.readonly}
           />
         </div>
       ))}
@@ -118,14 +120,14 @@ export function EntityCreateModal({
     ACCOUNT: { name: string; group: string };
     INCOME_SOURCE: { name: string; group: string };
     EXPENSE_ITEM: { name: string; group: string };
-    MUTUAL_FUND: { name: string };
+    MUTUAL_FUND: { name: string; isin: string };
   };
   setForms: React.Dispatch<
     React.SetStateAction<{
       ACCOUNT: { name: string; group: string };
       INCOME_SOURCE: { name: string; group: string };
       EXPENSE_ITEM: { name: string; group: string };
-      MUTUAL_FUND: { name: string };
+      MUTUAL_FUND: { name: string; isin: string };
     }>
   >;
   editId?: string | null;
@@ -187,12 +189,20 @@ export function EntityCreateModal({
         label="Mutual Fund"
         fields={[
           { name: 'name', label: 'Name' },
-          { name: 'isin', label: 'ISIN' },
+          { name: 'isin', label: 'ISIN', readonly: !!editId },
         ]}
-        form={forms.MUTUAL_FUND as any}
+        form={forms.MUTUAL_FUND}
         setForm={f => setForms({ ...forms, MUTUAL_FUND: f })}
-        onSubmit={async data => createMutualFund({ name: data.name, isin: data.isin })}
+        onSubmit={async data => {
+          if (editId) {
+            await updateMutualFund(editId, { name: data.name });
+          } else {
+            await createMutualFund({ name: data.name, isin: data.isin });
+          }
+        }}
         onSuccess={onAnyCreate}
+        submitLabel={editId ? 'Update' : 'Create'}
+        editMode={!!editId}
       />
     );
   }

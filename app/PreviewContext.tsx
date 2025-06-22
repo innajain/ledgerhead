@@ -1,11 +1,11 @@
 'use client';
 
-import { snapshot } from '@/server actions/db';
+import { Snapshot } from '@/server actions/db';
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 export interface PreviewContextType {
-  preview: snapshot | null;
-  setPreview: (snapshot: snapshot | null) => void;
+  preview: Snapshot | null;
+  setPreview: (snapshot: Snapshot | null) => void;
   inPreview: boolean;
 }
 
@@ -18,7 +18,7 @@ export function usePreview() {
 }
 
 export function PreviewProvider({ children }: { children: ReactNode }) {
-  const [preview, setPreview] = useState<snapshot | null>(null);
+  const [preview, setPreview] = useState<Snapshot | null>(null);
   const inPreview = preview !== null;
   return <PreviewContext.Provider value={{ preview, setPreview, inPreview }}>{children}</PreviewContext.Provider>;
 }

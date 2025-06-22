@@ -21,9 +21,6 @@ type TransactionWithRelations = {
   redemption_transaction?: { to_account_id: string } | null;
 };
 
-// If import still fails, define the type inline as a workaround
-// type MutualFundWithUnits = any;
-
 function getAccountBalances(accounts: any[], transactions: TransactionWithRelations[]): Record<string, number> {
   const balances: Record<string, number> = {};
   accounts.forEach((acc: any) => {
@@ -106,17 +103,17 @@ export default function Home() {
   function getUnitsHeld(mf: MutualFundWithUnits) {
     let bought = 0;
     let redeemed = 0;
-    mf.units.forEach((lot: any) => {
+    mf.units_lots.forEach((lot) => {
       bought += lot.investment_transaction.units_bought;
-      redeemed += lot.redemption_buckets.reduce((sum: number, b: any) => sum + b.units_redeemed, 0);
+      redeemed += lot.redemption_buckets.reduce((sum, b) => sum + b.units_redeemed, 0);
     });
     return bought - redeemed;
   }
 
   function getAmountInvested(mf: MutualFundWithUnits) {
-    const invested = mf.units.reduce((total: number, lot: any) => total + lot.investment_transaction.transaction.amount, 0);
-    const redeemed = mf.units.reduce((total: number, lot: any) => {
-      return total + lot.redemption_buckets.reduce((sum: number, b: any) => sum + b.redemption_transaction.transaction.amount, 0);
+    const invested = mf.units_lots.reduce((total, lot) => total + lot.investment_transaction.transaction.amount, 0);
+    const redeemed = mf.units_lots.reduce((total, lot) => {
+      return total + lot.redemption_buckets.reduce((sum, b) => sum + b.redemption_transaction.transaction.amount, 0);
     }, 0);
     return invested - redeemed;
   }
@@ -138,6 +135,16 @@ export default function Home() {
     });
   };
 
+  // State to track which account groups are open
+  const [openGroups, setOpenGroups] = React.useState<Set<string>>(new Set());
+  const toggleGroup = (group: string) => {
+    setOpenGroups(prev => {
+      const next = new Set(prev);
+      if (next.has(group)) next.delete(group); else next.add(group);
+      return next;
+    });
+  };
+
   // Disable all editing in preview mode
   return (
     <div className="max-w-5xl mx-auto p-4">
@@ -152,32 +159,56 @@ export default function Home() {
         <h2 className="text-xl font-bold mb-4 text-gray-800">Balance Sheet</h2>
         {loading ? (
           <div className="text-gray-500">Loading...</div>
-        ) : (
-          <table className="w-full text-left">
-            <thead>
-              <tr className="border-b">
-                <th className="py-2 pr-4">Account</th>
-                <th className="py-2 pr-4">Group</th>
-                <th className="py-2 pr-4 text-right">Balance</th>
-              </tr>
-            </thead>
-            <tbody>
-              {accounts.filter(acc => balances[acc.id] !== 0)
-              .map(acc => (
-                <tr key={acc.id} className="border-b last:border-0">
-                  <td className="py-2 pr-4">{acc.name}</td>
-                  <td className="py-2 pr-4">{acc.group}</td>
-                  <td className="py-2 pr-4 text-right">₹{(balances[acc.id]).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+        ) : (() => {
+          // Group accounts by their group and calculate group totals
+          const groupedAccounts: Record<string, any[]> = {};
+          const groupBalances: Record<string, number> = {};
+          
+          accounts.filter(acc => balances[acc.id] !== 0).forEach(acc => {
+            if (!groupedAccounts[acc.group]) {
+              groupedAccounts[acc.group] = [];
+              groupBalances[acc.group] = 0;
+            }
+            groupedAccounts[acc.group].push(acc);
+            groupBalances[acc.group] += balances[acc.id];
+          });
+
+          const groups = Object.keys(groupedAccounts).sort();
+
+          return (
+            <table className="w-full text-left">
+              <thead>
+                <tr className="border-b">
+                  <th className="py-2 pr-4">Account Group</th>
+                  <th className="py-2 pr-4 text-right">Balance</th>
                 </tr>
-              ))}
-              <tr className="font-bold">
-                <td className="py-2 pr-4">Total</td>
-                <td className="py-2 pr-4"></td>
-                <td className="py-2 pr-4 text-right">₹{(totalBalance).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
-              </tr>
-            </tbody>
-          </table>
-        )}
+              </thead>
+              <tbody>
+                {groups.map(group => (
+                  <React.Fragment key={group}>
+                    <tr 
+                      className="border-b cursor-pointer hover:bg-blue-50 transition"
+                      onClick={() => toggleGroup(group)}
+                    >
+                      <td className="py-2 pr-4">{group}</td>
+                      <td className="py-2 pr-4 text-right">₹{groupBalances[group].toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                    </tr>
+                    {openGroups.has(group) && groupedAccounts[group].map(acc => (
+                      <tr key={acc.id} className="border-b bg-gray-50">
+                        <td className="py-2 pr-4 pl-8 text-gray-700">{acc.name}</td>
+                        <td className="py-2 pr-4 text-right text-gray-700">₹{balances[acc.id].toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                      </tr>
+                    ))}
+                  </React.Fragment>
+                ))}
+                <tr className="font-bold border-t-2 border-gray-400 bg-gray-50">
+                  <td className="py-3 pr-4">Total</td>
+                  <td className="py-3 pr-4 text-right">₹{totalBalance.toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                </tr>
+              </tbody>
+            </table>
+          );
+        })()}
       </div>
 
       {/* Mutual Fund Holdings Section */}
@@ -187,19 +218,32 @@ export default function Home() {
           <div className="text-gray-500">Loading...</div>
         ) : mutualFunds.length === 0 ? (
           <div className="text-gray-500">No mutual funds yet.</div>
-        ) : (
-          <table className="w-full text-left">
-            <thead>
-              <tr className="border-b">
-                <th className="py-2 pr-4">Mutual Fund</th>
-                <th className="py-2 pr-4 text-right">Amount Invested</th>
-                <th className="py-2 pr-4 text-right">Current Value</th>
-              </tr>
-            </thead>
-            <tbody>
-              {mutualFunds
-                .filter(mf => getUnitsHeld(mf) > 0)
-                .map(mf => {
+        ) : (() => {
+          const mfWithHoldings = mutualFunds.filter(mf => getUnitsHeld(mf) > 0);
+          const totalInvested = mfWithHoldings.reduce((sum, mf) => sum + getAmountInvested(mf), 0);
+          const totalCurrentValue = mfWithHoldings.reduce((sum, mf) => {
+            const navInfo = navs[mf.id];
+            const units = getUnitsHeld(mf);
+            const nav = navInfo && navInfo.nav ? parseFloat(navInfo.nav) : null;
+            const currentValue = nav !== null ? units * nav : 0;
+            return sum + currentValue;
+          }, 0);
+          const hasAnyCurrentValue = mfWithHoldings.some(mf => {
+            const navInfo = navs[mf.id];
+            return navInfo && navInfo.nav;
+          });
+
+          return (
+            <table className="w-full text-left">
+              <thead>
+                <tr className="border-b">
+                  <th className="py-2 pr-4">Mutual Fund</th>
+                  <th className="py-2 pr-4 text-right">Amount Invested</th>
+                  <th className="py-2 pr-4 text-right">Current Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                {mfWithHoldings.map(mf => {
                   const navInfo = navs[mf.id];
                   const units = getUnitsHeld(mf);
                   const nav = navInfo && navInfo.nav ? parseFloat(navInfo.nav) : null;
@@ -207,7 +251,7 @@ export default function Home() {
                   const showDetails = openDetails.has(mf.id);
                   return (
                     <React.Fragment key={mf.id}>
-                      <tr className="border-b last:border-0 cursor-pointer hover:bg-blue-50 transition"
+                      <tr className="border-b cursor-pointer hover:bg-blue-50 transition"
                           onClick={() => toggleDetails(mf.id)}>
                         <td className="py-2 pr-4">{mf.name}</td>
                         <td className="py-2 pr-4 text-right">₹{getAmountInvested(mf).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
@@ -228,9 +272,16 @@ export default function Home() {
                     </React.Fragment>
                   );
                 })}
-            </tbody>
-          </table>
-        )}
+                {/* Totals Row */}
+                <tr className="border-t-2 border-gray-400 font-bold bg-gray-50">
+                  <td className="py-3 pr-4">Total</td>
+                  <td className="py-3 pr-4 text-right">₹{totalInvested.toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                  <td className="py-3 pr-4 text-right">{hasAnyCurrentValue ? `₹${totalCurrentValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}` : '—'}</td>
+                </tr>
+              </tbody>
+            </table>
+          );
+        })()}
       </div>
 
       {/* Monthwise P&L Section */}

@@ -44,38 +44,40 @@ model mutual_fund {
   name String @unique
   isin String @unique
 
-  units mutual_fund_units_lot[]
+  units_lots units_lot[]
 }
 
-model mutual_fund_units_lot {
+model units_lot {
   id             String @id @default(cuid())
   mutual_fund_id String
 
-  mutual_fund            mutual_fund            @relation(fields: [mutual_fund_id], references: [id])
-  investment_transaction investment_transaction @relation(fields: [id], references: [id], onDelete: Cascade)
+  investment_transaction investment_transaction?
   redemption_buckets     redemption_bucket[]
+  mutual_fund            mutual_fund             @relation(fields: [mutual_fund_id], references: [id])
 }
 
-// Investment Transaction model
 model investment_transaction {
-  id              String @id @default(cuid())
+  id              String   @id @default(cuid())
   from_account_id String
   units_bought    Float
   buy_nav         Float
+  allotment_date  DateTime
+  units_lot_id    String   @unique
+  transaction_id  String   @unique
 
-  transaction           transaction            @relation(fields: [id], references: [id], onDelete: Cascade)
-  from_account          account                @relation(fields: [from_account_id], references: [id])
-  mutual_fund_units_lot mutual_fund_units_lot?
+  transaction  transaction @relation(fields: [transaction_id], references: [id])
+  from_account account     @relation(fields: [from_account_id], references: [id])
+  units_lot    units_lot   @relation(fields: [units_lot_id], references: [id])
 }
 
-// Redemption Transaction model with many-to-many relationship
 model redemption_transaction {
-  id             String @id @default(cuid())
-  to_account_id  String
-  sell_nav       Float
-  units_redeemed Float
+  id              String   @id @default(cuid())
+  to_account_id   String
+  sell_nav        Float
+  redemption_date DateTime
+  transaction_id  String   @unique
 
-  transaction        transaction         @relation(fields: [id], references: [id])
+  transaction        transaction         @relation(fields: [transaction_id], references: [id])
   to_account         account             @relation(fields: [to_account_id], references: [id])
   redemption_buckets redemption_bucket[]
 }
@@ -84,11 +86,11 @@ model redemption_bucket {
   id                        String @id @default(cuid())
   redemption_transaction_id String
 
-  mutual_fund_units_lot_id String
-  units_redeemed           Float
+  units_lot_id   String
+  units_redeemed Float
 
   redemption_transaction redemption_transaction @relation(fields: [redemption_transaction_id], references: [id])
-  mutual_fund_units_lot  mutual_fund_units_lot  @relation(fields: [mutual_fund_units_lot_id], references: [id])
+  units_lot              units_lot              @relation(fields: [units_lot_id], references: [id])
 }
 
 model transaction {
@@ -108,34 +110,37 @@ model transaction {
 }
 
 model transfer_transaction {
-  id String @id
+  id String @id @default(cuid())
 
   from_account_id String
   to_account_id   String
+  transaction_id  String @unique
 
-  transaction  transaction @relation(fields: [id], references: [id], onDelete: Cascade)
+  transaction  transaction @relation(fields: [transaction_id], references: [id])
   from_account account     @relation("from_account", fields: [from_account_id], references: [id])
   to_account   account     @relation("to_account", fields: [to_account_id], references: [id])
 }
 
 model expense_transaction {
-  id String @id
+  id String @id @default(cuid())
 
-  account_id      String @map("from_account_id")
-  expense_item_id String @map("to_sink_id")
+  account_id      String
+  expense_item_id String
+  transaction_id  String @unique
 
-  transaction  transaction  @relation(fields: [id], references: [id], onDelete: Cascade)
+  transaction  transaction  @relation(fields: [transaction_id], references: [id])
   account      account      @relation(fields: [account_id], references: [id])
   expense_item expense_item @relation(fields: [expense_item_id], references: [id])
 }
 
 model income_transaction {
-  id String @id
+  id String @id @default(cuid())
 
-  income_source_id String @map("from_source_id")
-  account_id       String @map("to_account_id")
+  income_source_id String
+  account_id       String
+  transaction_id   String @unique
 
-  transaction   transaction   @relation(fields: [id], references: [id], onDelete: Cascade)
+  transaction   transaction   @relation(fields: [transaction_id], references: [id])
   income_source income_source @relation(fields: [income_source_id], references: [id])
   account       account       @relation(fields: [account_id], references: [id])
 }

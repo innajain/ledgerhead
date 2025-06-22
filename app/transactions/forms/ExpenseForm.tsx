@@ -2,24 +2,13 @@ import React from 'react';
 import { AccountSelector } from '../components/AccountSelector';
 import { CustomDatePicker } from '../components/CustomDatePicker';
 import { updateExpenseTransaction, createExpenseTransaction } from '@/server actions/db';
-import { NoteField } from '../components/NoteField';
 import { FormButtonStack } from '../components/FormButtonStack';
-import { useLedgerData } from '@/app/LedgerContext';
+import { LedgerExpenseTransaction, useLedgerData } from '@/app/LedgerContext';
 import { getTodayDDMMYYYY, toDDMMYYYY, toHHMM } from '../components/dateUtils';
 import { useFormState } from '../components/useFormState';
 import { FormStatusMessages } from '../components/FormStatusMessages';
 
-export interface ExpenseFormInitial {
-  id?: string;
-  account_id?: string;
-  expense_item_id?: string;
-  date?: string | Date;
-  time?: string | Date;
-  note?: string;
-  amount?: number;
-}
-
-export function ExpenseForm({ onSuccess, initial }: { onSuccess: () => void; initial?: ExpenseFormInitial }) {
+export function ExpenseForm({ onSuccess, initial }: { onSuccess: () => void; initial?: LedgerExpenseTransaction }) {
   const { accounts, expenseItems, loading } = useLedgerData();
   const initialForm = {
     fromAccount: '',
@@ -102,8 +91,8 @@ export function ExpenseForm({ onSuccess, initial }: { onSuccess: () => void; ini
   React.useEffect(() => {
     if (initial) {
       setForm({
-        fromAccount: initial.account_id || '',
-        toSink: initial.expense_item_id || '',
+        fromAccount: initial.expense_transaction.account_id || '',
+        toSink: initial.expense_transaction.expense_item_id || '',
         date: toDDMMYYYY(initial.date),
         time: toHHMM(initial.time),
         note: initial.note || '',
@@ -204,7 +193,20 @@ export function ExpenseForm({ onSuccess, initial }: { onSuccess: () => void; ini
       {/* Note and Buttons - Stack on mobile, side-by-side on desktop */}
       <div className="flex flex-col lg:flex-row lg:items-end gap-3 sm:gap-4">
         <div className="flex-1">
-          <NoteField value={safeForm.note} onChange={handleNoteChange} />
+          <div className="flex items-center gap-2">
+            <label htmlFor="note" className="block text-sm font-medium flex-shrink-0 w-12 sm:w-16">
+              Note
+            </label>
+            <textarea
+              id="note"
+              name="note"
+              value={safeForm.note}
+              onChange={handleNoteChange}
+              rows={2}
+              className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm resize-none"
+              placeholder="Optional note..."
+            />
+          </div>
         </div>
         <div className="flex-shrink-0">
           <FormButtonStack

@@ -34,10 +34,10 @@ export type expense_item = $Result.DefaultSelection<Prisma.$expense_itemPayload>
  */
 export type mutual_fund = $Result.DefaultSelection<Prisma.$mutual_fundPayload>
 /**
- * Model mutual_fund_units_lot
+ * Model units_lot
  * 
  */
-export type mutual_fund_units_lot = $Result.DefaultSelection<Prisma.$mutual_fund_units_lotPayload>
+export type units_lot = $Result.DefaultSelection<Prisma.$units_lotPayload>
 /**
  * Model investment_transaction
  * 
@@ -313,14 +313,14 @@ export class PrismaClient<
   get mutual_fund(): Prisma.mutual_fundDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.mutual_fund_units_lot`: Exposes CRUD operations for the **mutual_fund_units_lot** model.
+   * `prisma.units_lot`: Exposes CRUD operations for the **units_lot** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Mutual_fund_units_lots
-    * const mutual_fund_units_lots = await prisma.mutual_fund_units_lot.findMany()
+    * // Fetch zero or more Units_lots
+    * const units_lots = await prisma.units_lot.findMany()
     * ```
     */
-  get mutual_fund_units_lot(): Prisma.mutual_fund_units_lotDelegate<ExtArgs, ClientOptions>;
+  get units_lot(): Prisma.units_lotDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.investment_transaction`: Exposes CRUD operations for the **investment_transaction** model.
@@ -845,7 +845,7 @@ export namespace Prisma {
     income_source: 'income_source',
     expense_item: 'expense_item',
     mutual_fund: 'mutual_fund',
-    mutual_fund_units_lot: 'mutual_fund_units_lot',
+    units_lot: 'units_lot',
     investment_transaction: 'investment_transaction',
     redemption_transaction: 'redemption_transaction',
     redemption_bucket: 'redemption_bucket',
@@ -872,7 +872,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "account" | "income_source" | "expense_item" | "mutual_fund" | "mutual_fund_units_lot" | "investment_transaction" | "redemption_transaction" | "redemption_bucket" | "transaction" | "transfer_transaction" | "expense_transaction" | "income_transaction" | "db_history"
+      modelProps: "account" | "income_source" | "expense_item" | "mutual_fund" | "units_lot" | "investment_transaction" | "redemption_transaction" | "redemption_bucket" | "transaction" | "transfer_transaction" | "expense_transaction" | "income_transaction" | "db_history"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1172,77 +1172,77 @@ export namespace Prisma {
           }
         }
       }
-      mutual_fund_units_lot: {
-        payload: Prisma.$mutual_fund_units_lotPayload<ExtArgs>
-        fields: Prisma.mutual_fund_units_lotFieldRefs
+      units_lot: {
+        payload: Prisma.$units_lotPayload<ExtArgs>
+        fields: Prisma.units_lotFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.mutual_fund_units_lotFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$mutual_fund_units_lotPayload> | null
+            args: Prisma.units_lotFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$units_lotPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.mutual_fund_units_lotFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$mutual_fund_units_lotPayload>
+            args: Prisma.units_lotFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$units_lotPayload>
           }
           findFirst: {
-            args: Prisma.mutual_fund_units_lotFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$mutual_fund_units_lotPayload> | null
+            args: Prisma.units_lotFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$units_lotPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.mutual_fund_units_lotFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$mutual_fund_units_lotPayload>
+            args: Prisma.units_lotFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$units_lotPayload>
           }
           findMany: {
-            args: Prisma.mutual_fund_units_lotFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$mutual_fund_units_lotPayload>[]
+            args: Prisma.units_lotFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$units_lotPayload>[]
           }
           create: {
-            args: Prisma.mutual_fund_units_lotCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$mutual_fund_units_lotPayload>
+            args: Prisma.units_lotCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$units_lotPayload>
           }
           createMany: {
-            args: Prisma.mutual_fund_units_lotCreateManyArgs<ExtArgs>
+            args: Prisma.units_lotCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.mutual_fund_units_lotCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$mutual_fund_units_lotPayload>[]
+            args: Prisma.units_lotCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$units_lotPayload>[]
           }
           delete: {
-            args: Prisma.mutual_fund_units_lotDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$mutual_fund_units_lotPayload>
+            args: Prisma.units_lotDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$units_lotPayload>
           }
           update: {
-            args: Prisma.mutual_fund_units_lotUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$mutual_fund_units_lotPayload>
+            args: Prisma.units_lotUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$units_lotPayload>
           }
           deleteMany: {
-            args: Prisma.mutual_fund_units_lotDeleteManyArgs<ExtArgs>
+            args: Prisma.units_lotDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.mutual_fund_units_lotUpdateManyArgs<ExtArgs>
+            args: Prisma.units_lotUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.mutual_fund_units_lotUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$mutual_fund_units_lotPayload>[]
+            args: Prisma.units_lotUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$units_lotPayload>[]
           }
           upsert: {
-            args: Prisma.mutual_fund_units_lotUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$mutual_fund_units_lotPayload>
+            args: Prisma.units_lotUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$units_lotPayload>
           }
           aggregate: {
-            args: Prisma.Mutual_fund_units_lotAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateMutual_fund_units_lot>
+            args: Prisma.Units_lotAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUnits_lot>
           }
           groupBy: {
-            args: Prisma.mutual_fund_units_lotGroupByArgs<ExtArgs>
-            result: $Utils.Optional<Mutual_fund_units_lotGroupByOutputType>[]
+            args: Prisma.units_lotGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Units_lotGroupByOutputType>[]
           }
           count: {
-            args: Prisma.mutual_fund_units_lotCountArgs<ExtArgs>
-            result: $Utils.Optional<Mutual_fund_units_lotCountAggregateOutputType> | number
+            args: Prisma.units_lotCountArgs<ExtArgs>
+            result: $Utils.Optional<Units_lotCountAggregateOutputType> | number
           }
         }
       }
@@ -1926,7 +1926,7 @@ export namespace Prisma {
     income_source?: income_sourceOmit
     expense_item?: expense_itemOmit
     mutual_fund?: mutual_fundOmit
-    mutual_fund_units_lot?: mutual_fund_units_lotOmit
+    units_lot?: units_lotOmit
     investment_transaction?: investment_transactionOmit
     redemption_transaction?: redemption_transactionOmit
     redemption_bucket?: redemption_bucketOmit
@@ -2167,11 +2167,11 @@ export namespace Prisma {
    */
 
   export type Mutual_fundCountOutputType = {
-    units: number
+    units_lots: number
   }
 
   export type Mutual_fundCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    units?: boolean | Mutual_fundCountOutputTypeCountUnitsArgs
+    units_lots?: boolean | Mutual_fundCountOutputTypeCountUnits_lotsArgs
   }
 
   // Custom InputTypes
@@ -2188,38 +2188,38 @@ export namespace Prisma {
   /**
    * Mutual_fundCountOutputType without action
    */
-  export type Mutual_fundCountOutputTypeCountUnitsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: mutual_fund_units_lotWhereInput
+  export type Mutual_fundCountOutputTypeCountUnits_lotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: units_lotWhereInput
   }
 
 
   /**
-   * Count Type Mutual_fund_units_lotCountOutputType
+   * Count Type Units_lotCountOutputType
    */
 
-  export type Mutual_fund_units_lotCountOutputType = {
+  export type Units_lotCountOutputType = {
     redemption_buckets: number
   }
 
-  export type Mutual_fund_units_lotCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    redemption_buckets?: boolean | Mutual_fund_units_lotCountOutputTypeCountRedemption_bucketsArgs
+  export type Units_lotCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    redemption_buckets?: boolean | Units_lotCountOutputTypeCountRedemption_bucketsArgs
   }
 
   // Custom InputTypes
   /**
-   * Mutual_fund_units_lotCountOutputType without action
+   * Units_lotCountOutputType without action
    */
-  export type Mutual_fund_units_lotCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Units_lotCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Mutual_fund_units_lotCountOutputType
+     * Select specific fields to fetch from the Units_lotCountOutputType
      */
-    select?: Mutual_fund_units_lotCountOutputTypeSelect<ExtArgs> | null
+    select?: Units_lotCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * Mutual_fund_units_lotCountOutputType without action
+   * Units_lotCountOutputType without action
    */
-  export type Mutual_fund_units_lotCountOutputTypeCountRedemption_bucketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Units_lotCountOutputTypeCountRedemption_bucketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: redemption_bucketWhereInput
   }
 
@@ -5673,7 +5673,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     isin?: boolean
-    units?: boolean | mutual_fund$unitsArgs<ExtArgs>
+    units_lots?: boolean | mutual_fund$units_lotsArgs<ExtArgs>
     _count?: boolean | Mutual_fundCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["mutual_fund"]>
 
@@ -5697,7 +5697,7 @@ export namespace Prisma {
 
   export type mutual_fundOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "isin", ExtArgs["result"]["mutual_fund"]>
   export type mutual_fundInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    units?: boolean | mutual_fund$unitsArgs<ExtArgs>
+    units_lots?: boolean | mutual_fund$units_lotsArgs<ExtArgs>
     _count?: boolean | Mutual_fundCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type mutual_fundIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -5706,7 +5706,7 @@ export namespace Prisma {
   export type $mutual_fundPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "mutual_fund"
     objects: {
-      units: Prisma.$mutual_fund_units_lotPayload<ExtArgs>[]
+      units_lots: Prisma.$units_lotPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6106,7 +6106,7 @@ export namespace Prisma {
    */
   export interface Prisma__mutual_fundClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    units<T extends mutual_fund$unitsArgs<ExtArgs> = {}>(args?: Subset<T, mutual_fund$unitsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$mutual_fund_units_lotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    units_lots<T extends mutual_fund$units_lotsArgs<ExtArgs> = {}>(args?: Subset<T, mutual_fund$units_lotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$units_lotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6525,27 +6525,27 @@ export namespace Prisma {
   }
 
   /**
-   * mutual_fund.units
+   * mutual_fund.units_lots
    */
-  export type mutual_fund$unitsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type mutual_fund$units_lotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the mutual_fund_units_lot
+     * Select specific fields to fetch from the units_lot
      */
-    select?: mutual_fund_units_lotSelect<ExtArgs> | null
+    select?: units_lotSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the mutual_fund_units_lot
+     * Omit specific fields from the units_lot
      */
-    omit?: mutual_fund_units_lotOmit<ExtArgs> | null
+    omit?: units_lotOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: mutual_fund_units_lotInclude<ExtArgs> | null
-    where?: mutual_fund_units_lotWhereInput
-    orderBy?: mutual_fund_units_lotOrderByWithRelationInput | mutual_fund_units_lotOrderByWithRelationInput[]
-    cursor?: mutual_fund_units_lotWhereUniqueInput
+    include?: units_lotInclude<ExtArgs> | null
+    where?: units_lotWhereInput
+    orderBy?: units_lotOrderByWithRelationInput | units_lotOrderByWithRelationInput[]
+    cursor?: units_lotWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Mutual_fund_units_lotScalarFieldEnum | Mutual_fund_units_lotScalarFieldEnum[]
+    distinct?: Units_lotScalarFieldEnum | Units_lotScalarFieldEnum[]
   }
 
   /**
@@ -6568,326 +6568,322 @@ export namespace Prisma {
 
 
   /**
-   * Model mutual_fund_units_lot
+   * Model units_lot
    */
 
-  export type AggregateMutual_fund_units_lot = {
-    _count: Mutual_fund_units_lotCountAggregateOutputType | null
-    _min: Mutual_fund_units_lotMinAggregateOutputType | null
-    _max: Mutual_fund_units_lotMaxAggregateOutputType | null
+  export type AggregateUnits_lot = {
+    _count: Units_lotCountAggregateOutputType | null
+    _min: Units_lotMinAggregateOutputType | null
+    _max: Units_lotMaxAggregateOutputType | null
   }
 
-  export type Mutual_fund_units_lotMinAggregateOutputType = {
+  export type Units_lotMinAggregateOutputType = {
     id: string | null
     mutual_fund_id: string | null
   }
 
-  export type Mutual_fund_units_lotMaxAggregateOutputType = {
+  export type Units_lotMaxAggregateOutputType = {
     id: string | null
     mutual_fund_id: string | null
   }
 
-  export type Mutual_fund_units_lotCountAggregateOutputType = {
+  export type Units_lotCountAggregateOutputType = {
     id: number
     mutual_fund_id: number
     _all: number
   }
 
 
-  export type Mutual_fund_units_lotMinAggregateInputType = {
+  export type Units_lotMinAggregateInputType = {
     id?: true
     mutual_fund_id?: true
   }
 
-  export type Mutual_fund_units_lotMaxAggregateInputType = {
+  export type Units_lotMaxAggregateInputType = {
     id?: true
     mutual_fund_id?: true
   }
 
-  export type Mutual_fund_units_lotCountAggregateInputType = {
+  export type Units_lotCountAggregateInputType = {
     id?: true
     mutual_fund_id?: true
     _all?: true
   }
 
-  export type Mutual_fund_units_lotAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Units_lotAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which mutual_fund_units_lot to aggregate.
+     * Filter which units_lot to aggregate.
      */
-    where?: mutual_fund_units_lotWhereInput
+    where?: units_lotWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of mutual_fund_units_lots to fetch.
+     * Determine the order of units_lots to fetch.
      */
-    orderBy?: mutual_fund_units_lotOrderByWithRelationInput | mutual_fund_units_lotOrderByWithRelationInput[]
+    orderBy?: units_lotOrderByWithRelationInput | units_lotOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: mutual_fund_units_lotWhereUniqueInput
+    cursor?: units_lotWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` mutual_fund_units_lots from the position of the cursor.
+     * Take `±n` units_lots from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` mutual_fund_units_lots.
+     * Skip the first `n` units_lots.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned mutual_fund_units_lots
+     * Count returned units_lots
     **/
-    _count?: true | Mutual_fund_units_lotCountAggregateInputType
+    _count?: true | Units_lotCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: Mutual_fund_units_lotMinAggregateInputType
+    _min?: Units_lotMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: Mutual_fund_units_lotMaxAggregateInputType
+    _max?: Units_lotMaxAggregateInputType
   }
 
-  export type GetMutual_fund_units_lotAggregateType<T extends Mutual_fund_units_lotAggregateArgs> = {
-        [P in keyof T & keyof AggregateMutual_fund_units_lot]: P extends '_count' | 'count'
+  export type GetUnits_lotAggregateType<T extends Units_lotAggregateArgs> = {
+        [P in keyof T & keyof AggregateUnits_lot]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateMutual_fund_units_lot[P]>
-      : GetScalarType<T[P], AggregateMutual_fund_units_lot[P]>
+        : GetScalarType<T[P], AggregateUnits_lot[P]>
+      : GetScalarType<T[P], AggregateUnits_lot[P]>
   }
 
 
 
 
-  export type mutual_fund_units_lotGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: mutual_fund_units_lotWhereInput
-    orderBy?: mutual_fund_units_lotOrderByWithAggregationInput | mutual_fund_units_lotOrderByWithAggregationInput[]
-    by: Mutual_fund_units_lotScalarFieldEnum[] | Mutual_fund_units_lotScalarFieldEnum
-    having?: mutual_fund_units_lotScalarWhereWithAggregatesInput
+  export type units_lotGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: units_lotWhereInput
+    orderBy?: units_lotOrderByWithAggregationInput | units_lotOrderByWithAggregationInput[]
+    by: Units_lotScalarFieldEnum[] | Units_lotScalarFieldEnum
+    having?: units_lotScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: Mutual_fund_units_lotCountAggregateInputType | true
-    _min?: Mutual_fund_units_lotMinAggregateInputType
-    _max?: Mutual_fund_units_lotMaxAggregateInputType
+    _count?: Units_lotCountAggregateInputType | true
+    _min?: Units_lotMinAggregateInputType
+    _max?: Units_lotMaxAggregateInputType
   }
 
-  export type Mutual_fund_units_lotGroupByOutputType = {
+  export type Units_lotGroupByOutputType = {
     id: string
     mutual_fund_id: string
-    _count: Mutual_fund_units_lotCountAggregateOutputType | null
-    _min: Mutual_fund_units_lotMinAggregateOutputType | null
-    _max: Mutual_fund_units_lotMaxAggregateOutputType | null
+    _count: Units_lotCountAggregateOutputType | null
+    _min: Units_lotMinAggregateOutputType | null
+    _max: Units_lotMaxAggregateOutputType | null
   }
 
-  type GetMutual_fund_units_lotGroupByPayload<T extends mutual_fund_units_lotGroupByArgs> = Prisma.PrismaPromise<
+  type GetUnits_lotGroupByPayload<T extends units_lotGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<Mutual_fund_units_lotGroupByOutputType, T['by']> &
+      PickEnumerable<Units_lotGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof Mutual_fund_units_lotGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof Units_lotGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], Mutual_fund_units_lotGroupByOutputType[P]>
-            : GetScalarType<T[P], Mutual_fund_units_lotGroupByOutputType[P]>
+              : GetScalarType<T[P], Units_lotGroupByOutputType[P]>
+            : GetScalarType<T[P], Units_lotGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type mutual_fund_units_lotSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type units_lotSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    mutual_fund_id?: boolean
+    investment_transaction?: boolean | units_lot$investment_transactionArgs<ExtArgs>
+    redemption_buckets?: boolean | units_lot$redemption_bucketsArgs<ExtArgs>
+    mutual_fund?: boolean | mutual_fundDefaultArgs<ExtArgs>
+    _count?: boolean | Units_lotCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["units_lot"]>
+
+  export type units_lotSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     mutual_fund_id?: boolean
     mutual_fund?: boolean | mutual_fundDefaultArgs<ExtArgs>
-    investment_transaction?: boolean | investment_transactionDefaultArgs<ExtArgs>
-    redemption_buckets?: boolean | mutual_fund_units_lot$redemption_bucketsArgs<ExtArgs>
-    _count?: boolean | Mutual_fund_units_lotCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["mutual_fund_units_lot"]>
+  }, ExtArgs["result"]["units_lot"]>
 
-  export type mutual_fund_units_lotSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type units_lotSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     mutual_fund_id?: boolean
     mutual_fund?: boolean | mutual_fundDefaultArgs<ExtArgs>
-    investment_transaction?: boolean | investment_transactionDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["mutual_fund_units_lot"]>
+  }, ExtArgs["result"]["units_lot"]>
 
-  export type mutual_fund_units_lotSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    mutual_fund_id?: boolean
-    mutual_fund?: boolean | mutual_fundDefaultArgs<ExtArgs>
-    investment_transaction?: boolean | investment_transactionDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["mutual_fund_units_lot"]>
-
-  export type mutual_fund_units_lotSelectScalar = {
+  export type units_lotSelectScalar = {
     id?: boolean
     mutual_fund_id?: boolean
   }
 
-  export type mutual_fund_units_lotOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "mutual_fund_id", ExtArgs["result"]["mutual_fund_units_lot"]>
-  export type mutual_fund_units_lotInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type units_lotOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "mutual_fund_id", ExtArgs["result"]["units_lot"]>
+  export type units_lotInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    investment_transaction?: boolean | units_lot$investment_transactionArgs<ExtArgs>
+    redemption_buckets?: boolean | units_lot$redemption_bucketsArgs<ExtArgs>
     mutual_fund?: boolean | mutual_fundDefaultArgs<ExtArgs>
-    investment_transaction?: boolean | investment_transactionDefaultArgs<ExtArgs>
-    redemption_buckets?: boolean | mutual_fund_units_lot$redemption_bucketsArgs<ExtArgs>
-    _count?: boolean | Mutual_fund_units_lotCountOutputTypeDefaultArgs<ExtArgs>
+    _count?: boolean | Units_lotCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type mutual_fund_units_lotIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type units_lotIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     mutual_fund?: boolean | mutual_fundDefaultArgs<ExtArgs>
-    investment_transaction?: boolean | investment_transactionDefaultArgs<ExtArgs>
   }
-  export type mutual_fund_units_lotIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type units_lotIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     mutual_fund?: boolean | mutual_fundDefaultArgs<ExtArgs>
-    investment_transaction?: boolean | investment_transactionDefaultArgs<ExtArgs>
   }
 
-  export type $mutual_fund_units_lotPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "mutual_fund_units_lot"
+  export type $units_lotPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "units_lot"
     objects: {
-      mutual_fund: Prisma.$mutual_fundPayload<ExtArgs>
-      investment_transaction: Prisma.$investment_transactionPayload<ExtArgs>
+      investment_transaction: Prisma.$investment_transactionPayload<ExtArgs> | null
       redemption_buckets: Prisma.$redemption_bucketPayload<ExtArgs>[]
+      mutual_fund: Prisma.$mutual_fundPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       mutual_fund_id: string
-    }, ExtArgs["result"]["mutual_fund_units_lot"]>
+    }, ExtArgs["result"]["units_lot"]>
     composites: {}
   }
 
-  type mutual_fund_units_lotGetPayload<S extends boolean | null | undefined | mutual_fund_units_lotDefaultArgs> = $Result.GetResult<Prisma.$mutual_fund_units_lotPayload, S>
+  type units_lotGetPayload<S extends boolean | null | undefined | units_lotDefaultArgs> = $Result.GetResult<Prisma.$units_lotPayload, S>
 
-  type mutual_fund_units_lotCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<mutual_fund_units_lotFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: Mutual_fund_units_lotCountAggregateInputType | true
+  type units_lotCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<units_lotFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Units_lotCountAggregateInputType | true
     }
 
-  export interface mutual_fund_units_lotDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['mutual_fund_units_lot'], meta: { name: 'mutual_fund_units_lot' } }
+  export interface units_lotDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['units_lot'], meta: { name: 'units_lot' } }
     /**
-     * Find zero or one Mutual_fund_units_lot that matches the filter.
-     * @param {mutual_fund_units_lotFindUniqueArgs} args - Arguments to find a Mutual_fund_units_lot
+     * Find zero or one Units_lot that matches the filter.
+     * @param {units_lotFindUniqueArgs} args - Arguments to find a Units_lot
      * @example
-     * // Get one Mutual_fund_units_lot
-     * const mutual_fund_units_lot = await prisma.mutual_fund_units_lot.findUnique({
+     * // Get one Units_lot
+     * const units_lot = await prisma.units_lot.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends mutual_fund_units_lotFindUniqueArgs>(args: SelectSubset<T, mutual_fund_units_lotFindUniqueArgs<ExtArgs>>): Prisma__mutual_fund_units_lotClient<$Result.GetResult<Prisma.$mutual_fund_units_lotPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends units_lotFindUniqueArgs>(args: SelectSubset<T, units_lotFindUniqueArgs<ExtArgs>>): Prisma__units_lotClient<$Result.GetResult<Prisma.$units_lotPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Mutual_fund_units_lot that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Units_lot that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {mutual_fund_units_lotFindUniqueOrThrowArgs} args - Arguments to find a Mutual_fund_units_lot
+     * @param {units_lotFindUniqueOrThrowArgs} args - Arguments to find a Units_lot
      * @example
-     * // Get one Mutual_fund_units_lot
-     * const mutual_fund_units_lot = await prisma.mutual_fund_units_lot.findUniqueOrThrow({
+     * // Get one Units_lot
+     * const units_lot = await prisma.units_lot.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends mutual_fund_units_lotFindUniqueOrThrowArgs>(args: SelectSubset<T, mutual_fund_units_lotFindUniqueOrThrowArgs<ExtArgs>>): Prisma__mutual_fund_units_lotClient<$Result.GetResult<Prisma.$mutual_fund_units_lotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends units_lotFindUniqueOrThrowArgs>(args: SelectSubset<T, units_lotFindUniqueOrThrowArgs<ExtArgs>>): Prisma__units_lotClient<$Result.GetResult<Prisma.$units_lotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Mutual_fund_units_lot that matches the filter.
+     * Find the first Units_lot that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {mutual_fund_units_lotFindFirstArgs} args - Arguments to find a Mutual_fund_units_lot
+     * @param {units_lotFindFirstArgs} args - Arguments to find a Units_lot
      * @example
-     * // Get one Mutual_fund_units_lot
-     * const mutual_fund_units_lot = await prisma.mutual_fund_units_lot.findFirst({
+     * // Get one Units_lot
+     * const units_lot = await prisma.units_lot.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends mutual_fund_units_lotFindFirstArgs>(args?: SelectSubset<T, mutual_fund_units_lotFindFirstArgs<ExtArgs>>): Prisma__mutual_fund_units_lotClient<$Result.GetResult<Prisma.$mutual_fund_units_lotPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends units_lotFindFirstArgs>(args?: SelectSubset<T, units_lotFindFirstArgs<ExtArgs>>): Prisma__units_lotClient<$Result.GetResult<Prisma.$units_lotPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Mutual_fund_units_lot that matches the filter or
+     * Find the first Units_lot that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {mutual_fund_units_lotFindFirstOrThrowArgs} args - Arguments to find a Mutual_fund_units_lot
+     * @param {units_lotFindFirstOrThrowArgs} args - Arguments to find a Units_lot
      * @example
-     * // Get one Mutual_fund_units_lot
-     * const mutual_fund_units_lot = await prisma.mutual_fund_units_lot.findFirstOrThrow({
+     * // Get one Units_lot
+     * const units_lot = await prisma.units_lot.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends mutual_fund_units_lotFindFirstOrThrowArgs>(args?: SelectSubset<T, mutual_fund_units_lotFindFirstOrThrowArgs<ExtArgs>>): Prisma__mutual_fund_units_lotClient<$Result.GetResult<Prisma.$mutual_fund_units_lotPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends units_lotFindFirstOrThrowArgs>(args?: SelectSubset<T, units_lotFindFirstOrThrowArgs<ExtArgs>>): Prisma__units_lotClient<$Result.GetResult<Prisma.$units_lotPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Mutual_fund_units_lots that matches the filter.
+     * Find zero or more Units_lots that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {mutual_fund_units_lotFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {units_lotFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Mutual_fund_units_lots
-     * const mutual_fund_units_lots = await prisma.mutual_fund_units_lot.findMany()
+     * // Get all Units_lots
+     * const units_lots = await prisma.units_lot.findMany()
      * 
-     * // Get first 10 Mutual_fund_units_lots
-     * const mutual_fund_units_lots = await prisma.mutual_fund_units_lot.findMany({ take: 10 })
+     * // Get first 10 Units_lots
+     * const units_lots = await prisma.units_lot.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const mutual_fund_units_lotWithIdOnly = await prisma.mutual_fund_units_lot.findMany({ select: { id: true } })
+     * const units_lotWithIdOnly = await prisma.units_lot.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends mutual_fund_units_lotFindManyArgs>(args?: SelectSubset<T, mutual_fund_units_lotFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$mutual_fund_units_lotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends units_lotFindManyArgs>(args?: SelectSubset<T, units_lotFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$units_lotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Mutual_fund_units_lot.
-     * @param {mutual_fund_units_lotCreateArgs} args - Arguments to create a Mutual_fund_units_lot.
+     * Create a Units_lot.
+     * @param {units_lotCreateArgs} args - Arguments to create a Units_lot.
      * @example
-     * // Create one Mutual_fund_units_lot
-     * const Mutual_fund_units_lot = await prisma.mutual_fund_units_lot.create({
+     * // Create one Units_lot
+     * const Units_lot = await prisma.units_lot.create({
      *   data: {
-     *     // ... data to create a Mutual_fund_units_lot
+     *     // ... data to create a Units_lot
      *   }
      * })
      * 
      */
-    create<T extends mutual_fund_units_lotCreateArgs>(args: SelectSubset<T, mutual_fund_units_lotCreateArgs<ExtArgs>>): Prisma__mutual_fund_units_lotClient<$Result.GetResult<Prisma.$mutual_fund_units_lotPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends units_lotCreateArgs>(args: SelectSubset<T, units_lotCreateArgs<ExtArgs>>): Prisma__units_lotClient<$Result.GetResult<Prisma.$units_lotPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Mutual_fund_units_lots.
-     * @param {mutual_fund_units_lotCreateManyArgs} args - Arguments to create many Mutual_fund_units_lots.
+     * Create many Units_lots.
+     * @param {units_lotCreateManyArgs} args - Arguments to create many Units_lots.
      * @example
-     * // Create many Mutual_fund_units_lots
-     * const mutual_fund_units_lot = await prisma.mutual_fund_units_lot.createMany({
+     * // Create many Units_lots
+     * const units_lot = await prisma.units_lot.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends mutual_fund_units_lotCreateManyArgs>(args?: SelectSubset<T, mutual_fund_units_lotCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends units_lotCreateManyArgs>(args?: SelectSubset<T, units_lotCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Mutual_fund_units_lots and returns the data saved in the database.
-     * @param {mutual_fund_units_lotCreateManyAndReturnArgs} args - Arguments to create many Mutual_fund_units_lots.
+     * Create many Units_lots and returns the data saved in the database.
+     * @param {units_lotCreateManyAndReturnArgs} args - Arguments to create many Units_lots.
      * @example
-     * // Create many Mutual_fund_units_lots
-     * const mutual_fund_units_lot = await prisma.mutual_fund_units_lot.createManyAndReturn({
+     * // Create many Units_lots
+     * const units_lot = await prisma.units_lot.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Mutual_fund_units_lots and only return the `id`
-     * const mutual_fund_units_lotWithIdOnly = await prisma.mutual_fund_units_lot.createManyAndReturn({
+     * // Create many Units_lots and only return the `id`
+     * const units_lotWithIdOnly = await prisma.units_lot.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -6897,28 +6893,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends mutual_fund_units_lotCreateManyAndReturnArgs>(args?: SelectSubset<T, mutual_fund_units_lotCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$mutual_fund_units_lotPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends units_lotCreateManyAndReturnArgs>(args?: SelectSubset<T, units_lotCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$units_lotPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a Mutual_fund_units_lot.
-     * @param {mutual_fund_units_lotDeleteArgs} args - Arguments to delete one Mutual_fund_units_lot.
+     * Delete a Units_lot.
+     * @param {units_lotDeleteArgs} args - Arguments to delete one Units_lot.
      * @example
-     * // Delete one Mutual_fund_units_lot
-     * const Mutual_fund_units_lot = await prisma.mutual_fund_units_lot.delete({
+     * // Delete one Units_lot
+     * const Units_lot = await prisma.units_lot.delete({
      *   where: {
-     *     // ... filter to delete one Mutual_fund_units_lot
+     *     // ... filter to delete one Units_lot
      *   }
      * })
      * 
      */
-    delete<T extends mutual_fund_units_lotDeleteArgs>(args: SelectSubset<T, mutual_fund_units_lotDeleteArgs<ExtArgs>>): Prisma__mutual_fund_units_lotClient<$Result.GetResult<Prisma.$mutual_fund_units_lotPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends units_lotDeleteArgs>(args: SelectSubset<T, units_lotDeleteArgs<ExtArgs>>): Prisma__units_lotClient<$Result.GetResult<Prisma.$units_lotPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Mutual_fund_units_lot.
-     * @param {mutual_fund_units_lotUpdateArgs} args - Arguments to update one Mutual_fund_units_lot.
+     * Update one Units_lot.
+     * @param {units_lotUpdateArgs} args - Arguments to update one Units_lot.
      * @example
-     * // Update one Mutual_fund_units_lot
-     * const mutual_fund_units_lot = await prisma.mutual_fund_units_lot.update({
+     * // Update one Units_lot
+     * const units_lot = await prisma.units_lot.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -6928,30 +6924,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends mutual_fund_units_lotUpdateArgs>(args: SelectSubset<T, mutual_fund_units_lotUpdateArgs<ExtArgs>>): Prisma__mutual_fund_units_lotClient<$Result.GetResult<Prisma.$mutual_fund_units_lotPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends units_lotUpdateArgs>(args: SelectSubset<T, units_lotUpdateArgs<ExtArgs>>): Prisma__units_lotClient<$Result.GetResult<Prisma.$units_lotPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Mutual_fund_units_lots.
-     * @param {mutual_fund_units_lotDeleteManyArgs} args - Arguments to filter Mutual_fund_units_lots to delete.
+     * Delete zero or more Units_lots.
+     * @param {units_lotDeleteManyArgs} args - Arguments to filter Units_lots to delete.
      * @example
-     * // Delete a few Mutual_fund_units_lots
-     * const { count } = await prisma.mutual_fund_units_lot.deleteMany({
+     * // Delete a few Units_lots
+     * const { count } = await prisma.units_lot.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends mutual_fund_units_lotDeleteManyArgs>(args?: SelectSubset<T, mutual_fund_units_lotDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends units_lotDeleteManyArgs>(args?: SelectSubset<T, units_lotDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Mutual_fund_units_lots.
+     * Update zero or more Units_lots.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {mutual_fund_units_lotUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {units_lotUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Mutual_fund_units_lots
-     * const mutual_fund_units_lot = await prisma.mutual_fund_units_lot.updateMany({
+     * // Update many Units_lots
+     * const units_lot = await prisma.units_lot.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -6961,14 +6957,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends mutual_fund_units_lotUpdateManyArgs>(args: SelectSubset<T, mutual_fund_units_lotUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends units_lotUpdateManyArgs>(args: SelectSubset<T, units_lotUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Mutual_fund_units_lots and returns the data updated in the database.
-     * @param {mutual_fund_units_lotUpdateManyAndReturnArgs} args - Arguments to update many Mutual_fund_units_lots.
+     * Update zero or more Units_lots and returns the data updated in the database.
+     * @param {units_lotUpdateManyAndReturnArgs} args - Arguments to update many Units_lots.
      * @example
-     * // Update many Mutual_fund_units_lots
-     * const mutual_fund_units_lot = await prisma.mutual_fund_units_lot.updateManyAndReturn({
+     * // Update many Units_lots
+     * const units_lot = await prisma.units_lot.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -6977,8 +6973,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Mutual_fund_units_lots and only return the `id`
-     * const mutual_fund_units_lotWithIdOnly = await prisma.mutual_fund_units_lot.updateManyAndReturn({
+     * // Update zero or more Units_lots and only return the `id`
+     * const units_lotWithIdOnly = await prisma.units_lot.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -6991,56 +6987,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends mutual_fund_units_lotUpdateManyAndReturnArgs>(args: SelectSubset<T, mutual_fund_units_lotUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$mutual_fund_units_lotPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends units_lotUpdateManyAndReturnArgs>(args: SelectSubset<T, units_lotUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$units_lotPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one Mutual_fund_units_lot.
-     * @param {mutual_fund_units_lotUpsertArgs} args - Arguments to update or create a Mutual_fund_units_lot.
+     * Create or update one Units_lot.
+     * @param {units_lotUpsertArgs} args - Arguments to update or create a Units_lot.
      * @example
-     * // Update or create a Mutual_fund_units_lot
-     * const mutual_fund_units_lot = await prisma.mutual_fund_units_lot.upsert({
+     * // Update or create a Units_lot
+     * const units_lot = await prisma.units_lot.upsert({
      *   create: {
-     *     // ... data to create a Mutual_fund_units_lot
+     *     // ... data to create a Units_lot
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Mutual_fund_units_lot we want to update
+     *     // ... the filter for the Units_lot we want to update
      *   }
      * })
      */
-    upsert<T extends mutual_fund_units_lotUpsertArgs>(args: SelectSubset<T, mutual_fund_units_lotUpsertArgs<ExtArgs>>): Prisma__mutual_fund_units_lotClient<$Result.GetResult<Prisma.$mutual_fund_units_lotPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends units_lotUpsertArgs>(args: SelectSubset<T, units_lotUpsertArgs<ExtArgs>>): Prisma__units_lotClient<$Result.GetResult<Prisma.$units_lotPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Mutual_fund_units_lots.
+     * Count the number of Units_lots.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {mutual_fund_units_lotCountArgs} args - Arguments to filter Mutual_fund_units_lots to count.
+     * @param {units_lotCountArgs} args - Arguments to filter Units_lots to count.
      * @example
-     * // Count the number of Mutual_fund_units_lots
-     * const count = await prisma.mutual_fund_units_lot.count({
+     * // Count the number of Units_lots
+     * const count = await prisma.units_lot.count({
      *   where: {
-     *     // ... the filter for the Mutual_fund_units_lots we want to count
+     *     // ... the filter for the Units_lots we want to count
      *   }
      * })
     **/
-    count<T extends mutual_fund_units_lotCountArgs>(
-      args?: Subset<T, mutual_fund_units_lotCountArgs>,
+    count<T extends units_lotCountArgs>(
+      args?: Subset<T, units_lotCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], Mutual_fund_units_lotCountAggregateOutputType>
+          : GetScalarType<T['select'], Units_lotCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Mutual_fund_units_lot.
+     * Allows you to perform aggregations operations on a Units_lot.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {Mutual_fund_units_lotAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {Units_lotAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -7060,13 +7056,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends Mutual_fund_units_lotAggregateArgs>(args: Subset<T, Mutual_fund_units_lotAggregateArgs>): Prisma.PrismaPromise<GetMutual_fund_units_lotAggregateType<T>>
+    aggregate<T extends Units_lotAggregateArgs>(args: Subset<T, Units_lotAggregateArgs>): Prisma.PrismaPromise<GetUnits_lotAggregateType<T>>
 
     /**
-     * Group by Mutual_fund_units_lot.
+     * Group by Units_lot.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {mutual_fund_units_lotGroupByArgs} args - Group by arguments.
+     * @param {units_lotGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -7081,14 +7077,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends mutual_fund_units_lotGroupByArgs,
+      T extends units_lotGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: mutual_fund_units_lotGroupByArgs['orderBy'] }
-        : { orderBy?: mutual_fund_units_lotGroupByArgs['orderBy'] },
+        ? { orderBy: units_lotGroupByArgs['orderBy'] }
+        : { orderBy?: units_lotGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -7137,24 +7133,24 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, mutual_fund_units_lotGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMutual_fund_units_lotGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, units_lotGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUnits_lotGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the mutual_fund_units_lot model
+   * Fields of the units_lot model
    */
-  readonly fields: mutual_fund_units_lotFieldRefs;
+  readonly fields: units_lotFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for mutual_fund_units_lot.
+   * The delegate class that acts as a "Promise-like" for units_lot.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__mutual_fund_units_lotClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__units_lotClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    investment_transaction<T extends units_lot$investment_transactionArgs<ExtArgs> = {}>(args?: Subset<T, units_lot$investment_transactionArgs<ExtArgs>>): Prisma__investment_transactionClient<$Result.GetResult<Prisma.$investment_transactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    redemption_buckets<T extends units_lot$redemption_bucketsArgs<ExtArgs> = {}>(args?: Subset<T, units_lot$redemption_bucketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$redemption_bucketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     mutual_fund<T extends mutual_fundDefaultArgs<ExtArgs> = {}>(args?: Subset<T, mutual_fundDefaultArgs<ExtArgs>>): Prisma__mutual_fundClient<$Result.GetResult<Prisma.$mutual_fundPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    investment_transaction<T extends investment_transactionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, investment_transactionDefaultArgs<ExtArgs>>): Prisma__investment_transactionClient<$Result.GetResult<Prisma.$investment_transactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    redemption_buckets<T extends mutual_fund_units_lot$redemption_bucketsArgs<ExtArgs> = {}>(args?: Subset<T, mutual_fund_units_lot$redemption_bucketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$redemption_bucketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7181,408 +7177,427 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the mutual_fund_units_lot model
+   * Fields of the units_lot model
    */
-  interface mutual_fund_units_lotFieldRefs {
-    readonly id: FieldRef<"mutual_fund_units_lot", 'String'>
-    readonly mutual_fund_id: FieldRef<"mutual_fund_units_lot", 'String'>
+  interface units_lotFieldRefs {
+    readonly id: FieldRef<"units_lot", 'String'>
+    readonly mutual_fund_id: FieldRef<"units_lot", 'String'>
   }
     
 
   // Custom InputTypes
   /**
-   * mutual_fund_units_lot findUnique
+   * units_lot findUnique
    */
-  export type mutual_fund_units_lotFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type units_lotFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the mutual_fund_units_lot
+     * Select specific fields to fetch from the units_lot
      */
-    select?: mutual_fund_units_lotSelect<ExtArgs> | null
+    select?: units_lotSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the mutual_fund_units_lot
+     * Omit specific fields from the units_lot
      */
-    omit?: mutual_fund_units_lotOmit<ExtArgs> | null
+    omit?: units_lotOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: mutual_fund_units_lotInclude<ExtArgs> | null
+    include?: units_lotInclude<ExtArgs> | null
     /**
-     * Filter, which mutual_fund_units_lot to fetch.
+     * Filter, which units_lot to fetch.
      */
-    where: mutual_fund_units_lotWhereUniqueInput
+    where: units_lotWhereUniqueInput
   }
 
   /**
-   * mutual_fund_units_lot findUniqueOrThrow
+   * units_lot findUniqueOrThrow
    */
-  export type mutual_fund_units_lotFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type units_lotFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the mutual_fund_units_lot
+     * Select specific fields to fetch from the units_lot
      */
-    select?: mutual_fund_units_lotSelect<ExtArgs> | null
+    select?: units_lotSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the mutual_fund_units_lot
+     * Omit specific fields from the units_lot
      */
-    omit?: mutual_fund_units_lotOmit<ExtArgs> | null
+    omit?: units_lotOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: mutual_fund_units_lotInclude<ExtArgs> | null
+    include?: units_lotInclude<ExtArgs> | null
     /**
-     * Filter, which mutual_fund_units_lot to fetch.
+     * Filter, which units_lot to fetch.
      */
-    where: mutual_fund_units_lotWhereUniqueInput
+    where: units_lotWhereUniqueInput
   }
 
   /**
-   * mutual_fund_units_lot findFirst
+   * units_lot findFirst
    */
-  export type mutual_fund_units_lotFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type units_lotFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the mutual_fund_units_lot
+     * Select specific fields to fetch from the units_lot
      */
-    select?: mutual_fund_units_lotSelect<ExtArgs> | null
+    select?: units_lotSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the mutual_fund_units_lot
+     * Omit specific fields from the units_lot
      */
-    omit?: mutual_fund_units_lotOmit<ExtArgs> | null
+    omit?: units_lotOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: mutual_fund_units_lotInclude<ExtArgs> | null
+    include?: units_lotInclude<ExtArgs> | null
     /**
-     * Filter, which mutual_fund_units_lot to fetch.
+     * Filter, which units_lot to fetch.
      */
-    where?: mutual_fund_units_lotWhereInput
+    where?: units_lotWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of mutual_fund_units_lots to fetch.
+     * Determine the order of units_lots to fetch.
      */
-    orderBy?: mutual_fund_units_lotOrderByWithRelationInput | mutual_fund_units_lotOrderByWithRelationInput[]
+    orderBy?: units_lotOrderByWithRelationInput | units_lotOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for mutual_fund_units_lots.
+     * Sets the position for searching for units_lots.
      */
-    cursor?: mutual_fund_units_lotWhereUniqueInput
+    cursor?: units_lotWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` mutual_fund_units_lots from the position of the cursor.
+     * Take `±n` units_lots from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` mutual_fund_units_lots.
+     * Skip the first `n` units_lots.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of mutual_fund_units_lots.
+     * Filter by unique combinations of units_lots.
      */
-    distinct?: Mutual_fund_units_lotScalarFieldEnum | Mutual_fund_units_lotScalarFieldEnum[]
+    distinct?: Units_lotScalarFieldEnum | Units_lotScalarFieldEnum[]
   }
 
   /**
-   * mutual_fund_units_lot findFirstOrThrow
+   * units_lot findFirstOrThrow
    */
-  export type mutual_fund_units_lotFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type units_lotFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the mutual_fund_units_lot
+     * Select specific fields to fetch from the units_lot
      */
-    select?: mutual_fund_units_lotSelect<ExtArgs> | null
+    select?: units_lotSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the mutual_fund_units_lot
+     * Omit specific fields from the units_lot
      */
-    omit?: mutual_fund_units_lotOmit<ExtArgs> | null
+    omit?: units_lotOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: mutual_fund_units_lotInclude<ExtArgs> | null
+    include?: units_lotInclude<ExtArgs> | null
     /**
-     * Filter, which mutual_fund_units_lot to fetch.
+     * Filter, which units_lot to fetch.
      */
-    where?: mutual_fund_units_lotWhereInput
+    where?: units_lotWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of mutual_fund_units_lots to fetch.
+     * Determine the order of units_lots to fetch.
      */
-    orderBy?: mutual_fund_units_lotOrderByWithRelationInput | mutual_fund_units_lotOrderByWithRelationInput[]
+    orderBy?: units_lotOrderByWithRelationInput | units_lotOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for mutual_fund_units_lots.
+     * Sets the position for searching for units_lots.
      */
-    cursor?: mutual_fund_units_lotWhereUniqueInput
+    cursor?: units_lotWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` mutual_fund_units_lots from the position of the cursor.
+     * Take `±n` units_lots from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` mutual_fund_units_lots.
+     * Skip the first `n` units_lots.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of mutual_fund_units_lots.
+     * Filter by unique combinations of units_lots.
      */
-    distinct?: Mutual_fund_units_lotScalarFieldEnum | Mutual_fund_units_lotScalarFieldEnum[]
+    distinct?: Units_lotScalarFieldEnum | Units_lotScalarFieldEnum[]
   }
 
   /**
-   * mutual_fund_units_lot findMany
+   * units_lot findMany
    */
-  export type mutual_fund_units_lotFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type units_lotFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the mutual_fund_units_lot
+     * Select specific fields to fetch from the units_lot
      */
-    select?: mutual_fund_units_lotSelect<ExtArgs> | null
+    select?: units_lotSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the mutual_fund_units_lot
+     * Omit specific fields from the units_lot
      */
-    omit?: mutual_fund_units_lotOmit<ExtArgs> | null
+    omit?: units_lotOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: mutual_fund_units_lotInclude<ExtArgs> | null
+    include?: units_lotInclude<ExtArgs> | null
     /**
-     * Filter, which mutual_fund_units_lots to fetch.
+     * Filter, which units_lots to fetch.
      */
-    where?: mutual_fund_units_lotWhereInput
+    where?: units_lotWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of mutual_fund_units_lots to fetch.
+     * Determine the order of units_lots to fetch.
      */
-    orderBy?: mutual_fund_units_lotOrderByWithRelationInput | mutual_fund_units_lotOrderByWithRelationInput[]
+    orderBy?: units_lotOrderByWithRelationInput | units_lotOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing mutual_fund_units_lots.
+     * Sets the position for listing units_lots.
      */
-    cursor?: mutual_fund_units_lotWhereUniqueInput
+    cursor?: units_lotWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` mutual_fund_units_lots from the position of the cursor.
+     * Take `±n` units_lots from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` mutual_fund_units_lots.
+     * Skip the first `n` units_lots.
      */
     skip?: number
-    distinct?: Mutual_fund_units_lotScalarFieldEnum | Mutual_fund_units_lotScalarFieldEnum[]
+    distinct?: Units_lotScalarFieldEnum | Units_lotScalarFieldEnum[]
   }
 
   /**
-   * mutual_fund_units_lot create
+   * units_lot create
    */
-  export type mutual_fund_units_lotCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type units_lotCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the mutual_fund_units_lot
+     * Select specific fields to fetch from the units_lot
      */
-    select?: mutual_fund_units_lotSelect<ExtArgs> | null
+    select?: units_lotSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the mutual_fund_units_lot
+     * Omit specific fields from the units_lot
      */
-    omit?: mutual_fund_units_lotOmit<ExtArgs> | null
+    omit?: units_lotOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: mutual_fund_units_lotInclude<ExtArgs> | null
+    include?: units_lotInclude<ExtArgs> | null
     /**
-     * The data needed to create a mutual_fund_units_lot.
+     * The data needed to create a units_lot.
      */
-    data: XOR<mutual_fund_units_lotCreateInput, mutual_fund_units_lotUncheckedCreateInput>
+    data: XOR<units_lotCreateInput, units_lotUncheckedCreateInput>
   }
 
   /**
-   * mutual_fund_units_lot createMany
+   * units_lot createMany
    */
-  export type mutual_fund_units_lotCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type units_lotCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many mutual_fund_units_lots.
+     * The data used to create many units_lots.
      */
-    data: mutual_fund_units_lotCreateManyInput | mutual_fund_units_lotCreateManyInput[]
+    data: units_lotCreateManyInput | units_lotCreateManyInput[]
   }
 
   /**
-   * mutual_fund_units_lot createManyAndReturn
+   * units_lot createManyAndReturn
    */
-  export type mutual_fund_units_lotCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type units_lotCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the mutual_fund_units_lot
+     * Select specific fields to fetch from the units_lot
      */
-    select?: mutual_fund_units_lotSelectCreateManyAndReturn<ExtArgs> | null
+    select?: units_lotSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the mutual_fund_units_lot
+     * Omit specific fields from the units_lot
      */
-    omit?: mutual_fund_units_lotOmit<ExtArgs> | null
+    omit?: units_lotOmit<ExtArgs> | null
     /**
-     * The data used to create many mutual_fund_units_lots.
+     * The data used to create many units_lots.
      */
-    data: mutual_fund_units_lotCreateManyInput | mutual_fund_units_lotCreateManyInput[]
+    data: units_lotCreateManyInput | units_lotCreateManyInput[]
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: mutual_fund_units_lotIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: units_lotIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * mutual_fund_units_lot update
+   * units_lot update
    */
-  export type mutual_fund_units_lotUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type units_lotUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the mutual_fund_units_lot
+     * Select specific fields to fetch from the units_lot
      */
-    select?: mutual_fund_units_lotSelect<ExtArgs> | null
+    select?: units_lotSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the mutual_fund_units_lot
+     * Omit specific fields from the units_lot
      */
-    omit?: mutual_fund_units_lotOmit<ExtArgs> | null
+    omit?: units_lotOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: mutual_fund_units_lotInclude<ExtArgs> | null
+    include?: units_lotInclude<ExtArgs> | null
     /**
-     * The data needed to update a mutual_fund_units_lot.
+     * The data needed to update a units_lot.
      */
-    data: XOR<mutual_fund_units_lotUpdateInput, mutual_fund_units_lotUncheckedUpdateInput>
+    data: XOR<units_lotUpdateInput, units_lotUncheckedUpdateInput>
     /**
-     * Choose, which mutual_fund_units_lot to update.
+     * Choose, which units_lot to update.
      */
-    where: mutual_fund_units_lotWhereUniqueInput
+    where: units_lotWhereUniqueInput
   }
 
   /**
-   * mutual_fund_units_lot updateMany
+   * units_lot updateMany
    */
-  export type mutual_fund_units_lotUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type units_lotUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update mutual_fund_units_lots.
+     * The data used to update units_lots.
      */
-    data: XOR<mutual_fund_units_lotUpdateManyMutationInput, mutual_fund_units_lotUncheckedUpdateManyInput>
+    data: XOR<units_lotUpdateManyMutationInput, units_lotUncheckedUpdateManyInput>
     /**
-     * Filter which mutual_fund_units_lots to update
+     * Filter which units_lots to update
      */
-    where?: mutual_fund_units_lotWhereInput
+    where?: units_lotWhereInput
     /**
-     * Limit how many mutual_fund_units_lots to update.
+     * Limit how many units_lots to update.
      */
     limit?: number
   }
 
   /**
-   * mutual_fund_units_lot updateManyAndReturn
+   * units_lot updateManyAndReturn
    */
-  export type mutual_fund_units_lotUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type units_lotUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the mutual_fund_units_lot
+     * Select specific fields to fetch from the units_lot
      */
-    select?: mutual_fund_units_lotSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: units_lotSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the mutual_fund_units_lot
+     * Omit specific fields from the units_lot
      */
-    omit?: mutual_fund_units_lotOmit<ExtArgs> | null
+    omit?: units_lotOmit<ExtArgs> | null
     /**
-     * The data used to update mutual_fund_units_lots.
+     * The data used to update units_lots.
      */
-    data: XOR<mutual_fund_units_lotUpdateManyMutationInput, mutual_fund_units_lotUncheckedUpdateManyInput>
+    data: XOR<units_lotUpdateManyMutationInput, units_lotUncheckedUpdateManyInput>
     /**
-     * Filter which mutual_fund_units_lots to update
+     * Filter which units_lots to update
      */
-    where?: mutual_fund_units_lotWhereInput
+    where?: units_lotWhereInput
     /**
-     * Limit how many mutual_fund_units_lots to update.
+     * Limit how many units_lots to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: mutual_fund_units_lotIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: units_lotIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * mutual_fund_units_lot upsert
+   * units_lot upsert
    */
-  export type mutual_fund_units_lotUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type units_lotUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the mutual_fund_units_lot
+     * Select specific fields to fetch from the units_lot
      */
-    select?: mutual_fund_units_lotSelect<ExtArgs> | null
+    select?: units_lotSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the mutual_fund_units_lot
+     * Omit specific fields from the units_lot
      */
-    omit?: mutual_fund_units_lotOmit<ExtArgs> | null
+    omit?: units_lotOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: mutual_fund_units_lotInclude<ExtArgs> | null
+    include?: units_lotInclude<ExtArgs> | null
     /**
-     * The filter to search for the mutual_fund_units_lot to update in case it exists.
+     * The filter to search for the units_lot to update in case it exists.
      */
-    where: mutual_fund_units_lotWhereUniqueInput
+    where: units_lotWhereUniqueInput
     /**
-     * In case the mutual_fund_units_lot found by the `where` argument doesn't exist, create a new mutual_fund_units_lot with this data.
+     * In case the units_lot found by the `where` argument doesn't exist, create a new units_lot with this data.
      */
-    create: XOR<mutual_fund_units_lotCreateInput, mutual_fund_units_lotUncheckedCreateInput>
+    create: XOR<units_lotCreateInput, units_lotUncheckedCreateInput>
     /**
-     * In case the mutual_fund_units_lot was found with the provided `where` argument, update it with this data.
+     * In case the units_lot was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<mutual_fund_units_lotUpdateInput, mutual_fund_units_lotUncheckedUpdateInput>
+    update: XOR<units_lotUpdateInput, units_lotUncheckedUpdateInput>
   }
 
   /**
-   * mutual_fund_units_lot delete
+   * units_lot delete
    */
-  export type mutual_fund_units_lotDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type units_lotDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the mutual_fund_units_lot
+     * Select specific fields to fetch from the units_lot
      */
-    select?: mutual_fund_units_lotSelect<ExtArgs> | null
+    select?: units_lotSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the mutual_fund_units_lot
+     * Omit specific fields from the units_lot
      */
-    omit?: mutual_fund_units_lotOmit<ExtArgs> | null
+    omit?: units_lotOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: mutual_fund_units_lotInclude<ExtArgs> | null
+    include?: units_lotInclude<ExtArgs> | null
     /**
-     * Filter which mutual_fund_units_lot to delete.
+     * Filter which units_lot to delete.
      */
-    where: mutual_fund_units_lotWhereUniqueInput
+    where: units_lotWhereUniqueInput
   }
 
   /**
-   * mutual_fund_units_lot deleteMany
+   * units_lot deleteMany
    */
-  export type mutual_fund_units_lotDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type units_lotDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which mutual_fund_units_lots to delete
+     * Filter which units_lots to delete
      */
-    where?: mutual_fund_units_lotWhereInput
+    where?: units_lotWhereInput
     /**
-     * Limit how many mutual_fund_units_lots to delete.
+     * Limit how many units_lots to delete.
      */
     limit?: number
   }
 
   /**
-   * mutual_fund_units_lot.redemption_buckets
+   * units_lot.investment_transaction
    */
-  export type mutual_fund_units_lot$redemption_bucketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type units_lot$investment_transactionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the investment_transaction
+     */
+    select?: investment_transactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the investment_transaction
+     */
+    omit?: investment_transactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: investment_transactionInclude<ExtArgs> | null
+    where?: investment_transactionWhereInput
+  }
+
+  /**
+   * units_lot.redemption_buckets
+   */
+  export type units_lot$redemption_bucketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the redemption_bucket
      */
@@ -7604,21 +7619,21 @@ export namespace Prisma {
   }
 
   /**
-   * mutual_fund_units_lot without action
+   * units_lot without action
    */
-  export type mutual_fund_units_lotDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type units_lotDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the mutual_fund_units_lot
+     * Select specific fields to fetch from the units_lot
      */
-    select?: mutual_fund_units_lotSelect<ExtArgs> | null
+    select?: units_lotSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the mutual_fund_units_lot
+     * Omit specific fields from the units_lot
      */
-    omit?: mutual_fund_units_lotOmit<ExtArgs> | null
+    omit?: units_lotOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: mutual_fund_units_lotInclude<ExtArgs> | null
+    include?: units_lotInclude<ExtArgs> | null
   }
 
 
@@ -7649,6 +7664,9 @@ export namespace Prisma {
     from_account_id: string | null
     units_bought: number | null
     buy_nav: number | null
+    allotment_date: Date | null
+    units_lot_id: string | null
+    transaction_id: string | null
   }
 
   export type Investment_transactionMaxAggregateOutputType = {
@@ -7656,6 +7674,9 @@ export namespace Prisma {
     from_account_id: string | null
     units_bought: number | null
     buy_nav: number | null
+    allotment_date: Date | null
+    units_lot_id: string | null
+    transaction_id: string | null
   }
 
   export type Investment_transactionCountAggregateOutputType = {
@@ -7663,6 +7684,9 @@ export namespace Prisma {
     from_account_id: number
     units_bought: number
     buy_nav: number
+    allotment_date: number
+    units_lot_id: number
+    transaction_id: number
     _all: number
   }
 
@@ -7682,6 +7706,9 @@ export namespace Prisma {
     from_account_id?: true
     units_bought?: true
     buy_nav?: true
+    allotment_date?: true
+    units_lot_id?: true
+    transaction_id?: true
   }
 
   export type Investment_transactionMaxAggregateInputType = {
@@ -7689,6 +7716,9 @@ export namespace Prisma {
     from_account_id?: true
     units_bought?: true
     buy_nav?: true
+    allotment_date?: true
+    units_lot_id?: true
+    transaction_id?: true
   }
 
   export type Investment_transactionCountAggregateInputType = {
@@ -7696,6 +7726,9 @@ export namespace Prisma {
     from_account_id?: true
     units_bought?: true
     buy_nav?: true
+    allotment_date?: true
+    units_lot_id?: true
+    transaction_id?: true
     _all?: true
   }
 
@@ -7790,6 +7823,9 @@ export namespace Prisma {
     from_account_id: string
     units_bought: number
     buy_nav: number
+    allotment_date: Date
+    units_lot_id: string
+    transaction_id: string
     _count: Investment_transactionCountAggregateOutputType | null
     _avg: Investment_transactionAvgAggregateOutputType | null
     _sum: Investment_transactionSumAggregateOutputType | null
@@ -7816,9 +7852,12 @@ export namespace Prisma {
     from_account_id?: boolean
     units_bought?: boolean
     buy_nav?: boolean
+    allotment_date?: boolean
+    units_lot_id?: boolean
+    transaction_id?: boolean
     transaction?: boolean | transactionDefaultArgs<ExtArgs>
     from_account?: boolean | accountDefaultArgs<ExtArgs>
-    mutual_fund_units_lot?: boolean | investment_transaction$mutual_fund_units_lotArgs<ExtArgs>
+    units_lot?: boolean | units_lotDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["investment_transaction"]>
 
   export type investment_transactionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7826,8 +7865,12 @@ export namespace Prisma {
     from_account_id?: boolean
     units_bought?: boolean
     buy_nav?: boolean
+    allotment_date?: boolean
+    units_lot_id?: boolean
+    transaction_id?: boolean
     transaction?: boolean | transactionDefaultArgs<ExtArgs>
     from_account?: boolean | accountDefaultArgs<ExtArgs>
+    units_lot?: boolean | units_lotDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["investment_transaction"]>
 
   export type investment_transactionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7835,8 +7878,12 @@ export namespace Prisma {
     from_account_id?: boolean
     units_bought?: boolean
     buy_nav?: boolean
+    allotment_date?: boolean
+    units_lot_id?: boolean
+    transaction_id?: boolean
     transaction?: boolean | transactionDefaultArgs<ExtArgs>
     from_account?: boolean | accountDefaultArgs<ExtArgs>
+    units_lot?: boolean | units_lotDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["investment_transaction"]>
 
   export type investment_transactionSelectScalar = {
@@ -7844,21 +7891,26 @@ export namespace Prisma {
     from_account_id?: boolean
     units_bought?: boolean
     buy_nav?: boolean
+    allotment_date?: boolean
+    units_lot_id?: boolean
+    transaction_id?: boolean
   }
 
-  export type investment_transactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "from_account_id" | "units_bought" | "buy_nav", ExtArgs["result"]["investment_transaction"]>
+  export type investment_transactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "from_account_id" | "units_bought" | "buy_nav" | "allotment_date" | "units_lot_id" | "transaction_id", ExtArgs["result"]["investment_transaction"]>
   export type investment_transactionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     transaction?: boolean | transactionDefaultArgs<ExtArgs>
     from_account?: boolean | accountDefaultArgs<ExtArgs>
-    mutual_fund_units_lot?: boolean | investment_transaction$mutual_fund_units_lotArgs<ExtArgs>
+    units_lot?: boolean | units_lotDefaultArgs<ExtArgs>
   }
   export type investment_transactionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     transaction?: boolean | transactionDefaultArgs<ExtArgs>
     from_account?: boolean | accountDefaultArgs<ExtArgs>
+    units_lot?: boolean | units_lotDefaultArgs<ExtArgs>
   }
   export type investment_transactionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     transaction?: boolean | transactionDefaultArgs<ExtArgs>
     from_account?: boolean | accountDefaultArgs<ExtArgs>
+    units_lot?: boolean | units_lotDefaultArgs<ExtArgs>
   }
 
   export type $investment_transactionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7866,13 +7918,16 @@ export namespace Prisma {
     objects: {
       transaction: Prisma.$transactionPayload<ExtArgs>
       from_account: Prisma.$accountPayload<ExtArgs>
-      mutual_fund_units_lot: Prisma.$mutual_fund_units_lotPayload<ExtArgs> | null
+      units_lot: Prisma.$units_lotPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       from_account_id: string
       units_bought: number
       buy_nav: number
+      allotment_date: Date
+      units_lot_id: string
+      transaction_id: string
     }, ExtArgs["result"]["investment_transaction"]>
     composites: {}
   }
@@ -8269,7 +8324,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     transaction<T extends transactionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, transactionDefaultArgs<ExtArgs>>): Prisma__transactionClient<$Result.GetResult<Prisma.$transactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     from_account<T extends accountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, accountDefaultArgs<ExtArgs>>): Prisma__accountClient<$Result.GetResult<Prisma.$accountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    mutual_fund_units_lot<T extends investment_transaction$mutual_fund_units_lotArgs<ExtArgs> = {}>(args?: Subset<T, investment_transaction$mutual_fund_units_lotArgs<ExtArgs>>): Prisma__mutual_fund_units_lotClient<$Result.GetResult<Prisma.$mutual_fund_units_lotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    units_lot<T extends units_lotDefaultArgs<ExtArgs> = {}>(args?: Subset<T, units_lotDefaultArgs<ExtArgs>>): Prisma__units_lotClient<$Result.GetResult<Prisma.$units_lotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8303,6 +8358,9 @@ export namespace Prisma {
     readonly from_account_id: FieldRef<"investment_transaction", 'String'>
     readonly units_bought: FieldRef<"investment_transaction", 'Float'>
     readonly buy_nav: FieldRef<"investment_transaction", 'Float'>
+    readonly allotment_date: FieldRef<"investment_transaction", 'DateTime'>
+    readonly units_lot_id: FieldRef<"investment_transaction", 'String'>
+    readonly transaction_id: FieldRef<"investment_transaction", 'String'>
   }
     
 
@@ -8697,25 +8755,6 @@ export namespace Prisma {
   }
 
   /**
-   * investment_transaction.mutual_fund_units_lot
-   */
-  export type investment_transaction$mutual_fund_units_lotArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the mutual_fund_units_lot
-     */
-    select?: mutual_fund_units_lotSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the mutual_fund_units_lot
-     */
-    omit?: mutual_fund_units_lotOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: mutual_fund_units_lotInclude<ExtArgs> | null
-    where?: mutual_fund_units_lotWhereInput
-  }
-
-  /**
    * investment_transaction without action
    */
   export type investment_transactionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8748,66 +8787,68 @@ export namespace Prisma {
 
   export type Redemption_transactionAvgAggregateOutputType = {
     sell_nav: number | null
-    units_redeemed: number | null
   }
 
   export type Redemption_transactionSumAggregateOutputType = {
     sell_nav: number | null
-    units_redeemed: number | null
   }
 
   export type Redemption_transactionMinAggregateOutputType = {
     id: string | null
     to_account_id: string | null
     sell_nav: number | null
-    units_redeemed: number | null
+    redemption_date: Date | null
+    transaction_id: string | null
   }
 
   export type Redemption_transactionMaxAggregateOutputType = {
     id: string | null
     to_account_id: string | null
     sell_nav: number | null
-    units_redeemed: number | null
+    redemption_date: Date | null
+    transaction_id: string | null
   }
 
   export type Redemption_transactionCountAggregateOutputType = {
     id: number
     to_account_id: number
     sell_nav: number
-    units_redeemed: number
+    redemption_date: number
+    transaction_id: number
     _all: number
   }
 
 
   export type Redemption_transactionAvgAggregateInputType = {
     sell_nav?: true
-    units_redeemed?: true
   }
 
   export type Redemption_transactionSumAggregateInputType = {
     sell_nav?: true
-    units_redeemed?: true
   }
 
   export type Redemption_transactionMinAggregateInputType = {
     id?: true
     to_account_id?: true
     sell_nav?: true
-    units_redeemed?: true
+    redemption_date?: true
+    transaction_id?: true
   }
 
   export type Redemption_transactionMaxAggregateInputType = {
     id?: true
     to_account_id?: true
     sell_nav?: true
-    units_redeemed?: true
+    redemption_date?: true
+    transaction_id?: true
   }
 
   export type Redemption_transactionCountAggregateInputType = {
     id?: true
     to_account_id?: true
     sell_nav?: true
-    units_redeemed?: true
+    redemption_date?: true
+    transaction_id?: true
     _all?: true
   }
 
@@ -8901,7 +8942,8 @@ export namespace Prisma {
     id: string
     to_account_id: string
     sell_nav: number
-    units_redeemed: number
+    redemption_date: Date
+    transaction_id: string
     _count: Redemption_transactionCountAggregateOutputType | null
     _avg: Redemption_transactionAvgAggregateOutputType | null
     _sum: Redemption_transactionSumAggregateOutputType | null
@@ -8927,7 +8969,8 @@ export namespace Prisma {
     id?: boolean
     to_account_id?: boolean
     sell_nav?: boolean
-    units_redeemed?: boolean
+    redemption_date?: boolean
+    transaction_id?: boolean
     transaction?: boolean | transactionDefaultArgs<ExtArgs>
     to_account?: boolean | accountDefaultArgs<ExtArgs>
     redemption_buckets?: boolean | redemption_transaction$redemption_bucketsArgs<ExtArgs>
@@ -8938,7 +8981,8 @@ export namespace Prisma {
     id?: boolean
     to_account_id?: boolean
     sell_nav?: boolean
-    units_redeemed?: boolean
+    redemption_date?: boolean
+    transaction_id?: boolean
     transaction?: boolean | transactionDefaultArgs<ExtArgs>
     to_account?: boolean | accountDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["redemption_transaction"]>
@@ -8947,7 +8991,8 @@ export namespace Prisma {
     id?: boolean
     to_account_id?: boolean
     sell_nav?: boolean
-    units_redeemed?: boolean
+    redemption_date?: boolean
+    transaction_id?: boolean
     transaction?: boolean | transactionDefaultArgs<ExtArgs>
     to_account?: boolean | accountDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["redemption_transaction"]>
@@ -8956,10 +9001,11 @@ export namespace Prisma {
     id?: boolean
     to_account_id?: boolean
     sell_nav?: boolean
-    units_redeemed?: boolean
+    redemption_date?: boolean
+    transaction_id?: boolean
   }
 
-  export type redemption_transactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "to_account_id" | "sell_nav" | "units_redeemed", ExtArgs["result"]["redemption_transaction"]>
+  export type redemption_transactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "to_account_id" | "sell_nav" | "redemption_date" | "transaction_id", ExtArgs["result"]["redemption_transaction"]>
   export type redemption_transactionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     transaction?: boolean | transactionDefaultArgs<ExtArgs>
     to_account?: boolean | accountDefaultArgs<ExtArgs>
@@ -8986,7 +9032,8 @@ export namespace Prisma {
       id: string
       to_account_id: string
       sell_nav: number
-      units_redeemed: number
+      redemption_date: Date
+      transaction_id: string
     }, ExtArgs["result"]["redemption_transaction"]>
     composites: {}
   }
@@ -9416,7 +9463,8 @@ export namespace Prisma {
     readonly id: FieldRef<"redemption_transaction", 'String'>
     readonly to_account_id: FieldRef<"redemption_transaction", 'String'>
     readonly sell_nav: FieldRef<"redemption_transaction", 'Float'>
-    readonly units_redeemed: FieldRef<"redemption_transaction", 'Float'>
+    readonly redemption_date: FieldRef<"redemption_transaction", 'DateTime'>
+    readonly transaction_id: FieldRef<"redemption_transaction", 'String'>
   }
     
 
@@ -9876,21 +9924,21 @@ export namespace Prisma {
   export type Redemption_bucketMinAggregateOutputType = {
     id: string | null
     redemption_transaction_id: string | null
-    mutual_fund_units_lot_id: string | null
+    units_lot_id: string | null
     units_redeemed: number | null
   }
 
   export type Redemption_bucketMaxAggregateOutputType = {
     id: string | null
     redemption_transaction_id: string | null
-    mutual_fund_units_lot_id: string | null
+    units_lot_id: string | null
     units_redeemed: number | null
   }
 
   export type Redemption_bucketCountAggregateOutputType = {
     id: number
     redemption_transaction_id: number
-    mutual_fund_units_lot_id: number
+    units_lot_id: number
     units_redeemed: number
     _all: number
   }
@@ -9907,21 +9955,21 @@ export namespace Prisma {
   export type Redemption_bucketMinAggregateInputType = {
     id?: true
     redemption_transaction_id?: true
-    mutual_fund_units_lot_id?: true
+    units_lot_id?: true
     units_redeemed?: true
   }
 
   export type Redemption_bucketMaxAggregateInputType = {
     id?: true
     redemption_transaction_id?: true
-    mutual_fund_units_lot_id?: true
+    units_lot_id?: true
     units_redeemed?: true
   }
 
   export type Redemption_bucketCountAggregateInputType = {
     id?: true
     redemption_transaction_id?: true
-    mutual_fund_units_lot_id?: true
+    units_lot_id?: true
     units_redeemed?: true
     _all?: true
   }
@@ -10015,7 +10063,7 @@ export namespace Prisma {
   export type Redemption_bucketGroupByOutputType = {
     id: string
     redemption_transaction_id: string
-    mutual_fund_units_lot_id: string
+    units_lot_id: string
     units_redeemed: number
     _count: Redemption_bucketCountAggregateOutputType | null
     _avg: Redemption_bucketAvgAggregateOutputType | null
@@ -10041,61 +10089,61 @@ export namespace Prisma {
   export type redemption_bucketSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     redemption_transaction_id?: boolean
-    mutual_fund_units_lot_id?: boolean
+    units_lot_id?: boolean
     units_redeemed?: boolean
     redemption_transaction?: boolean | redemption_transactionDefaultArgs<ExtArgs>
-    mutual_fund_units_lot?: boolean | mutual_fund_units_lotDefaultArgs<ExtArgs>
+    units_lot?: boolean | units_lotDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["redemption_bucket"]>
 
   export type redemption_bucketSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     redemption_transaction_id?: boolean
-    mutual_fund_units_lot_id?: boolean
+    units_lot_id?: boolean
     units_redeemed?: boolean
     redemption_transaction?: boolean | redemption_transactionDefaultArgs<ExtArgs>
-    mutual_fund_units_lot?: boolean | mutual_fund_units_lotDefaultArgs<ExtArgs>
+    units_lot?: boolean | units_lotDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["redemption_bucket"]>
 
   export type redemption_bucketSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     redemption_transaction_id?: boolean
-    mutual_fund_units_lot_id?: boolean
+    units_lot_id?: boolean
     units_redeemed?: boolean
     redemption_transaction?: boolean | redemption_transactionDefaultArgs<ExtArgs>
-    mutual_fund_units_lot?: boolean | mutual_fund_units_lotDefaultArgs<ExtArgs>
+    units_lot?: boolean | units_lotDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["redemption_bucket"]>
 
   export type redemption_bucketSelectScalar = {
     id?: boolean
     redemption_transaction_id?: boolean
-    mutual_fund_units_lot_id?: boolean
+    units_lot_id?: boolean
     units_redeemed?: boolean
   }
 
-  export type redemption_bucketOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "redemption_transaction_id" | "mutual_fund_units_lot_id" | "units_redeemed", ExtArgs["result"]["redemption_bucket"]>
+  export type redemption_bucketOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "redemption_transaction_id" | "units_lot_id" | "units_redeemed", ExtArgs["result"]["redemption_bucket"]>
   export type redemption_bucketInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     redemption_transaction?: boolean | redemption_transactionDefaultArgs<ExtArgs>
-    mutual_fund_units_lot?: boolean | mutual_fund_units_lotDefaultArgs<ExtArgs>
+    units_lot?: boolean | units_lotDefaultArgs<ExtArgs>
   }
   export type redemption_bucketIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     redemption_transaction?: boolean | redemption_transactionDefaultArgs<ExtArgs>
-    mutual_fund_units_lot?: boolean | mutual_fund_units_lotDefaultArgs<ExtArgs>
+    units_lot?: boolean | units_lotDefaultArgs<ExtArgs>
   }
   export type redemption_bucketIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     redemption_transaction?: boolean | redemption_transactionDefaultArgs<ExtArgs>
-    mutual_fund_units_lot?: boolean | mutual_fund_units_lotDefaultArgs<ExtArgs>
+    units_lot?: boolean | units_lotDefaultArgs<ExtArgs>
   }
 
   export type $redemption_bucketPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "redemption_bucket"
     objects: {
       redemption_transaction: Prisma.$redemption_transactionPayload<ExtArgs>
-      mutual_fund_units_lot: Prisma.$mutual_fund_units_lotPayload<ExtArgs>
+      units_lot: Prisma.$units_lotPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       redemption_transaction_id: string
-      mutual_fund_units_lot_id: string
+      units_lot_id: string
       units_redeemed: number
     }, ExtArgs["result"]["redemption_bucket"]>
     composites: {}
@@ -10492,7 +10540,7 @@ export namespace Prisma {
   export interface Prisma__redemption_bucketClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     redemption_transaction<T extends redemption_transactionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, redemption_transactionDefaultArgs<ExtArgs>>): Prisma__redemption_transactionClient<$Result.GetResult<Prisma.$redemption_transactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    mutual_fund_units_lot<T extends mutual_fund_units_lotDefaultArgs<ExtArgs> = {}>(args?: Subset<T, mutual_fund_units_lotDefaultArgs<ExtArgs>>): Prisma__mutual_fund_units_lotClient<$Result.GetResult<Prisma.$mutual_fund_units_lotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    units_lot<T extends units_lotDefaultArgs<ExtArgs> = {}>(args?: Subset<T, units_lotDefaultArgs<ExtArgs>>): Prisma__units_lotClient<$Result.GetResult<Prisma.$units_lotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10524,7 +10572,7 @@ export namespace Prisma {
   interface redemption_bucketFieldRefs {
     readonly id: FieldRef<"redemption_bucket", 'String'>
     readonly redemption_transaction_id: FieldRef<"redemption_bucket", 'String'>
-    readonly mutual_fund_units_lot_id: FieldRef<"redemption_bucket", 'String'>
+    readonly units_lot_id: FieldRef<"redemption_bucket", 'String'>
     readonly units_redeemed: FieldRef<"redemption_bucket", 'Float'>
   }
     
@@ -12165,18 +12213,21 @@ export namespace Prisma {
     id: string | null
     from_account_id: string | null
     to_account_id: string | null
+    transaction_id: string | null
   }
 
   export type Transfer_transactionMaxAggregateOutputType = {
     id: string | null
     from_account_id: string | null
     to_account_id: string | null
+    transaction_id: string | null
   }
 
   export type Transfer_transactionCountAggregateOutputType = {
     id: number
     from_account_id: number
     to_account_id: number
+    transaction_id: number
     _all: number
   }
 
@@ -12185,18 +12236,21 @@ export namespace Prisma {
     id?: true
     from_account_id?: true
     to_account_id?: true
+    transaction_id?: true
   }
 
   export type Transfer_transactionMaxAggregateInputType = {
     id?: true
     from_account_id?: true
     to_account_id?: true
+    transaction_id?: true
   }
 
   export type Transfer_transactionCountAggregateInputType = {
     id?: true
     from_account_id?: true
     to_account_id?: true
+    transaction_id?: true
     _all?: true
   }
 
@@ -12276,6 +12330,7 @@ export namespace Prisma {
     id: string
     from_account_id: string
     to_account_id: string
+    transaction_id: string
     _count: Transfer_transactionCountAggregateOutputType | null
     _min: Transfer_transactionMinAggregateOutputType | null
     _max: Transfer_transactionMaxAggregateOutputType | null
@@ -12299,6 +12354,7 @@ export namespace Prisma {
     id?: boolean
     from_account_id?: boolean
     to_account_id?: boolean
+    transaction_id?: boolean
     transaction?: boolean | transactionDefaultArgs<ExtArgs>
     from_account?: boolean | accountDefaultArgs<ExtArgs>
     to_account?: boolean | accountDefaultArgs<ExtArgs>
@@ -12308,6 +12364,7 @@ export namespace Prisma {
     id?: boolean
     from_account_id?: boolean
     to_account_id?: boolean
+    transaction_id?: boolean
     transaction?: boolean | transactionDefaultArgs<ExtArgs>
     from_account?: boolean | accountDefaultArgs<ExtArgs>
     to_account?: boolean | accountDefaultArgs<ExtArgs>
@@ -12317,6 +12374,7 @@ export namespace Prisma {
     id?: boolean
     from_account_id?: boolean
     to_account_id?: boolean
+    transaction_id?: boolean
     transaction?: boolean | transactionDefaultArgs<ExtArgs>
     from_account?: boolean | accountDefaultArgs<ExtArgs>
     to_account?: boolean | accountDefaultArgs<ExtArgs>
@@ -12326,9 +12384,10 @@ export namespace Prisma {
     id?: boolean
     from_account_id?: boolean
     to_account_id?: boolean
+    transaction_id?: boolean
   }
 
-  export type transfer_transactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "from_account_id" | "to_account_id", ExtArgs["result"]["transfer_transaction"]>
+  export type transfer_transactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "from_account_id" | "to_account_id" | "transaction_id", ExtArgs["result"]["transfer_transaction"]>
   export type transfer_transactionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     transaction?: boolean | transactionDefaultArgs<ExtArgs>
     from_account?: boolean | accountDefaultArgs<ExtArgs>
@@ -12356,6 +12415,7 @@ export namespace Prisma {
       id: string
       from_account_id: string
       to_account_id: string
+      transaction_id: string
     }, ExtArgs["result"]["transfer_transaction"]>
     composites: {}
   }
@@ -12785,6 +12845,7 @@ export namespace Prisma {
     readonly id: FieldRef<"transfer_transaction", 'String'>
     readonly from_account_id: FieldRef<"transfer_transaction", 'String'>
     readonly to_account_id: FieldRef<"transfer_transaction", 'String'>
+    readonly transaction_id: FieldRef<"transfer_transaction", 'String'>
   }
     
 
@@ -13211,18 +13272,21 @@ export namespace Prisma {
     id: string | null
     account_id: string | null
     expense_item_id: string | null
+    transaction_id: string | null
   }
 
   export type Expense_transactionMaxAggregateOutputType = {
     id: string | null
     account_id: string | null
     expense_item_id: string | null
+    transaction_id: string | null
   }
 
   export type Expense_transactionCountAggregateOutputType = {
     id: number
     account_id: number
     expense_item_id: number
+    transaction_id: number
     _all: number
   }
 
@@ -13231,18 +13295,21 @@ export namespace Prisma {
     id?: true
     account_id?: true
     expense_item_id?: true
+    transaction_id?: true
   }
 
   export type Expense_transactionMaxAggregateInputType = {
     id?: true
     account_id?: true
     expense_item_id?: true
+    transaction_id?: true
   }
 
   export type Expense_transactionCountAggregateInputType = {
     id?: true
     account_id?: true
     expense_item_id?: true
+    transaction_id?: true
     _all?: true
   }
 
@@ -13322,6 +13389,7 @@ export namespace Prisma {
     id: string
     account_id: string
     expense_item_id: string
+    transaction_id: string
     _count: Expense_transactionCountAggregateOutputType | null
     _min: Expense_transactionMinAggregateOutputType | null
     _max: Expense_transactionMaxAggregateOutputType | null
@@ -13345,6 +13413,7 @@ export namespace Prisma {
     id?: boolean
     account_id?: boolean
     expense_item_id?: boolean
+    transaction_id?: boolean
     transaction?: boolean | transactionDefaultArgs<ExtArgs>
     account?: boolean | accountDefaultArgs<ExtArgs>
     expense_item?: boolean | expense_itemDefaultArgs<ExtArgs>
@@ -13354,6 +13423,7 @@ export namespace Prisma {
     id?: boolean
     account_id?: boolean
     expense_item_id?: boolean
+    transaction_id?: boolean
     transaction?: boolean | transactionDefaultArgs<ExtArgs>
     account?: boolean | accountDefaultArgs<ExtArgs>
     expense_item?: boolean | expense_itemDefaultArgs<ExtArgs>
@@ -13363,6 +13433,7 @@ export namespace Prisma {
     id?: boolean
     account_id?: boolean
     expense_item_id?: boolean
+    transaction_id?: boolean
     transaction?: boolean | transactionDefaultArgs<ExtArgs>
     account?: boolean | accountDefaultArgs<ExtArgs>
     expense_item?: boolean | expense_itemDefaultArgs<ExtArgs>
@@ -13372,9 +13443,10 @@ export namespace Prisma {
     id?: boolean
     account_id?: boolean
     expense_item_id?: boolean
+    transaction_id?: boolean
   }
 
-  export type expense_transactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "account_id" | "expense_item_id", ExtArgs["result"]["expense_transaction"]>
+  export type expense_transactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "account_id" | "expense_item_id" | "transaction_id", ExtArgs["result"]["expense_transaction"]>
   export type expense_transactionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     transaction?: boolean | transactionDefaultArgs<ExtArgs>
     account?: boolean | accountDefaultArgs<ExtArgs>
@@ -13402,6 +13474,7 @@ export namespace Prisma {
       id: string
       account_id: string
       expense_item_id: string
+      transaction_id: string
     }, ExtArgs["result"]["expense_transaction"]>
     composites: {}
   }
@@ -13831,6 +13904,7 @@ export namespace Prisma {
     readonly id: FieldRef<"expense_transaction", 'String'>
     readonly account_id: FieldRef<"expense_transaction", 'String'>
     readonly expense_item_id: FieldRef<"expense_transaction", 'String'>
+    readonly transaction_id: FieldRef<"expense_transaction", 'String'>
   }
     
 
@@ -14257,18 +14331,21 @@ export namespace Prisma {
     id: string | null
     income_source_id: string | null
     account_id: string | null
+    transaction_id: string | null
   }
 
   export type Income_transactionMaxAggregateOutputType = {
     id: string | null
     income_source_id: string | null
     account_id: string | null
+    transaction_id: string | null
   }
 
   export type Income_transactionCountAggregateOutputType = {
     id: number
     income_source_id: number
     account_id: number
+    transaction_id: number
     _all: number
   }
 
@@ -14277,18 +14354,21 @@ export namespace Prisma {
     id?: true
     income_source_id?: true
     account_id?: true
+    transaction_id?: true
   }
 
   export type Income_transactionMaxAggregateInputType = {
     id?: true
     income_source_id?: true
     account_id?: true
+    transaction_id?: true
   }
 
   export type Income_transactionCountAggregateInputType = {
     id?: true
     income_source_id?: true
     account_id?: true
+    transaction_id?: true
     _all?: true
   }
 
@@ -14368,6 +14448,7 @@ export namespace Prisma {
     id: string
     income_source_id: string
     account_id: string
+    transaction_id: string
     _count: Income_transactionCountAggregateOutputType | null
     _min: Income_transactionMinAggregateOutputType | null
     _max: Income_transactionMaxAggregateOutputType | null
@@ -14391,6 +14472,7 @@ export namespace Prisma {
     id?: boolean
     income_source_id?: boolean
     account_id?: boolean
+    transaction_id?: boolean
     transaction?: boolean | transactionDefaultArgs<ExtArgs>
     income_source?: boolean | income_sourceDefaultArgs<ExtArgs>
     account?: boolean | accountDefaultArgs<ExtArgs>
@@ -14400,6 +14482,7 @@ export namespace Prisma {
     id?: boolean
     income_source_id?: boolean
     account_id?: boolean
+    transaction_id?: boolean
     transaction?: boolean | transactionDefaultArgs<ExtArgs>
     income_source?: boolean | income_sourceDefaultArgs<ExtArgs>
     account?: boolean | accountDefaultArgs<ExtArgs>
@@ -14409,6 +14492,7 @@ export namespace Prisma {
     id?: boolean
     income_source_id?: boolean
     account_id?: boolean
+    transaction_id?: boolean
     transaction?: boolean | transactionDefaultArgs<ExtArgs>
     income_source?: boolean | income_sourceDefaultArgs<ExtArgs>
     account?: boolean | accountDefaultArgs<ExtArgs>
@@ -14418,9 +14502,10 @@ export namespace Prisma {
     id?: boolean
     income_source_id?: boolean
     account_id?: boolean
+    transaction_id?: boolean
   }
 
-  export type income_transactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "income_source_id" | "account_id", ExtArgs["result"]["income_transaction"]>
+  export type income_transactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "income_source_id" | "account_id" | "transaction_id", ExtArgs["result"]["income_transaction"]>
   export type income_transactionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     transaction?: boolean | transactionDefaultArgs<ExtArgs>
     income_source?: boolean | income_sourceDefaultArgs<ExtArgs>
@@ -14448,6 +14533,7 @@ export namespace Prisma {
       id: string
       income_source_id: string
       account_id: string
+      transaction_id: string
     }, ExtArgs["result"]["income_transaction"]>
     composites: {}
   }
@@ -14877,6 +14963,7 @@ export namespace Prisma {
     readonly id: FieldRef<"income_transaction", 'String'>
     readonly income_source_id: FieldRef<"income_transaction", 'String'>
     readonly account_id: FieldRef<"income_transaction", 'String'>
+    readonly transaction_id: FieldRef<"income_transaction", 'String'>
   }
     
 
@@ -16338,19 +16425,22 @@ export namespace Prisma {
   export type Mutual_fundScalarFieldEnum = (typeof Mutual_fundScalarFieldEnum)[keyof typeof Mutual_fundScalarFieldEnum]
 
 
-  export const Mutual_fund_units_lotScalarFieldEnum: {
+  export const Units_lotScalarFieldEnum: {
     id: 'id',
     mutual_fund_id: 'mutual_fund_id'
   };
 
-  export type Mutual_fund_units_lotScalarFieldEnum = (typeof Mutual_fund_units_lotScalarFieldEnum)[keyof typeof Mutual_fund_units_lotScalarFieldEnum]
+  export type Units_lotScalarFieldEnum = (typeof Units_lotScalarFieldEnum)[keyof typeof Units_lotScalarFieldEnum]
 
 
   export const Investment_transactionScalarFieldEnum: {
     id: 'id',
     from_account_id: 'from_account_id',
     units_bought: 'units_bought',
-    buy_nav: 'buy_nav'
+    buy_nav: 'buy_nav',
+    allotment_date: 'allotment_date',
+    units_lot_id: 'units_lot_id',
+    transaction_id: 'transaction_id'
   };
 
   export type Investment_transactionScalarFieldEnum = (typeof Investment_transactionScalarFieldEnum)[keyof typeof Investment_transactionScalarFieldEnum]
@@ -16360,7 +16450,8 @@ export namespace Prisma {
     id: 'id',
     to_account_id: 'to_account_id',
     sell_nav: 'sell_nav',
-    units_redeemed: 'units_redeemed'
+    redemption_date: 'redemption_date',
+    transaction_id: 'transaction_id'
   };
 
   export type Redemption_transactionScalarFieldEnum = (typeof Redemption_transactionScalarFieldEnum)[keyof typeof Redemption_transactionScalarFieldEnum]
@@ -16369,7 +16460,7 @@ export namespace Prisma {
   export const Redemption_bucketScalarFieldEnum: {
     id: 'id',
     redemption_transaction_id: 'redemption_transaction_id',
-    mutual_fund_units_lot_id: 'mutual_fund_units_lot_id',
+    units_lot_id: 'units_lot_id',
     units_redeemed: 'units_redeemed'
   };
 
@@ -16392,7 +16483,8 @@ export namespace Prisma {
   export const Transfer_transactionScalarFieldEnum: {
     id: 'id',
     from_account_id: 'from_account_id',
-    to_account_id: 'to_account_id'
+    to_account_id: 'to_account_id',
+    transaction_id: 'transaction_id'
   };
 
   export type Transfer_transactionScalarFieldEnum = (typeof Transfer_transactionScalarFieldEnum)[keyof typeof Transfer_transactionScalarFieldEnum]
@@ -16401,7 +16493,8 @@ export namespace Prisma {
   export const Expense_transactionScalarFieldEnum: {
     id: 'id',
     account_id: 'account_id',
-    expense_item_id: 'expense_item_id'
+    expense_item_id: 'expense_item_id',
+    transaction_id: 'transaction_id'
   };
 
   export type Expense_transactionScalarFieldEnum = (typeof Expense_transactionScalarFieldEnum)[keyof typeof Expense_transactionScalarFieldEnum]
@@ -16410,7 +16503,8 @@ export namespace Prisma {
   export const Income_transactionScalarFieldEnum: {
     id: 'id',
     income_source_id: 'income_source_id',
-    account_id: 'account_id'
+    account_id: 'account_id',
+    transaction_id: 'transaction_id'
   };
 
   export type Income_transactionScalarFieldEnum = (typeof Income_transactionScalarFieldEnum)[keyof typeof Income_transactionScalarFieldEnum]
@@ -16697,14 +16791,14 @@ export namespace Prisma {
     id?: StringFilter<"mutual_fund"> | string
     name?: StringFilter<"mutual_fund"> | string
     isin?: StringFilter<"mutual_fund"> | string
-    units?: Mutual_fund_units_lotListRelationFilter
+    units_lots?: Units_lotListRelationFilter
   }
 
   export type mutual_fundOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
     isin?: SortOrder
-    units?: mutual_fund_units_lotOrderByRelationAggregateInput
+    units_lots?: units_lotOrderByRelationAggregateInput
   }
 
   export type mutual_fundWhereUniqueInput = Prisma.AtLeast<{
@@ -16714,7 +16808,7 @@ export namespace Prisma {
     AND?: mutual_fundWhereInput | mutual_fundWhereInput[]
     OR?: mutual_fundWhereInput[]
     NOT?: mutual_fundWhereInput | mutual_fundWhereInput[]
-    units?: Mutual_fund_units_lotListRelationFilter
+    units_lots?: Units_lotListRelationFilter
   }, "id" | "name" | "isin">
 
   export type mutual_fundOrderByWithAggregationInput = {
@@ -16735,50 +16829,50 @@ export namespace Prisma {
     isin?: StringWithAggregatesFilter<"mutual_fund"> | string
   }
 
-  export type mutual_fund_units_lotWhereInput = {
-    AND?: mutual_fund_units_lotWhereInput | mutual_fund_units_lotWhereInput[]
-    OR?: mutual_fund_units_lotWhereInput[]
-    NOT?: mutual_fund_units_lotWhereInput | mutual_fund_units_lotWhereInput[]
-    id?: StringFilter<"mutual_fund_units_lot"> | string
-    mutual_fund_id?: StringFilter<"mutual_fund_units_lot"> | string
-    mutual_fund?: XOR<Mutual_fundScalarRelationFilter, mutual_fundWhereInput>
-    investment_transaction?: XOR<Investment_transactionScalarRelationFilter, investment_transactionWhereInput>
+  export type units_lotWhereInput = {
+    AND?: units_lotWhereInput | units_lotWhereInput[]
+    OR?: units_lotWhereInput[]
+    NOT?: units_lotWhereInput | units_lotWhereInput[]
+    id?: StringFilter<"units_lot"> | string
+    mutual_fund_id?: StringFilter<"units_lot"> | string
+    investment_transaction?: XOR<Investment_transactionNullableScalarRelationFilter, investment_transactionWhereInput> | null
     redemption_buckets?: Redemption_bucketListRelationFilter
+    mutual_fund?: XOR<Mutual_fundScalarRelationFilter, mutual_fundWhereInput>
   }
 
-  export type mutual_fund_units_lotOrderByWithRelationInput = {
+  export type units_lotOrderByWithRelationInput = {
     id?: SortOrder
     mutual_fund_id?: SortOrder
-    mutual_fund?: mutual_fundOrderByWithRelationInput
     investment_transaction?: investment_transactionOrderByWithRelationInput
     redemption_buckets?: redemption_bucketOrderByRelationAggregateInput
+    mutual_fund?: mutual_fundOrderByWithRelationInput
   }
 
-  export type mutual_fund_units_lotWhereUniqueInput = Prisma.AtLeast<{
+  export type units_lotWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    AND?: mutual_fund_units_lotWhereInput | mutual_fund_units_lotWhereInput[]
-    OR?: mutual_fund_units_lotWhereInput[]
-    NOT?: mutual_fund_units_lotWhereInput | mutual_fund_units_lotWhereInput[]
-    mutual_fund_id?: StringFilter<"mutual_fund_units_lot"> | string
-    mutual_fund?: XOR<Mutual_fundScalarRelationFilter, mutual_fundWhereInput>
-    investment_transaction?: XOR<Investment_transactionScalarRelationFilter, investment_transactionWhereInput>
+    AND?: units_lotWhereInput | units_lotWhereInput[]
+    OR?: units_lotWhereInput[]
+    NOT?: units_lotWhereInput | units_lotWhereInput[]
+    mutual_fund_id?: StringFilter<"units_lot"> | string
+    investment_transaction?: XOR<Investment_transactionNullableScalarRelationFilter, investment_transactionWhereInput> | null
     redemption_buckets?: Redemption_bucketListRelationFilter
+    mutual_fund?: XOR<Mutual_fundScalarRelationFilter, mutual_fundWhereInput>
   }, "id">
 
-  export type mutual_fund_units_lotOrderByWithAggregationInput = {
+  export type units_lotOrderByWithAggregationInput = {
     id?: SortOrder
     mutual_fund_id?: SortOrder
-    _count?: mutual_fund_units_lotCountOrderByAggregateInput
-    _max?: mutual_fund_units_lotMaxOrderByAggregateInput
-    _min?: mutual_fund_units_lotMinOrderByAggregateInput
+    _count?: units_lotCountOrderByAggregateInput
+    _max?: units_lotMaxOrderByAggregateInput
+    _min?: units_lotMinOrderByAggregateInput
   }
 
-  export type mutual_fund_units_lotScalarWhereWithAggregatesInput = {
-    AND?: mutual_fund_units_lotScalarWhereWithAggregatesInput | mutual_fund_units_lotScalarWhereWithAggregatesInput[]
-    OR?: mutual_fund_units_lotScalarWhereWithAggregatesInput[]
-    NOT?: mutual_fund_units_lotScalarWhereWithAggregatesInput | mutual_fund_units_lotScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"mutual_fund_units_lot"> | string
-    mutual_fund_id?: StringWithAggregatesFilter<"mutual_fund_units_lot"> | string
+  export type units_lotScalarWhereWithAggregatesInput = {
+    AND?: units_lotScalarWhereWithAggregatesInput | units_lotScalarWhereWithAggregatesInput[]
+    OR?: units_lotScalarWhereWithAggregatesInput[]
+    NOT?: units_lotScalarWhereWithAggregatesInput | units_lotScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"units_lot"> | string
+    mutual_fund_id?: StringWithAggregatesFilter<"units_lot"> | string
   }
 
   export type investment_transactionWhereInput = {
@@ -16789,9 +16883,12 @@ export namespace Prisma {
     from_account_id?: StringFilter<"investment_transaction"> | string
     units_bought?: FloatFilter<"investment_transaction"> | number
     buy_nav?: FloatFilter<"investment_transaction"> | number
+    allotment_date?: DateTimeFilter<"investment_transaction"> | Date | string
+    units_lot_id?: StringFilter<"investment_transaction"> | string
+    transaction_id?: StringFilter<"investment_transaction"> | string
     transaction?: XOR<TransactionScalarRelationFilter, transactionWhereInput>
     from_account?: XOR<AccountScalarRelationFilter, accountWhereInput>
-    mutual_fund_units_lot?: XOR<Mutual_fund_units_lotNullableScalarRelationFilter, mutual_fund_units_lotWhereInput> | null
+    units_lot?: XOR<Units_lotScalarRelationFilter, units_lotWhereInput>
   }
 
   export type investment_transactionOrderByWithRelationInput = {
@@ -16799,29 +16896,38 @@ export namespace Prisma {
     from_account_id?: SortOrder
     units_bought?: SortOrder
     buy_nav?: SortOrder
+    allotment_date?: SortOrder
+    units_lot_id?: SortOrder
+    transaction_id?: SortOrder
     transaction?: transactionOrderByWithRelationInput
     from_account?: accountOrderByWithRelationInput
-    mutual_fund_units_lot?: mutual_fund_units_lotOrderByWithRelationInput
+    units_lot?: units_lotOrderByWithRelationInput
   }
 
   export type investment_transactionWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    units_lot_id?: string
+    transaction_id?: string
     AND?: investment_transactionWhereInput | investment_transactionWhereInput[]
     OR?: investment_transactionWhereInput[]
     NOT?: investment_transactionWhereInput | investment_transactionWhereInput[]
     from_account_id?: StringFilter<"investment_transaction"> | string
     units_bought?: FloatFilter<"investment_transaction"> | number
     buy_nav?: FloatFilter<"investment_transaction"> | number
+    allotment_date?: DateTimeFilter<"investment_transaction"> | Date | string
     transaction?: XOR<TransactionScalarRelationFilter, transactionWhereInput>
     from_account?: XOR<AccountScalarRelationFilter, accountWhereInput>
-    mutual_fund_units_lot?: XOR<Mutual_fund_units_lotNullableScalarRelationFilter, mutual_fund_units_lotWhereInput> | null
-  }, "id">
+    units_lot?: XOR<Units_lotScalarRelationFilter, units_lotWhereInput>
+  }, "id" | "units_lot_id" | "transaction_id">
 
   export type investment_transactionOrderByWithAggregationInput = {
     id?: SortOrder
     from_account_id?: SortOrder
     units_bought?: SortOrder
     buy_nav?: SortOrder
+    allotment_date?: SortOrder
+    units_lot_id?: SortOrder
+    transaction_id?: SortOrder
     _count?: investment_transactionCountOrderByAggregateInput
     _avg?: investment_transactionAvgOrderByAggregateInput
     _max?: investment_transactionMaxOrderByAggregateInput
@@ -16837,6 +16943,9 @@ export namespace Prisma {
     from_account_id?: StringWithAggregatesFilter<"investment_transaction"> | string
     units_bought?: FloatWithAggregatesFilter<"investment_transaction"> | number
     buy_nav?: FloatWithAggregatesFilter<"investment_transaction"> | number
+    allotment_date?: DateTimeWithAggregatesFilter<"investment_transaction"> | Date | string
+    units_lot_id?: StringWithAggregatesFilter<"investment_transaction"> | string
+    transaction_id?: StringWithAggregatesFilter<"investment_transaction"> | string
   }
 
   export type redemption_transactionWhereInput = {
@@ -16846,7 +16955,8 @@ export namespace Prisma {
     id?: StringFilter<"redemption_transaction"> | string
     to_account_id?: StringFilter<"redemption_transaction"> | string
     sell_nav?: FloatFilter<"redemption_transaction"> | number
-    units_redeemed?: FloatFilter<"redemption_transaction"> | number
+    redemption_date?: DateTimeFilter<"redemption_transaction"> | Date | string
+    transaction_id?: StringFilter<"redemption_transaction"> | string
     transaction?: XOR<TransactionScalarRelationFilter, transactionWhereInput>
     to_account?: XOR<AccountScalarRelationFilter, accountWhereInput>
     redemption_buckets?: Redemption_bucketListRelationFilter
@@ -16856,7 +16966,8 @@ export namespace Prisma {
     id?: SortOrder
     to_account_id?: SortOrder
     sell_nav?: SortOrder
-    units_redeemed?: SortOrder
+    redemption_date?: SortOrder
+    transaction_id?: SortOrder
     transaction?: transactionOrderByWithRelationInput
     to_account?: accountOrderByWithRelationInput
     redemption_buckets?: redemption_bucketOrderByRelationAggregateInput
@@ -16864,22 +16975,24 @@ export namespace Prisma {
 
   export type redemption_transactionWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    transaction_id?: string
     AND?: redemption_transactionWhereInput | redemption_transactionWhereInput[]
     OR?: redemption_transactionWhereInput[]
     NOT?: redemption_transactionWhereInput | redemption_transactionWhereInput[]
     to_account_id?: StringFilter<"redemption_transaction"> | string
     sell_nav?: FloatFilter<"redemption_transaction"> | number
-    units_redeemed?: FloatFilter<"redemption_transaction"> | number
+    redemption_date?: DateTimeFilter<"redemption_transaction"> | Date | string
     transaction?: XOR<TransactionScalarRelationFilter, transactionWhereInput>
     to_account?: XOR<AccountScalarRelationFilter, accountWhereInput>
     redemption_buckets?: Redemption_bucketListRelationFilter
-  }, "id">
+  }, "id" | "transaction_id">
 
   export type redemption_transactionOrderByWithAggregationInput = {
     id?: SortOrder
     to_account_id?: SortOrder
     sell_nav?: SortOrder
-    units_redeemed?: SortOrder
+    redemption_date?: SortOrder
+    transaction_id?: SortOrder
     _count?: redemption_transactionCountOrderByAggregateInput
     _avg?: redemption_transactionAvgOrderByAggregateInput
     _max?: redemption_transactionMaxOrderByAggregateInput
@@ -16894,7 +17007,8 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"redemption_transaction"> | string
     to_account_id?: StringWithAggregatesFilter<"redemption_transaction"> | string
     sell_nav?: FloatWithAggregatesFilter<"redemption_transaction"> | number
-    units_redeemed?: FloatWithAggregatesFilter<"redemption_transaction"> | number
+    redemption_date?: DateTimeWithAggregatesFilter<"redemption_transaction"> | Date | string
+    transaction_id?: StringWithAggregatesFilter<"redemption_transaction"> | string
   }
 
   export type redemption_bucketWhereInput = {
@@ -16903,19 +17017,19 @@ export namespace Prisma {
     NOT?: redemption_bucketWhereInput | redemption_bucketWhereInput[]
     id?: StringFilter<"redemption_bucket"> | string
     redemption_transaction_id?: StringFilter<"redemption_bucket"> | string
-    mutual_fund_units_lot_id?: StringFilter<"redemption_bucket"> | string
+    units_lot_id?: StringFilter<"redemption_bucket"> | string
     units_redeemed?: FloatFilter<"redemption_bucket"> | number
     redemption_transaction?: XOR<Redemption_transactionScalarRelationFilter, redemption_transactionWhereInput>
-    mutual_fund_units_lot?: XOR<Mutual_fund_units_lotScalarRelationFilter, mutual_fund_units_lotWhereInput>
+    units_lot?: XOR<Units_lotScalarRelationFilter, units_lotWhereInput>
   }
 
   export type redemption_bucketOrderByWithRelationInput = {
     id?: SortOrder
     redemption_transaction_id?: SortOrder
-    mutual_fund_units_lot_id?: SortOrder
+    units_lot_id?: SortOrder
     units_redeemed?: SortOrder
     redemption_transaction?: redemption_transactionOrderByWithRelationInput
-    mutual_fund_units_lot?: mutual_fund_units_lotOrderByWithRelationInput
+    units_lot?: units_lotOrderByWithRelationInput
   }
 
   export type redemption_bucketWhereUniqueInput = Prisma.AtLeast<{
@@ -16924,16 +17038,16 @@ export namespace Prisma {
     OR?: redemption_bucketWhereInput[]
     NOT?: redemption_bucketWhereInput | redemption_bucketWhereInput[]
     redemption_transaction_id?: StringFilter<"redemption_bucket"> | string
-    mutual_fund_units_lot_id?: StringFilter<"redemption_bucket"> | string
+    units_lot_id?: StringFilter<"redemption_bucket"> | string
     units_redeemed?: FloatFilter<"redemption_bucket"> | number
     redemption_transaction?: XOR<Redemption_transactionScalarRelationFilter, redemption_transactionWhereInput>
-    mutual_fund_units_lot?: XOR<Mutual_fund_units_lotScalarRelationFilter, mutual_fund_units_lotWhereInput>
+    units_lot?: XOR<Units_lotScalarRelationFilter, units_lotWhereInput>
   }, "id">
 
   export type redemption_bucketOrderByWithAggregationInput = {
     id?: SortOrder
     redemption_transaction_id?: SortOrder
-    mutual_fund_units_lot_id?: SortOrder
+    units_lot_id?: SortOrder
     units_redeemed?: SortOrder
     _count?: redemption_bucketCountOrderByAggregateInput
     _avg?: redemption_bucketAvgOrderByAggregateInput
@@ -16948,7 +17062,7 @@ export namespace Prisma {
     NOT?: redemption_bucketScalarWhereWithAggregatesInput | redemption_bucketScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"redemption_bucket"> | string
     redemption_transaction_id?: StringWithAggregatesFilter<"redemption_bucket"> | string
-    mutual_fund_units_lot_id?: StringWithAggregatesFilter<"redemption_bucket"> | string
+    units_lot_id?: StringWithAggregatesFilter<"redemption_bucket"> | string
     units_redeemed?: FloatWithAggregatesFilter<"redemption_bucket"> | number
   }
 
@@ -17038,6 +17152,7 @@ export namespace Prisma {
     id?: StringFilter<"transfer_transaction"> | string
     from_account_id?: StringFilter<"transfer_transaction"> | string
     to_account_id?: StringFilter<"transfer_transaction"> | string
+    transaction_id?: StringFilter<"transfer_transaction"> | string
     transaction?: XOR<TransactionScalarRelationFilter, transactionWhereInput>
     from_account?: XOR<AccountScalarRelationFilter, accountWhereInput>
     to_account?: XOR<AccountScalarRelationFilter, accountWhereInput>
@@ -17047,6 +17162,7 @@ export namespace Prisma {
     id?: SortOrder
     from_account_id?: SortOrder
     to_account_id?: SortOrder
+    transaction_id?: SortOrder
     transaction?: transactionOrderByWithRelationInput
     from_account?: accountOrderByWithRelationInput
     to_account?: accountOrderByWithRelationInput
@@ -17054,6 +17170,7 @@ export namespace Prisma {
 
   export type transfer_transactionWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    transaction_id?: string
     AND?: transfer_transactionWhereInput | transfer_transactionWhereInput[]
     OR?: transfer_transactionWhereInput[]
     NOT?: transfer_transactionWhereInput | transfer_transactionWhereInput[]
@@ -17062,12 +17179,13 @@ export namespace Prisma {
     transaction?: XOR<TransactionScalarRelationFilter, transactionWhereInput>
     from_account?: XOR<AccountScalarRelationFilter, accountWhereInput>
     to_account?: XOR<AccountScalarRelationFilter, accountWhereInput>
-  }, "id">
+  }, "id" | "transaction_id">
 
   export type transfer_transactionOrderByWithAggregationInput = {
     id?: SortOrder
     from_account_id?: SortOrder
     to_account_id?: SortOrder
+    transaction_id?: SortOrder
     _count?: transfer_transactionCountOrderByAggregateInput
     _max?: transfer_transactionMaxOrderByAggregateInput
     _min?: transfer_transactionMinOrderByAggregateInput
@@ -17080,6 +17198,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"transfer_transaction"> | string
     from_account_id?: StringWithAggregatesFilter<"transfer_transaction"> | string
     to_account_id?: StringWithAggregatesFilter<"transfer_transaction"> | string
+    transaction_id?: StringWithAggregatesFilter<"transfer_transaction"> | string
   }
 
   export type expense_transactionWhereInput = {
@@ -17089,6 +17208,7 @@ export namespace Prisma {
     id?: StringFilter<"expense_transaction"> | string
     account_id?: StringFilter<"expense_transaction"> | string
     expense_item_id?: StringFilter<"expense_transaction"> | string
+    transaction_id?: StringFilter<"expense_transaction"> | string
     transaction?: XOR<TransactionScalarRelationFilter, transactionWhereInput>
     account?: XOR<AccountScalarRelationFilter, accountWhereInput>
     expense_item?: XOR<Expense_itemScalarRelationFilter, expense_itemWhereInput>
@@ -17098,6 +17218,7 @@ export namespace Prisma {
     id?: SortOrder
     account_id?: SortOrder
     expense_item_id?: SortOrder
+    transaction_id?: SortOrder
     transaction?: transactionOrderByWithRelationInput
     account?: accountOrderByWithRelationInput
     expense_item?: expense_itemOrderByWithRelationInput
@@ -17105,6 +17226,7 @@ export namespace Prisma {
 
   export type expense_transactionWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    transaction_id?: string
     AND?: expense_transactionWhereInput | expense_transactionWhereInput[]
     OR?: expense_transactionWhereInput[]
     NOT?: expense_transactionWhereInput | expense_transactionWhereInput[]
@@ -17113,12 +17235,13 @@ export namespace Prisma {
     transaction?: XOR<TransactionScalarRelationFilter, transactionWhereInput>
     account?: XOR<AccountScalarRelationFilter, accountWhereInput>
     expense_item?: XOR<Expense_itemScalarRelationFilter, expense_itemWhereInput>
-  }, "id">
+  }, "id" | "transaction_id">
 
   export type expense_transactionOrderByWithAggregationInput = {
     id?: SortOrder
     account_id?: SortOrder
     expense_item_id?: SortOrder
+    transaction_id?: SortOrder
     _count?: expense_transactionCountOrderByAggregateInput
     _max?: expense_transactionMaxOrderByAggregateInput
     _min?: expense_transactionMinOrderByAggregateInput
@@ -17131,6 +17254,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"expense_transaction"> | string
     account_id?: StringWithAggregatesFilter<"expense_transaction"> | string
     expense_item_id?: StringWithAggregatesFilter<"expense_transaction"> | string
+    transaction_id?: StringWithAggregatesFilter<"expense_transaction"> | string
   }
 
   export type income_transactionWhereInput = {
@@ -17140,6 +17264,7 @@ export namespace Prisma {
     id?: StringFilter<"income_transaction"> | string
     income_source_id?: StringFilter<"income_transaction"> | string
     account_id?: StringFilter<"income_transaction"> | string
+    transaction_id?: StringFilter<"income_transaction"> | string
     transaction?: XOR<TransactionScalarRelationFilter, transactionWhereInput>
     income_source?: XOR<Income_sourceScalarRelationFilter, income_sourceWhereInput>
     account?: XOR<AccountScalarRelationFilter, accountWhereInput>
@@ -17149,6 +17274,7 @@ export namespace Prisma {
     id?: SortOrder
     income_source_id?: SortOrder
     account_id?: SortOrder
+    transaction_id?: SortOrder
     transaction?: transactionOrderByWithRelationInput
     income_source?: income_sourceOrderByWithRelationInput
     account?: accountOrderByWithRelationInput
@@ -17156,6 +17282,7 @@ export namespace Prisma {
 
   export type income_transactionWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    transaction_id?: string
     AND?: income_transactionWhereInput | income_transactionWhereInput[]
     OR?: income_transactionWhereInput[]
     NOT?: income_transactionWhereInput | income_transactionWhereInput[]
@@ -17164,12 +17291,13 @@ export namespace Prisma {
     transaction?: XOR<TransactionScalarRelationFilter, transactionWhereInput>
     income_source?: XOR<Income_sourceScalarRelationFilter, income_sourceWhereInput>
     account?: XOR<AccountScalarRelationFilter, accountWhereInput>
-  }, "id">
+  }, "id" | "transaction_id">
 
   export type income_transactionOrderByWithAggregationInput = {
     id?: SortOrder
     income_source_id?: SortOrder
     account_id?: SortOrder
+    transaction_id?: SortOrder
     _count?: income_transactionCountOrderByAggregateInput
     _max?: income_transactionMaxOrderByAggregateInput
     _min?: income_transactionMinOrderByAggregateInput
@@ -17182,6 +17310,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"income_transaction"> | string
     income_source_id?: StringWithAggregatesFilter<"income_transaction"> | string
     account_id?: StringWithAggregatesFilter<"income_transaction"> | string
+    transaction_id?: StringWithAggregatesFilter<"income_transaction"> | string
   }
 
   export type db_historyWhereInput = {
@@ -17403,28 +17532,28 @@ export namespace Prisma {
     id?: string
     name: string
     isin: string
-    units?: mutual_fund_units_lotCreateNestedManyWithoutMutual_fundInput
+    units_lots?: units_lotCreateNestedManyWithoutMutual_fundInput
   }
 
   export type mutual_fundUncheckedCreateInput = {
     id?: string
     name: string
     isin: string
-    units?: mutual_fund_units_lotUncheckedCreateNestedManyWithoutMutual_fundInput
+    units_lots?: units_lotUncheckedCreateNestedManyWithoutMutual_fundInput
   }
 
   export type mutual_fundUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     isin?: StringFieldUpdateOperationsInput | string
-    units?: mutual_fund_units_lotUpdateManyWithoutMutual_fundNestedInput
+    units_lots?: units_lotUpdateManyWithoutMutual_fundNestedInput
   }
 
   export type mutual_fundUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     isin?: StringFieldUpdateOperationsInput | string
-    units?: mutual_fund_units_lotUncheckedUpdateManyWithoutMutual_fundNestedInput
+    units_lots?: units_lotUncheckedUpdateManyWithoutMutual_fundNestedInput
   }
 
   export type mutual_fundCreateManyInput = {
@@ -17445,50 +17574,56 @@ export namespace Prisma {
     isin?: StringFieldUpdateOperationsInput | string
   }
 
-  export type mutual_fund_units_lotCreateInput = {
-    mutual_fund: mutual_fundCreateNestedOneWithoutUnitsInput
-    investment_transaction?: investment_transactionCreateNestedOneWithoutMutual_fund_units_lotInput
-    redemption_buckets?: redemption_bucketCreateNestedManyWithoutMutual_fund_units_lotInput
+  export type units_lotCreateInput = {
+    id?: string
+    investment_transaction?: investment_transactionCreateNestedOneWithoutUnits_lotInput
+    redemption_buckets?: redemption_bucketCreateNestedManyWithoutUnits_lotInput
+    mutual_fund: mutual_fundCreateNestedOneWithoutUnits_lotsInput
   }
 
-  export type mutual_fund_units_lotUncheckedCreateInput = {
+  export type units_lotUncheckedCreateInput = {
     id?: string
     mutual_fund_id: string
-    redemption_buckets?: redemption_bucketUncheckedCreateNestedManyWithoutMutual_fund_units_lotInput
+    investment_transaction?: investment_transactionUncheckedCreateNestedOneWithoutUnits_lotInput
+    redemption_buckets?: redemption_bucketUncheckedCreateNestedManyWithoutUnits_lotInput
   }
 
-  export type mutual_fund_units_lotUpdateInput = {
-    mutual_fund?: mutual_fundUpdateOneRequiredWithoutUnitsNestedInput
-    investment_transaction?: investment_transactionUpdateOneRequiredWithoutMutual_fund_units_lotNestedInput
-    redemption_buckets?: redemption_bucketUpdateManyWithoutMutual_fund_units_lotNestedInput
+  export type units_lotUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    investment_transaction?: investment_transactionUpdateOneWithoutUnits_lotNestedInput
+    redemption_buckets?: redemption_bucketUpdateManyWithoutUnits_lotNestedInput
+    mutual_fund?: mutual_fundUpdateOneRequiredWithoutUnits_lotsNestedInput
   }
 
-  export type mutual_fund_units_lotUncheckedUpdateInput = {
+  export type units_lotUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     mutual_fund_id?: StringFieldUpdateOperationsInput | string
-    redemption_buckets?: redemption_bucketUncheckedUpdateManyWithoutMutual_fund_units_lotNestedInput
+    investment_transaction?: investment_transactionUncheckedUpdateOneWithoutUnits_lotNestedInput
+    redemption_buckets?: redemption_bucketUncheckedUpdateManyWithoutUnits_lotNestedInput
   }
 
-  export type mutual_fund_units_lotCreateManyInput = {
+  export type units_lotCreateManyInput = {
     id?: string
     mutual_fund_id: string
   }
 
-  export type mutual_fund_units_lotUpdateManyMutationInput = {
-
+  export type units_lotUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
   }
 
-  export type mutual_fund_units_lotUncheckedUpdateManyInput = {
+  export type units_lotUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     mutual_fund_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type investment_transactionCreateInput = {
+    id?: string
     units_bought: number
     buy_nav: number
-    transaction?: transactionCreateNestedOneWithoutInvestment_transactionInput
+    allotment_date: Date | string
+    transaction: transactionCreateNestedOneWithoutInvestment_transactionInput
     from_account: accountCreateNestedOneWithoutInvestment_transactionsInput
-    mutual_fund_units_lot?: mutual_fund_units_lotCreateNestedOneWithoutInvestment_transactionInput
+    units_lot: units_lotCreateNestedOneWithoutInvestment_transactionInput
   }
 
   export type investment_transactionUncheckedCreateInput = {
@@ -17496,15 +17631,19 @@ export namespace Prisma {
     from_account_id: string
     units_bought: number
     buy_nav: number
-    mutual_fund_units_lot?: mutual_fund_units_lotUncheckedCreateNestedOneWithoutInvestment_transactionInput
+    allotment_date: Date | string
+    units_lot_id: string
+    transaction_id: string
   }
 
   export type investment_transactionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
     units_bought?: FloatFieldUpdateOperationsInput | number
     buy_nav?: FloatFieldUpdateOperationsInput | number
+    allotment_date?: DateTimeFieldUpdateOperationsInput | Date | string
     transaction?: transactionUpdateOneRequiredWithoutInvestment_transactionNestedInput
     from_account?: accountUpdateOneRequiredWithoutInvestment_transactionsNestedInput
-    mutual_fund_units_lot?: mutual_fund_units_lotUpdateOneWithoutInvestment_transactionNestedInput
+    units_lot?: units_lotUpdateOneRequiredWithoutInvestment_transactionNestedInput
   }
 
   export type investment_transactionUncheckedUpdateInput = {
@@ -17512,7 +17651,9 @@ export namespace Prisma {
     from_account_id?: StringFieldUpdateOperationsInput | string
     units_bought?: FloatFieldUpdateOperationsInput | number
     buy_nav?: FloatFieldUpdateOperationsInput | number
-    mutual_fund_units_lot?: mutual_fund_units_lotUncheckedUpdateOneWithoutInvestment_transactionNestedInput
+    allotment_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    units_lot_id?: StringFieldUpdateOperationsInput | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type investment_transactionCreateManyInput = {
@@ -17520,11 +17661,16 @@ export namespace Prisma {
     from_account_id: string
     units_bought: number
     buy_nav: number
+    allotment_date: Date | string
+    units_lot_id: string
+    transaction_id: string
   }
 
   export type investment_transactionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
     units_bought?: FloatFieldUpdateOperationsInput | number
     buy_nav?: FloatFieldUpdateOperationsInput | number
+    allotment_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type investment_transactionUncheckedUpdateManyInput = {
@@ -17532,12 +17678,16 @@ export namespace Prisma {
     from_account_id?: StringFieldUpdateOperationsInput | string
     units_bought?: FloatFieldUpdateOperationsInput | number
     buy_nav?: FloatFieldUpdateOperationsInput | number
+    allotment_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    units_lot_id?: StringFieldUpdateOperationsInput | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type redemption_transactionCreateInput = {
+    id?: string
     sell_nav: number
-    units_redeemed: number
-    transaction?: transactionCreateNestedOneWithoutRedemption_transactionInput
+    redemption_date: Date | string
+    transaction: transactionCreateNestedOneWithoutRedemption_transactionInput
     to_account: accountCreateNestedOneWithoutRedemption_transactionsInput
     redemption_buckets?: redemption_bucketCreateNestedManyWithoutRedemption_transactionInput
   }
@@ -17546,13 +17696,15 @@ export namespace Prisma {
     id?: string
     to_account_id: string
     sell_nav: number
-    units_redeemed: number
+    redemption_date: Date | string
+    transaction_id: string
     redemption_buckets?: redemption_bucketUncheckedCreateNestedManyWithoutRedemption_transactionInput
   }
 
   export type redemption_transactionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
     sell_nav?: FloatFieldUpdateOperationsInput | number
-    units_redeemed?: FloatFieldUpdateOperationsInput | number
+    redemption_date?: DateTimeFieldUpdateOperationsInput | Date | string
     transaction?: transactionUpdateOneRequiredWithoutRedemption_transactionNestedInput
     to_account?: accountUpdateOneRequiredWithoutRedemption_transactionsNestedInput
     redemption_buckets?: redemption_bucketUpdateManyWithoutRedemption_transactionNestedInput
@@ -17562,7 +17714,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     to_account_id?: StringFieldUpdateOperationsInput | string
     sell_nav?: FloatFieldUpdateOperationsInput | number
-    units_redeemed?: FloatFieldUpdateOperationsInput | number
+    redemption_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
     redemption_buckets?: redemption_bucketUncheckedUpdateManyWithoutRedemption_transactionNestedInput
   }
 
@@ -17570,32 +17723,35 @@ export namespace Prisma {
     id?: string
     to_account_id: string
     sell_nav: number
-    units_redeemed: number
+    redemption_date: Date | string
+    transaction_id: string
   }
 
   export type redemption_transactionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
     sell_nav?: FloatFieldUpdateOperationsInput | number
-    units_redeemed?: FloatFieldUpdateOperationsInput | number
+    redemption_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type redemption_transactionUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     to_account_id?: StringFieldUpdateOperationsInput | string
     sell_nav?: FloatFieldUpdateOperationsInput | number
-    units_redeemed?: FloatFieldUpdateOperationsInput | number
+    redemption_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type redemption_bucketCreateInput = {
     id?: string
     units_redeemed: number
     redemption_transaction: redemption_transactionCreateNestedOneWithoutRedemption_bucketsInput
-    mutual_fund_units_lot: mutual_fund_units_lotCreateNestedOneWithoutRedemption_bucketsInput
+    units_lot: units_lotCreateNestedOneWithoutRedemption_bucketsInput
   }
 
   export type redemption_bucketUncheckedCreateInput = {
     id?: string
     redemption_transaction_id: string
-    mutual_fund_units_lot_id: string
+    units_lot_id: string
     units_redeemed: number
   }
 
@@ -17603,20 +17759,20 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     units_redeemed?: FloatFieldUpdateOperationsInput | number
     redemption_transaction?: redemption_transactionUpdateOneRequiredWithoutRedemption_bucketsNestedInput
-    mutual_fund_units_lot?: mutual_fund_units_lotUpdateOneRequiredWithoutRedemption_bucketsNestedInput
+    units_lot?: units_lotUpdateOneRequiredWithoutRedemption_bucketsNestedInput
   }
 
   export type redemption_bucketUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     redemption_transaction_id?: StringFieldUpdateOperationsInput | string
-    mutual_fund_units_lot_id?: StringFieldUpdateOperationsInput | string
+    units_lot_id?: StringFieldUpdateOperationsInput | string
     units_redeemed?: FloatFieldUpdateOperationsInput | number
   }
 
   export type redemption_bucketCreateManyInput = {
     id?: string
     redemption_transaction_id: string
-    mutual_fund_units_lot_id: string
+    units_lot_id: string
     units_redeemed: number
   }
 
@@ -17628,7 +17784,7 @@ export namespace Prisma {
   export type redemption_bucketUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     redemption_transaction_id?: StringFieldUpdateOperationsInput | string
-    mutual_fund_units_lot_id?: StringFieldUpdateOperationsInput | string
+    units_lot_id?: StringFieldUpdateOperationsInput | string
     units_redeemed?: FloatFieldUpdateOperationsInput | number
   }
 
@@ -17723,18 +17879,21 @@ export namespace Prisma {
   }
 
   export type transfer_transactionCreateInput = {
+    id?: string
     transaction: transactionCreateNestedOneWithoutTransfer_transactionInput
     from_account: accountCreateNestedOneWithoutFrom_transfersInput
     to_account: accountCreateNestedOneWithoutTo_transfersInput
   }
 
   export type transfer_transactionUncheckedCreateInput = {
-    id: string
+    id?: string
     from_account_id: string
     to_account_id: string
+    transaction_id: string
   }
 
   export type transfer_transactionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
     transaction?: transactionUpdateOneRequiredWithoutTransfer_transactionNestedInput
     from_account?: accountUpdateOneRequiredWithoutFrom_transfersNestedInput
     to_account?: accountUpdateOneRequiredWithoutTo_transfersNestedInput
@@ -17744,37 +17903,43 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     from_account_id?: StringFieldUpdateOperationsInput | string
     to_account_id?: StringFieldUpdateOperationsInput | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type transfer_transactionCreateManyInput = {
-    id: string
+    id?: string
     from_account_id: string
     to_account_id: string
+    transaction_id: string
   }
 
   export type transfer_transactionUpdateManyMutationInput = {
-
+    id?: StringFieldUpdateOperationsInput | string
   }
 
   export type transfer_transactionUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     from_account_id?: StringFieldUpdateOperationsInput | string
     to_account_id?: StringFieldUpdateOperationsInput | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type expense_transactionCreateInput = {
+    id?: string
     transaction: transactionCreateNestedOneWithoutExpense_transactionInput
     account: accountCreateNestedOneWithoutExpense_transactionsInput
     expense_item: expense_itemCreateNestedOneWithoutTransactionsInput
   }
 
   export type expense_transactionUncheckedCreateInput = {
-    id: string
+    id?: string
     account_id: string
     expense_item_id: string
+    transaction_id: string
   }
 
   export type expense_transactionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
     transaction?: transactionUpdateOneRequiredWithoutExpense_transactionNestedInput
     account?: accountUpdateOneRequiredWithoutExpense_transactionsNestedInput
     expense_item?: expense_itemUpdateOneRequiredWithoutTransactionsNestedInput
@@ -17784,37 +17949,43 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     account_id?: StringFieldUpdateOperationsInput | string
     expense_item_id?: StringFieldUpdateOperationsInput | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type expense_transactionCreateManyInput = {
-    id: string
+    id?: string
     account_id: string
     expense_item_id: string
+    transaction_id: string
   }
 
   export type expense_transactionUpdateManyMutationInput = {
-
+    id?: StringFieldUpdateOperationsInput | string
   }
 
   export type expense_transactionUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     account_id?: StringFieldUpdateOperationsInput | string
     expense_item_id?: StringFieldUpdateOperationsInput | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type income_transactionCreateInput = {
+    id?: string
     transaction: transactionCreateNestedOneWithoutIncome_transactionInput
     income_source: income_sourceCreateNestedOneWithoutTransactionsInput
     account: accountCreateNestedOneWithoutIncome_transactionsInput
   }
 
   export type income_transactionUncheckedCreateInput = {
-    id: string
+    id?: string
     income_source_id: string
     account_id: string
+    transaction_id: string
   }
 
   export type income_transactionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
     transaction?: transactionUpdateOneRequiredWithoutIncome_transactionNestedInput
     income_source?: income_sourceUpdateOneRequiredWithoutTransactionsNestedInput
     account?: accountUpdateOneRequiredWithoutIncome_transactionsNestedInput
@@ -17824,22 +17995,25 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     income_source_id?: StringFieldUpdateOperationsInput | string
     account_id?: StringFieldUpdateOperationsInput | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type income_transactionCreateManyInput = {
-    id: string
+    id?: string
     income_source_id: string
     account_id: string
+    transaction_id: string
   }
 
   export type income_transactionUpdateManyMutationInput = {
-
+    id?: StringFieldUpdateOperationsInput | string
   }
 
   export type income_transactionUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     income_source_id?: StringFieldUpdateOperationsInput | string
     account_id?: StringFieldUpdateOperationsInput | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type db_historyCreateInput = {
@@ -18045,13 +18219,13 @@ export namespace Prisma {
     group?: SortOrder
   }
 
-  export type Mutual_fund_units_lotListRelationFilter = {
-    every?: mutual_fund_units_lotWhereInput
-    some?: mutual_fund_units_lotWhereInput
-    none?: mutual_fund_units_lotWhereInput
+  export type Units_lotListRelationFilter = {
+    every?: units_lotWhereInput
+    some?: units_lotWhereInput
+    none?: units_lotWhereInput
   }
 
-  export type mutual_fund_units_lotOrderByRelationAggregateInput = {
+  export type units_lotOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -18073,14 +18247,9 @@ export namespace Prisma {
     isin?: SortOrder
   }
 
-  export type Mutual_fundScalarRelationFilter = {
-    is?: mutual_fundWhereInput
-    isNot?: mutual_fundWhereInput
-  }
-
-  export type Investment_transactionScalarRelationFilter = {
-    is?: investment_transactionWhereInput
-    isNot?: investment_transactionWhereInput
+  export type Investment_transactionNullableScalarRelationFilter = {
+    is?: investment_transactionWhereInput | null
+    isNot?: investment_transactionWhereInput | null
   }
 
   export type Redemption_bucketListRelationFilter = {
@@ -18089,21 +18258,26 @@ export namespace Prisma {
     none?: redemption_bucketWhereInput
   }
 
+  export type Mutual_fundScalarRelationFilter = {
+    is?: mutual_fundWhereInput
+    isNot?: mutual_fundWhereInput
+  }
+
   export type redemption_bucketOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type mutual_fund_units_lotCountOrderByAggregateInput = {
+  export type units_lotCountOrderByAggregateInput = {
     id?: SortOrder
     mutual_fund_id?: SortOrder
   }
 
-  export type mutual_fund_units_lotMaxOrderByAggregateInput = {
+  export type units_lotMaxOrderByAggregateInput = {
     id?: SortOrder
     mutual_fund_id?: SortOrder
   }
 
-  export type mutual_fund_units_lotMinOrderByAggregateInput = {
+  export type units_lotMinOrderByAggregateInput = {
     id?: SortOrder
     mutual_fund_id?: SortOrder
   }
@@ -18119,6 +18293,17 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type TransactionScalarRelationFilter = {
     is?: transactionWhereInput
     isNot?: transactionWhereInput
@@ -18129,9 +18314,9 @@ export namespace Prisma {
     isNot?: accountWhereInput
   }
 
-  export type Mutual_fund_units_lotNullableScalarRelationFilter = {
-    is?: mutual_fund_units_lotWhereInput | null
-    isNot?: mutual_fund_units_lotWhereInput | null
+  export type Units_lotScalarRelationFilter = {
+    is?: units_lotWhereInput
+    isNot?: units_lotWhereInput
   }
 
   export type investment_transactionCountOrderByAggregateInput = {
@@ -18139,6 +18324,9 @@ export namespace Prisma {
     from_account_id?: SortOrder
     units_bought?: SortOrder
     buy_nav?: SortOrder
+    allotment_date?: SortOrder
+    units_lot_id?: SortOrder
+    transaction_id?: SortOrder
   }
 
   export type investment_transactionAvgOrderByAggregateInput = {
@@ -18151,6 +18339,9 @@ export namespace Prisma {
     from_account_id?: SortOrder
     units_bought?: SortOrder
     buy_nav?: SortOrder
+    allotment_date?: SortOrder
+    units_lot_id?: SortOrder
+    transaction_id?: SortOrder
   }
 
   export type investment_transactionMinOrderByAggregateInput = {
@@ -18158,6 +18349,9 @@ export namespace Prisma {
     from_account_id?: SortOrder
     units_bought?: SortOrder
     buy_nav?: SortOrder
+    allotment_date?: SortOrder
+    units_lot_id?: SortOrder
+    transaction_id?: SortOrder
   }
 
   export type investment_transactionSumOrderByAggregateInput = {
@@ -18181,35 +18375,50 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type redemption_transactionCountOrderByAggregateInput = {
     id?: SortOrder
     to_account_id?: SortOrder
     sell_nav?: SortOrder
-    units_redeemed?: SortOrder
+    redemption_date?: SortOrder
+    transaction_id?: SortOrder
   }
 
   export type redemption_transactionAvgOrderByAggregateInput = {
     sell_nav?: SortOrder
-    units_redeemed?: SortOrder
   }
 
   export type redemption_transactionMaxOrderByAggregateInput = {
     id?: SortOrder
     to_account_id?: SortOrder
     sell_nav?: SortOrder
-    units_redeemed?: SortOrder
+    redemption_date?: SortOrder
+    transaction_id?: SortOrder
   }
 
   export type redemption_transactionMinOrderByAggregateInput = {
     id?: SortOrder
     to_account_id?: SortOrder
     sell_nav?: SortOrder
-    units_redeemed?: SortOrder
+    redemption_date?: SortOrder
+    transaction_id?: SortOrder
   }
 
   export type redemption_transactionSumOrderByAggregateInput = {
     sell_nav?: SortOrder
-    units_redeemed?: SortOrder
   }
 
   export type Redemption_transactionScalarRelationFilter = {
@@ -18217,15 +18426,10 @@ export namespace Prisma {
     isNot?: redemption_transactionWhereInput
   }
 
-  export type Mutual_fund_units_lotScalarRelationFilter = {
-    is?: mutual_fund_units_lotWhereInput
-    isNot?: mutual_fund_units_lotWhereInput
-  }
-
   export type redemption_bucketCountOrderByAggregateInput = {
     id?: SortOrder
     redemption_transaction_id?: SortOrder
-    mutual_fund_units_lot_id?: SortOrder
+    units_lot_id?: SortOrder
     units_redeemed?: SortOrder
   }
 
@@ -18236,30 +18440,19 @@ export namespace Prisma {
   export type redemption_bucketMaxOrderByAggregateInput = {
     id?: SortOrder
     redemption_transaction_id?: SortOrder
-    mutual_fund_units_lot_id?: SortOrder
+    units_lot_id?: SortOrder
     units_redeemed?: SortOrder
   }
 
   export type redemption_bucketMinOrderByAggregateInput = {
     id?: SortOrder
     redemption_transaction_id?: SortOrder
-    mutual_fund_units_lot_id?: SortOrder
+    units_lot_id?: SortOrder
     units_redeemed?: SortOrder
   }
 
   export type redemption_bucketSumOrderByAggregateInput = {
     units_redeemed?: SortOrder
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -18307,11 +18500,6 @@ export namespace Prisma {
   export type Income_transactionNullableScalarRelationFilter = {
     is?: income_transactionWhereInput | null
     isNot?: income_transactionWhereInput | null
-  }
-
-  export type Investment_transactionNullableScalarRelationFilter = {
-    is?: investment_transactionWhereInput | null
-    isNot?: investment_transactionWhereInput | null
   }
 
   export type Redemption_transactionNullableScalarRelationFilter = {
@@ -18362,20 +18550,6 @@ export namespace Prisma {
     amount?: SortOrder
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -18421,18 +18595,21 @@ export namespace Prisma {
     id?: SortOrder
     from_account_id?: SortOrder
     to_account_id?: SortOrder
+    transaction_id?: SortOrder
   }
 
   export type transfer_transactionMaxOrderByAggregateInput = {
     id?: SortOrder
     from_account_id?: SortOrder
     to_account_id?: SortOrder
+    transaction_id?: SortOrder
   }
 
   export type transfer_transactionMinOrderByAggregateInput = {
     id?: SortOrder
     from_account_id?: SortOrder
     to_account_id?: SortOrder
+    transaction_id?: SortOrder
   }
 
   export type Expense_itemScalarRelationFilter = {
@@ -18444,18 +18621,21 @@ export namespace Prisma {
     id?: SortOrder
     account_id?: SortOrder
     expense_item_id?: SortOrder
+    transaction_id?: SortOrder
   }
 
   export type expense_transactionMaxOrderByAggregateInput = {
     id?: SortOrder
     account_id?: SortOrder
     expense_item_id?: SortOrder
+    transaction_id?: SortOrder
   }
 
   export type expense_transactionMinOrderByAggregateInput = {
     id?: SortOrder
     account_id?: SortOrder
     expense_item_id?: SortOrder
+    transaction_id?: SortOrder
   }
 
   export type Income_sourceScalarRelationFilter = {
@@ -18467,18 +18647,21 @@ export namespace Prisma {
     id?: SortOrder
     income_source_id?: SortOrder
     account_id?: SortOrder
+    transaction_id?: SortOrder
   }
 
   export type income_transactionMaxOrderByAggregateInput = {
     id?: SortOrder
     income_source_id?: SortOrder
     account_id?: SortOrder
+    transaction_id?: SortOrder
   }
 
   export type income_transactionMinOrderByAggregateInput = {
     id?: SortOrder
     income_source_id?: SortOrder
     account_id?: SortOrder
+    transaction_id?: SortOrder
   }
 
   export type Enumdb_history_event_typeFilter<$PrismaModel = never> = {
@@ -18919,115 +19102,133 @@ export namespace Prisma {
     deleteMany?: expense_transactionScalarWhereInput | expense_transactionScalarWhereInput[]
   }
 
-  export type mutual_fund_units_lotCreateNestedManyWithoutMutual_fundInput = {
-    create?: XOR<mutual_fund_units_lotCreateWithoutMutual_fundInput, mutual_fund_units_lotUncheckedCreateWithoutMutual_fundInput> | mutual_fund_units_lotCreateWithoutMutual_fundInput[] | mutual_fund_units_lotUncheckedCreateWithoutMutual_fundInput[]
-    connectOrCreate?: mutual_fund_units_lotCreateOrConnectWithoutMutual_fundInput | mutual_fund_units_lotCreateOrConnectWithoutMutual_fundInput[]
-    createMany?: mutual_fund_units_lotCreateManyMutual_fundInputEnvelope
-    connect?: mutual_fund_units_lotWhereUniqueInput | mutual_fund_units_lotWhereUniqueInput[]
+  export type units_lotCreateNestedManyWithoutMutual_fundInput = {
+    create?: XOR<units_lotCreateWithoutMutual_fundInput, units_lotUncheckedCreateWithoutMutual_fundInput> | units_lotCreateWithoutMutual_fundInput[] | units_lotUncheckedCreateWithoutMutual_fundInput[]
+    connectOrCreate?: units_lotCreateOrConnectWithoutMutual_fundInput | units_lotCreateOrConnectWithoutMutual_fundInput[]
+    createMany?: units_lotCreateManyMutual_fundInputEnvelope
+    connect?: units_lotWhereUniqueInput | units_lotWhereUniqueInput[]
   }
 
-  export type mutual_fund_units_lotUncheckedCreateNestedManyWithoutMutual_fundInput = {
-    create?: XOR<mutual_fund_units_lotCreateWithoutMutual_fundInput, mutual_fund_units_lotUncheckedCreateWithoutMutual_fundInput> | mutual_fund_units_lotCreateWithoutMutual_fundInput[] | mutual_fund_units_lotUncheckedCreateWithoutMutual_fundInput[]
-    connectOrCreate?: mutual_fund_units_lotCreateOrConnectWithoutMutual_fundInput | mutual_fund_units_lotCreateOrConnectWithoutMutual_fundInput[]
-    createMany?: mutual_fund_units_lotCreateManyMutual_fundInputEnvelope
-    connect?: mutual_fund_units_lotWhereUniqueInput | mutual_fund_units_lotWhereUniqueInput[]
+  export type units_lotUncheckedCreateNestedManyWithoutMutual_fundInput = {
+    create?: XOR<units_lotCreateWithoutMutual_fundInput, units_lotUncheckedCreateWithoutMutual_fundInput> | units_lotCreateWithoutMutual_fundInput[] | units_lotUncheckedCreateWithoutMutual_fundInput[]
+    connectOrCreate?: units_lotCreateOrConnectWithoutMutual_fundInput | units_lotCreateOrConnectWithoutMutual_fundInput[]
+    createMany?: units_lotCreateManyMutual_fundInputEnvelope
+    connect?: units_lotWhereUniqueInput | units_lotWhereUniqueInput[]
   }
 
-  export type mutual_fund_units_lotUpdateManyWithoutMutual_fundNestedInput = {
-    create?: XOR<mutual_fund_units_lotCreateWithoutMutual_fundInput, mutual_fund_units_lotUncheckedCreateWithoutMutual_fundInput> | mutual_fund_units_lotCreateWithoutMutual_fundInput[] | mutual_fund_units_lotUncheckedCreateWithoutMutual_fundInput[]
-    connectOrCreate?: mutual_fund_units_lotCreateOrConnectWithoutMutual_fundInput | mutual_fund_units_lotCreateOrConnectWithoutMutual_fundInput[]
-    upsert?: mutual_fund_units_lotUpsertWithWhereUniqueWithoutMutual_fundInput | mutual_fund_units_lotUpsertWithWhereUniqueWithoutMutual_fundInput[]
-    createMany?: mutual_fund_units_lotCreateManyMutual_fundInputEnvelope
-    set?: mutual_fund_units_lotWhereUniqueInput | mutual_fund_units_lotWhereUniqueInput[]
-    disconnect?: mutual_fund_units_lotWhereUniqueInput | mutual_fund_units_lotWhereUniqueInput[]
-    delete?: mutual_fund_units_lotWhereUniqueInput | mutual_fund_units_lotWhereUniqueInput[]
-    connect?: mutual_fund_units_lotWhereUniqueInput | mutual_fund_units_lotWhereUniqueInput[]
-    update?: mutual_fund_units_lotUpdateWithWhereUniqueWithoutMutual_fundInput | mutual_fund_units_lotUpdateWithWhereUniqueWithoutMutual_fundInput[]
-    updateMany?: mutual_fund_units_lotUpdateManyWithWhereWithoutMutual_fundInput | mutual_fund_units_lotUpdateManyWithWhereWithoutMutual_fundInput[]
-    deleteMany?: mutual_fund_units_lotScalarWhereInput | mutual_fund_units_lotScalarWhereInput[]
+  export type units_lotUpdateManyWithoutMutual_fundNestedInput = {
+    create?: XOR<units_lotCreateWithoutMutual_fundInput, units_lotUncheckedCreateWithoutMutual_fundInput> | units_lotCreateWithoutMutual_fundInput[] | units_lotUncheckedCreateWithoutMutual_fundInput[]
+    connectOrCreate?: units_lotCreateOrConnectWithoutMutual_fundInput | units_lotCreateOrConnectWithoutMutual_fundInput[]
+    upsert?: units_lotUpsertWithWhereUniqueWithoutMutual_fundInput | units_lotUpsertWithWhereUniqueWithoutMutual_fundInput[]
+    createMany?: units_lotCreateManyMutual_fundInputEnvelope
+    set?: units_lotWhereUniqueInput | units_lotWhereUniqueInput[]
+    disconnect?: units_lotWhereUniqueInput | units_lotWhereUniqueInput[]
+    delete?: units_lotWhereUniqueInput | units_lotWhereUniqueInput[]
+    connect?: units_lotWhereUniqueInput | units_lotWhereUniqueInput[]
+    update?: units_lotUpdateWithWhereUniqueWithoutMutual_fundInput | units_lotUpdateWithWhereUniqueWithoutMutual_fundInput[]
+    updateMany?: units_lotUpdateManyWithWhereWithoutMutual_fundInput | units_lotUpdateManyWithWhereWithoutMutual_fundInput[]
+    deleteMany?: units_lotScalarWhereInput | units_lotScalarWhereInput[]
   }
 
-  export type mutual_fund_units_lotUncheckedUpdateManyWithoutMutual_fundNestedInput = {
-    create?: XOR<mutual_fund_units_lotCreateWithoutMutual_fundInput, mutual_fund_units_lotUncheckedCreateWithoutMutual_fundInput> | mutual_fund_units_lotCreateWithoutMutual_fundInput[] | mutual_fund_units_lotUncheckedCreateWithoutMutual_fundInput[]
-    connectOrCreate?: mutual_fund_units_lotCreateOrConnectWithoutMutual_fundInput | mutual_fund_units_lotCreateOrConnectWithoutMutual_fundInput[]
-    upsert?: mutual_fund_units_lotUpsertWithWhereUniqueWithoutMutual_fundInput | mutual_fund_units_lotUpsertWithWhereUniqueWithoutMutual_fundInput[]
-    createMany?: mutual_fund_units_lotCreateManyMutual_fundInputEnvelope
-    set?: mutual_fund_units_lotWhereUniqueInput | mutual_fund_units_lotWhereUniqueInput[]
-    disconnect?: mutual_fund_units_lotWhereUniqueInput | mutual_fund_units_lotWhereUniqueInput[]
-    delete?: mutual_fund_units_lotWhereUniqueInput | mutual_fund_units_lotWhereUniqueInput[]
-    connect?: mutual_fund_units_lotWhereUniqueInput | mutual_fund_units_lotWhereUniqueInput[]
-    update?: mutual_fund_units_lotUpdateWithWhereUniqueWithoutMutual_fundInput | mutual_fund_units_lotUpdateWithWhereUniqueWithoutMutual_fundInput[]
-    updateMany?: mutual_fund_units_lotUpdateManyWithWhereWithoutMutual_fundInput | mutual_fund_units_lotUpdateManyWithWhereWithoutMutual_fundInput[]
-    deleteMany?: mutual_fund_units_lotScalarWhereInput | mutual_fund_units_lotScalarWhereInput[]
+  export type units_lotUncheckedUpdateManyWithoutMutual_fundNestedInput = {
+    create?: XOR<units_lotCreateWithoutMutual_fundInput, units_lotUncheckedCreateWithoutMutual_fundInput> | units_lotCreateWithoutMutual_fundInput[] | units_lotUncheckedCreateWithoutMutual_fundInput[]
+    connectOrCreate?: units_lotCreateOrConnectWithoutMutual_fundInput | units_lotCreateOrConnectWithoutMutual_fundInput[]
+    upsert?: units_lotUpsertWithWhereUniqueWithoutMutual_fundInput | units_lotUpsertWithWhereUniqueWithoutMutual_fundInput[]
+    createMany?: units_lotCreateManyMutual_fundInputEnvelope
+    set?: units_lotWhereUniqueInput | units_lotWhereUniqueInput[]
+    disconnect?: units_lotWhereUniqueInput | units_lotWhereUniqueInput[]
+    delete?: units_lotWhereUniqueInput | units_lotWhereUniqueInput[]
+    connect?: units_lotWhereUniqueInput | units_lotWhereUniqueInput[]
+    update?: units_lotUpdateWithWhereUniqueWithoutMutual_fundInput | units_lotUpdateWithWhereUniqueWithoutMutual_fundInput[]
+    updateMany?: units_lotUpdateManyWithWhereWithoutMutual_fundInput | units_lotUpdateManyWithWhereWithoutMutual_fundInput[]
+    deleteMany?: units_lotScalarWhereInput | units_lotScalarWhereInput[]
   }
 
-  export type mutual_fundCreateNestedOneWithoutUnitsInput = {
-    create?: XOR<mutual_fundCreateWithoutUnitsInput, mutual_fundUncheckedCreateWithoutUnitsInput>
-    connectOrCreate?: mutual_fundCreateOrConnectWithoutUnitsInput
-    connect?: mutual_fundWhereUniqueInput
-  }
-
-  export type investment_transactionCreateNestedOneWithoutMutual_fund_units_lotInput = {
-    create?: XOR<investment_transactionCreateWithoutMutual_fund_units_lotInput, investment_transactionUncheckedCreateWithoutMutual_fund_units_lotInput>
-    connectOrCreate?: investment_transactionCreateOrConnectWithoutMutual_fund_units_lotInput
+  export type investment_transactionCreateNestedOneWithoutUnits_lotInput = {
+    create?: XOR<investment_transactionCreateWithoutUnits_lotInput, investment_transactionUncheckedCreateWithoutUnits_lotInput>
+    connectOrCreate?: investment_transactionCreateOrConnectWithoutUnits_lotInput
     connect?: investment_transactionWhereUniqueInput
   }
 
-  export type redemption_bucketCreateNestedManyWithoutMutual_fund_units_lotInput = {
-    create?: XOR<redemption_bucketCreateWithoutMutual_fund_units_lotInput, redemption_bucketUncheckedCreateWithoutMutual_fund_units_lotInput> | redemption_bucketCreateWithoutMutual_fund_units_lotInput[] | redemption_bucketUncheckedCreateWithoutMutual_fund_units_lotInput[]
-    connectOrCreate?: redemption_bucketCreateOrConnectWithoutMutual_fund_units_lotInput | redemption_bucketCreateOrConnectWithoutMutual_fund_units_lotInput[]
-    createMany?: redemption_bucketCreateManyMutual_fund_units_lotInputEnvelope
+  export type redemption_bucketCreateNestedManyWithoutUnits_lotInput = {
+    create?: XOR<redemption_bucketCreateWithoutUnits_lotInput, redemption_bucketUncheckedCreateWithoutUnits_lotInput> | redemption_bucketCreateWithoutUnits_lotInput[] | redemption_bucketUncheckedCreateWithoutUnits_lotInput[]
+    connectOrCreate?: redemption_bucketCreateOrConnectWithoutUnits_lotInput | redemption_bucketCreateOrConnectWithoutUnits_lotInput[]
+    createMany?: redemption_bucketCreateManyUnits_lotInputEnvelope
     connect?: redemption_bucketWhereUniqueInput | redemption_bucketWhereUniqueInput[]
   }
 
-  export type redemption_bucketUncheckedCreateNestedManyWithoutMutual_fund_units_lotInput = {
-    create?: XOR<redemption_bucketCreateWithoutMutual_fund_units_lotInput, redemption_bucketUncheckedCreateWithoutMutual_fund_units_lotInput> | redemption_bucketCreateWithoutMutual_fund_units_lotInput[] | redemption_bucketUncheckedCreateWithoutMutual_fund_units_lotInput[]
-    connectOrCreate?: redemption_bucketCreateOrConnectWithoutMutual_fund_units_lotInput | redemption_bucketCreateOrConnectWithoutMutual_fund_units_lotInput[]
-    createMany?: redemption_bucketCreateManyMutual_fund_units_lotInputEnvelope
-    connect?: redemption_bucketWhereUniqueInput | redemption_bucketWhereUniqueInput[]
-  }
-
-  export type mutual_fundUpdateOneRequiredWithoutUnitsNestedInput = {
-    create?: XOR<mutual_fundCreateWithoutUnitsInput, mutual_fundUncheckedCreateWithoutUnitsInput>
-    connectOrCreate?: mutual_fundCreateOrConnectWithoutUnitsInput
-    upsert?: mutual_fundUpsertWithoutUnitsInput
+  export type mutual_fundCreateNestedOneWithoutUnits_lotsInput = {
+    create?: XOR<mutual_fundCreateWithoutUnits_lotsInput, mutual_fundUncheckedCreateWithoutUnits_lotsInput>
+    connectOrCreate?: mutual_fundCreateOrConnectWithoutUnits_lotsInput
     connect?: mutual_fundWhereUniqueInput
-    update?: XOR<XOR<mutual_fundUpdateToOneWithWhereWithoutUnitsInput, mutual_fundUpdateWithoutUnitsInput>, mutual_fundUncheckedUpdateWithoutUnitsInput>
   }
 
-  export type investment_transactionUpdateOneRequiredWithoutMutual_fund_units_lotNestedInput = {
-    create?: XOR<investment_transactionCreateWithoutMutual_fund_units_lotInput, investment_transactionUncheckedCreateWithoutMutual_fund_units_lotInput>
-    connectOrCreate?: investment_transactionCreateOrConnectWithoutMutual_fund_units_lotInput
-    upsert?: investment_transactionUpsertWithoutMutual_fund_units_lotInput
+  export type investment_transactionUncheckedCreateNestedOneWithoutUnits_lotInput = {
+    create?: XOR<investment_transactionCreateWithoutUnits_lotInput, investment_transactionUncheckedCreateWithoutUnits_lotInput>
+    connectOrCreate?: investment_transactionCreateOrConnectWithoutUnits_lotInput
     connect?: investment_transactionWhereUniqueInput
-    update?: XOR<XOR<investment_transactionUpdateToOneWithWhereWithoutMutual_fund_units_lotInput, investment_transactionUpdateWithoutMutual_fund_units_lotInput>, investment_transactionUncheckedUpdateWithoutMutual_fund_units_lotInput>
   }
 
-  export type redemption_bucketUpdateManyWithoutMutual_fund_units_lotNestedInput = {
-    create?: XOR<redemption_bucketCreateWithoutMutual_fund_units_lotInput, redemption_bucketUncheckedCreateWithoutMutual_fund_units_lotInput> | redemption_bucketCreateWithoutMutual_fund_units_lotInput[] | redemption_bucketUncheckedCreateWithoutMutual_fund_units_lotInput[]
-    connectOrCreate?: redemption_bucketCreateOrConnectWithoutMutual_fund_units_lotInput | redemption_bucketCreateOrConnectWithoutMutual_fund_units_lotInput[]
-    upsert?: redemption_bucketUpsertWithWhereUniqueWithoutMutual_fund_units_lotInput | redemption_bucketUpsertWithWhereUniqueWithoutMutual_fund_units_lotInput[]
-    createMany?: redemption_bucketCreateManyMutual_fund_units_lotInputEnvelope
+  export type redemption_bucketUncheckedCreateNestedManyWithoutUnits_lotInput = {
+    create?: XOR<redemption_bucketCreateWithoutUnits_lotInput, redemption_bucketUncheckedCreateWithoutUnits_lotInput> | redemption_bucketCreateWithoutUnits_lotInput[] | redemption_bucketUncheckedCreateWithoutUnits_lotInput[]
+    connectOrCreate?: redemption_bucketCreateOrConnectWithoutUnits_lotInput | redemption_bucketCreateOrConnectWithoutUnits_lotInput[]
+    createMany?: redemption_bucketCreateManyUnits_lotInputEnvelope
+    connect?: redemption_bucketWhereUniqueInput | redemption_bucketWhereUniqueInput[]
+  }
+
+  export type investment_transactionUpdateOneWithoutUnits_lotNestedInput = {
+    create?: XOR<investment_transactionCreateWithoutUnits_lotInput, investment_transactionUncheckedCreateWithoutUnits_lotInput>
+    connectOrCreate?: investment_transactionCreateOrConnectWithoutUnits_lotInput
+    upsert?: investment_transactionUpsertWithoutUnits_lotInput
+    disconnect?: investment_transactionWhereInput | boolean
+    delete?: investment_transactionWhereInput | boolean
+    connect?: investment_transactionWhereUniqueInput
+    update?: XOR<XOR<investment_transactionUpdateToOneWithWhereWithoutUnits_lotInput, investment_transactionUpdateWithoutUnits_lotInput>, investment_transactionUncheckedUpdateWithoutUnits_lotInput>
+  }
+
+  export type redemption_bucketUpdateManyWithoutUnits_lotNestedInput = {
+    create?: XOR<redemption_bucketCreateWithoutUnits_lotInput, redemption_bucketUncheckedCreateWithoutUnits_lotInput> | redemption_bucketCreateWithoutUnits_lotInput[] | redemption_bucketUncheckedCreateWithoutUnits_lotInput[]
+    connectOrCreate?: redemption_bucketCreateOrConnectWithoutUnits_lotInput | redemption_bucketCreateOrConnectWithoutUnits_lotInput[]
+    upsert?: redemption_bucketUpsertWithWhereUniqueWithoutUnits_lotInput | redemption_bucketUpsertWithWhereUniqueWithoutUnits_lotInput[]
+    createMany?: redemption_bucketCreateManyUnits_lotInputEnvelope
     set?: redemption_bucketWhereUniqueInput | redemption_bucketWhereUniqueInput[]
     disconnect?: redemption_bucketWhereUniqueInput | redemption_bucketWhereUniqueInput[]
     delete?: redemption_bucketWhereUniqueInput | redemption_bucketWhereUniqueInput[]
     connect?: redemption_bucketWhereUniqueInput | redemption_bucketWhereUniqueInput[]
-    update?: redemption_bucketUpdateWithWhereUniqueWithoutMutual_fund_units_lotInput | redemption_bucketUpdateWithWhereUniqueWithoutMutual_fund_units_lotInput[]
-    updateMany?: redemption_bucketUpdateManyWithWhereWithoutMutual_fund_units_lotInput | redemption_bucketUpdateManyWithWhereWithoutMutual_fund_units_lotInput[]
+    update?: redemption_bucketUpdateWithWhereUniqueWithoutUnits_lotInput | redemption_bucketUpdateWithWhereUniqueWithoutUnits_lotInput[]
+    updateMany?: redemption_bucketUpdateManyWithWhereWithoutUnits_lotInput | redemption_bucketUpdateManyWithWhereWithoutUnits_lotInput[]
     deleteMany?: redemption_bucketScalarWhereInput | redemption_bucketScalarWhereInput[]
   }
 
-  export type redemption_bucketUncheckedUpdateManyWithoutMutual_fund_units_lotNestedInput = {
-    create?: XOR<redemption_bucketCreateWithoutMutual_fund_units_lotInput, redemption_bucketUncheckedCreateWithoutMutual_fund_units_lotInput> | redemption_bucketCreateWithoutMutual_fund_units_lotInput[] | redemption_bucketUncheckedCreateWithoutMutual_fund_units_lotInput[]
-    connectOrCreate?: redemption_bucketCreateOrConnectWithoutMutual_fund_units_lotInput | redemption_bucketCreateOrConnectWithoutMutual_fund_units_lotInput[]
-    upsert?: redemption_bucketUpsertWithWhereUniqueWithoutMutual_fund_units_lotInput | redemption_bucketUpsertWithWhereUniqueWithoutMutual_fund_units_lotInput[]
-    createMany?: redemption_bucketCreateManyMutual_fund_units_lotInputEnvelope
+  export type mutual_fundUpdateOneRequiredWithoutUnits_lotsNestedInput = {
+    create?: XOR<mutual_fundCreateWithoutUnits_lotsInput, mutual_fundUncheckedCreateWithoutUnits_lotsInput>
+    connectOrCreate?: mutual_fundCreateOrConnectWithoutUnits_lotsInput
+    upsert?: mutual_fundUpsertWithoutUnits_lotsInput
+    connect?: mutual_fundWhereUniqueInput
+    update?: XOR<XOR<mutual_fundUpdateToOneWithWhereWithoutUnits_lotsInput, mutual_fundUpdateWithoutUnits_lotsInput>, mutual_fundUncheckedUpdateWithoutUnits_lotsInput>
+  }
+
+  export type investment_transactionUncheckedUpdateOneWithoutUnits_lotNestedInput = {
+    create?: XOR<investment_transactionCreateWithoutUnits_lotInput, investment_transactionUncheckedCreateWithoutUnits_lotInput>
+    connectOrCreate?: investment_transactionCreateOrConnectWithoutUnits_lotInput
+    upsert?: investment_transactionUpsertWithoutUnits_lotInput
+    disconnect?: investment_transactionWhereInput | boolean
+    delete?: investment_transactionWhereInput | boolean
+    connect?: investment_transactionWhereUniqueInput
+    update?: XOR<XOR<investment_transactionUpdateToOneWithWhereWithoutUnits_lotInput, investment_transactionUpdateWithoutUnits_lotInput>, investment_transactionUncheckedUpdateWithoutUnits_lotInput>
+  }
+
+  export type redemption_bucketUncheckedUpdateManyWithoutUnits_lotNestedInput = {
+    create?: XOR<redemption_bucketCreateWithoutUnits_lotInput, redemption_bucketUncheckedCreateWithoutUnits_lotInput> | redemption_bucketCreateWithoutUnits_lotInput[] | redemption_bucketUncheckedCreateWithoutUnits_lotInput[]
+    connectOrCreate?: redemption_bucketCreateOrConnectWithoutUnits_lotInput | redemption_bucketCreateOrConnectWithoutUnits_lotInput[]
+    upsert?: redemption_bucketUpsertWithWhereUniqueWithoutUnits_lotInput | redemption_bucketUpsertWithWhereUniqueWithoutUnits_lotInput[]
+    createMany?: redemption_bucketCreateManyUnits_lotInputEnvelope
     set?: redemption_bucketWhereUniqueInput | redemption_bucketWhereUniqueInput[]
     disconnect?: redemption_bucketWhereUniqueInput | redemption_bucketWhereUniqueInput[]
     delete?: redemption_bucketWhereUniqueInput | redemption_bucketWhereUniqueInput[]
     connect?: redemption_bucketWhereUniqueInput | redemption_bucketWhereUniqueInput[]
-    update?: redemption_bucketUpdateWithWhereUniqueWithoutMutual_fund_units_lotInput | redemption_bucketUpdateWithWhereUniqueWithoutMutual_fund_units_lotInput[]
-    updateMany?: redemption_bucketUpdateManyWithWhereWithoutMutual_fund_units_lotInput | redemption_bucketUpdateManyWithWhereWithoutMutual_fund_units_lotInput[]
+    update?: redemption_bucketUpdateWithWhereUniqueWithoutUnits_lotInput | redemption_bucketUpdateWithWhereUniqueWithoutUnits_lotInput[]
+    updateMany?: redemption_bucketUpdateManyWithWhereWithoutUnits_lotInput | redemption_bucketUpdateManyWithWhereWithoutUnits_lotInput[]
     deleteMany?: redemption_bucketScalarWhereInput | redemption_bucketScalarWhereInput[]
   }
 
@@ -19043,16 +19244,10 @@ export namespace Prisma {
     connect?: accountWhereUniqueInput
   }
 
-  export type mutual_fund_units_lotCreateNestedOneWithoutInvestment_transactionInput = {
-    create?: XOR<mutual_fund_units_lotCreateWithoutInvestment_transactionInput, mutual_fund_units_lotUncheckedCreateWithoutInvestment_transactionInput>
-    connectOrCreate?: mutual_fund_units_lotCreateOrConnectWithoutInvestment_transactionInput
-    connect?: mutual_fund_units_lotWhereUniqueInput
-  }
-
-  export type mutual_fund_units_lotUncheckedCreateNestedOneWithoutInvestment_transactionInput = {
-    create?: XOR<mutual_fund_units_lotCreateWithoutInvestment_transactionInput, mutual_fund_units_lotUncheckedCreateWithoutInvestment_transactionInput>
-    connectOrCreate?: mutual_fund_units_lotCreateOrConnectWithoutInvestment_transactionInput
-    connect?: mutual_fund_units_lotWhereUniqueInput
+  export type units_lotCreateNestedOneWithoutInvestment_transactionInput = {
+    create?: XOR<units_lotCreateWithoutInvestment_transactionInput, units_lotUncheckedCreateWithoutInvestment_transactionInput>
+    connectOrCreate?: units_lotCreateOrConnectWithoutInvestment_transactionInput
+    connect?: units_lotWhereUniqueInput
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -19061,6 +19256,10 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type transactionUpdateOneRequiredWithoutInvestment_transactionNestedInput = {
@@ -19079,24 +19278,12 @@ export namespace Prisma {
     update?: XOR<XOR<accountUpdateToOneWithWhereWithoutInvestment_transactionsInput, accountUpdateWithoutInvestment_transactionsInput>, accountUncheckedUpdateWithoutInvestment_transactionsInput>
   }
 
-  export type mutual_fund_units_lotUpdateOneWithoutInvestment_transactionNestedInput = {
-    create?: XOR<mutual_fund_units_lotCreateWithoutInvestment_transactionInput, mutual_fund_units_lotUncheckedCreateWithoutInvestment_transactionInput>
-    connectOrCreate?: mutual_fund_units_lotCreateOrConnectWithoutInvestment_transactionInput
-    upsert?: mutual_fund_units_lotUpsertWithoutInvestment_transactionInput
-    disconnect?: mutual_fund_units_lotWhereInput | boolean
-    delete?: mutual_fund_units_lotWhereInput | boolean
-    connect?: mutual_fund_units_lotWhereUniqueInput
-    update?: XOR<XOR<mutual_fund_units_lotUpdateToOneWithWhereWithoutInvestment_transactionInput, mutual_fund_units_lotUpdateWithoutInvestment_transactionInput>, mutual_fund_units_lotUncheckedUpdateWithoutInvestment_transactionInput>
-  }
-
-  export type mutual_fund_units_lotUncheckedUpdateOneWithoutInvestment_transactionNestedInput = {
-    create?: XOR<mutual_fund_units_lotCreateWithoutInvestment_transactionInput, mutual_fund_units_lotUncheckedCreateWithoutInvestment_transactionInput>
-    connectOrCreate?: mutual_fund_units_lotCreateOrConnectWithoutInvestment_transactionInput
-    upsert?: mutual_fund_units_lotUpsertWithoutInvestment_transactionInput
-    disconnect?: mutual_fund_units_lotWhereInput | boolean
-    delete?: mutual_fund_units_lotWhereInput | boolean
-    connect?: mutual_fund_units_lotWhereUniqueInput
-    update?: XOR<XOR<mutual_fund_units_lotUpdateToOneWithWhereWithoutInvestment_transactionInput, mutual_fund_units_lotUpdateWithoutInvestment_transactionInput>, mutual_fund_units_lotUncheckedUpdateWithoutInvestment_transactionInput>
+  export type units_lotUpdateOneRequiredWithoutInvestment_transactionNestedInput = {
+    create?: XOR<units_lotCreateWithoutInvestment_transactionInput, units_lotUncheckedCreateWithoutInvestment_transactionInput>
+    connectOrCreate?: units_lotCreateOrConnectWithoutInvestment_transactionInput
+    upsert?: units_lotUpsertWithoutInvestment_transactionInput
+    connect?: units_lotWhereUniqueInput
+    update?: XOR<XOR<units_lotUpdateToOneWithWhereWithoutInvestment_transactionInput, units_lotUpdateWithoutInvestment_transactionInput>, units_lotUncheckedUpdateWithoutInvestment_transactionInput>
   }
 
   export type transactionCreateNestedOneWithoutRedemption_transactionInput = {
@@ -19175,10 +19362,10 @@ export namespace Prisma {
     connect?: redemption_transactionWhereUniqueInput
   }
 
-  export type mutual_fund_units_lotCreateNestedOneWithoutRedemption_bucketsInput = {
-    create?: XOR<mutual_fund_units_lotCreateWithoutRedemption_bucketsInput, mutual_fund_units_lotUncheckedCreateWithoutRedemption_bucketsInput>
-    connectOrCreate?: mutual_fund_units_lotCreateOrConnectWithoutRedemption_bucketsInput
-    connect?: mutual_fund_units_lotWhereUniqueInput
+  export type units_lotCreateNestedOneWithoutRedemption_bucketsInput = {
+    create?: XOR<units_lotCreateWithoutRedemption_bucketsInput, units_lotUncheckedCreateWithoutRedemption_bucketsInput>
+    connectOrCreate?: units_lotCreateOrConnectWithoutRedemption_bucketsInput
+    connect?: units_lotWhereUniqueInput
   }
 
   export type redemption_transactionUpdateOneRequiredWithoutRedemption_bucketsNestedInput = {
@@ -19189,12 +19376,12 @@ export namespace Prisma {
     update?: XOR<XOR<redemption_transactionUpdateToOneWithWhereWithoutRedemption_bucketsInput, redemption_transactionUpdateWithoutRedemption_bucketsInput>, redemption_transactionUncheckedUpdateWithoutRedemption_bucketsInput>
   }
 
-  export type mutual_fund_units_lotUpdateOneRequiredWithoutRedemption_bucketsNestedInput = {
-    create?: XOR<mutual_fund_units_lotCreateWithoutRedemption_bucketsInput, mutual_fund_units_lotUncheckedCreateWithoutRedemption_bucketsInput>
-    connectOrCreate?: mutual_fund_units_lotCreateOrConnectWithoutRedemption_bucketsInput
-    upsert?: mutual_fund_units_lotUpsertWithoutRedemption_bucketsInput
-    connect?: mutual_fund_units_lotWhereUniqueInput
-    update?: XOR<XOR<mutual_fund_units_lotUpdateToOneWithWhereWithoutRedemption_bucketsInput, mutual_fund_units_lotUpdateWithoutRedemption_bucketsInput>, mutual_fund_units_lotUncheckedUpdateWithoutRedemption_bucketsInput>
+  export type units_lotUpdateOneRequiredWithoutRedemption_bucketsNestedInput = {
+    create?: XOR<units_lotCreateWithoutRedemption_bucketsInput, units_lotUncheckedCreateWithoutRedemption_bucketsInput>
+    connectOrCreate?: units_lotCreateOrConnectWithoutRedemption_bucketsInput
+    upsert?: units_lotUpsertWithoutRedemption_bucketsInput
+    connect?: units_lotWhereUniqueInput
+    update?: XOR<XOR<units_lotUpdateToOneWithWhereWithoutRedemption_bucketsInput, units_lotUpdateWithoutRedemption_bucketsInput>, units_lotUncheckedUpdateWithoutRedemption_bucketsInput>
   }
 
   export type transfer_transactionCreateNestedOneWithoutTransactionInput = {
@@ -19255,10 +19442,6 @@ export namespace Prisma {
     create?: XOR<redemption_transactionCreateWithoutTransactionInput, redemption_transactionUncheckedCreateWithoutTransactionInput>
     connectOrCreate?: redemption_transactionCreateOrConnectWithoutTransactionInput
     connect?: redemption_transactionWhereUniqueInput
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -19560,6 +19743,17 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[]
@@ -19576,7 +19770,7 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
     notIn?: Date[] | string[]
@@ -19584,7 +19778,10 @@ export namespace Prisma {
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -19617,20 +19814,6 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -19738,13 +19921,15 @@ export namespace Prisma {
   }
 
   export type transfer_transactionCreateWithoutFrom_accountInput = {
+    id?: string
     transaction: transactionCreateNestedOneWithoutTransfer_transactionInput
     to_account: accountCreateNestedOneWithoutTo_transfersInput
   }
 
   export type transfer_transactionUncheckedCreateWithoutFrom_accountInput = {
-    id: string
+    id?: string
     to_account_id: string
+    transaction_id: string
   }
 
   export type transfer_transactionCreateOrConnectWithoutFrom_accountInput = {
@@ -19757,13 +19942,15 @@ export namespace Prisma {
   }
 
   export type transfer_transactionCreateWithoutTo_accountInput = {
+    id?: string
     transaction: transactionCreateNestedOneWithoutTransfer_transactionInput
     from_account: accountCreateNestedOneWithoutFrom_transfersInput
   }
 
   export type transfer_transactionUncheckedCreateWithoutTo_accountInput = {
-    id: string
+    id?: string
     from_account_id: string
+    transaction_id: string
   }
 
   export type transfer_transactionCreateOrConnectWithoutTo_accountInput = {
@@ -19776,13 +19963,15 @@ export namespace Prisma {
   }
 
   export type income_transactionCreateWithoutAccountInput = {
+    id?: string
     transaction: transactionCreateNestedOneWithoutIncome_transactionInput
     income_source: income_sourceCreateNestedOneWithoutTransactionsInput
   }
 
   export type income_transactionUncheckedCreateWithoutAccountInput = {
-    id: string
+    id?: string
     income_source_id: string
+    transaction_id: string
   }
 
   export type income_transactionCreateOrConnectWithoutAccountInput = {
@@ -19795,13 +19984,15 @@ export namespace Prisma {
   }
 
   export type expense_transactionCreateWithoutAccountInput = {
+    id?: string
     transaction: transactionCreateNestedOneWithoutExpense_transactionInput
     expense_item: expense_itemCreateNestedOneWithoutTransactionsInput
   }
 
   export type expense_transactionUncheckedCreateWithoutAccountInput = {
-    id: string
+    id?: string
     expense_item_id: string
+    transaction_id: string
   }
 
   export type expense_transactionCreateOrConnectWithoutAccountInput = {
@@ -19814,17 +20005,21 @@ export namespace Prisma {
   }
 
   export type investment_transactionCreateWithoutFrom_accountInput = {
+    id?: string
     units_bought: number
     buy_nav: number
-    transaction?: transactionCreateNestedOneWithoutInvestment_transactionInput
-    mutual_fund_units_lot?: mutual_fund_units_lotCreateNestedOneWithoutInvestment_transactionInput
+    allotment_date: Date | string
+    transaction: transactionCreateNestedOneWithoutInvestment_transactionInput
+    units_lot: units_lotCreateNestedOneWithoutInvestment_transactionInput
   }
 
   export type investment_transactionUncheckedCreateWithoutFrom_accountInput = {
     id?: string
     units_bought: number
     buy_nav: number
-    mutual_fund_units_lot?: mutual_fund_units_lotUncheckedCreateNestedOneWithoutInvestment_transactionInput
+    allotment_date: Date | string
+    units_lot_id: string
+    transaction_id: string
   }
 
   export type investment_transactionCreateOrConnectWithoutFrom_accountInput = {
@@ -19837,16 +20032,18 @@ export namespace Prisma {
   }
 
   export type redemption_transactionCreateWithoutTo_accountInput = {
+    id?: string
     sell_nav: number
-    units_redeemed: number
-    transaction?: transactionCreateNestedOneWithoutRedemption_transactionInput
+    redemption_date: Date | string
+    transaction: transactionCreateNestedOneWithoutRedemption_transactionInput
     redemption_buckets?: redemption_bucketCreateNestedManyWithoutRedemption_transactionInput
   }
 
   export type redemption_transactionUncheckedCreateWithoutTo_accountInput = {
     id?: string
     sell_nav: number
-    units_redeemed: number
+    redemption_date: Date | string
+    transaction_id: string
     redemption_buckets?: redemption_bucketUncheckedCreateNestedManyWithoutRedemption_transactionInput
   }
 
@@ -19882,6 +20079,7 @@ export namespace Prisma {
     id?: StringFilter<"transfer_transaction"> | string
     from_account_id?: StringFilter<"transfer_transaction"> | string
     to_account_id?: StringFilter<"transfer_transaction"> | string
+    transaction_id?: StringFilter<"transfer_transaction"> | string
   }
 
   export type transfer_transactionUpsertWithWhereUniqueWithoutTo_accountInput = {
@@ -19923,6 +20121,7 @@ export namespace Prisma {
     id?: StringFilter<"income_transaction"> | string
     income_source_id?: StringFilter<"income_transaction"> | string
     account_id?: StringFilter<"income_transaction"> | string
+    transaction_id?: StringFilter<"income_transaction"> | string
   }
 
   export type expense_transactionUpsertWithWhereUniqueWithoutAccountInput = {
@@ -19948,6 +20147,7 @@ export namespace Prisma {
     id?: StringFilter<"expense_transaction"> | string
     account_id?: StringFilter<"expense_transaction"> | string
     expense_item_id?: StringFilter<"expense_transaction"> | string
+    transaction_id?: StringFilter<"expense_transaction"> | string
   }
 
   export type investment_transactionUpsertWithWhereUniqueWithoutFrom_accountInput = {
@@ -19974,6 +20174,9 @@ export namespace Prisma {
     from_account_id?: StringFilter<"investment_transaction"> | string
     units_bought?: FloatFilter<"investment_transaction"> | number
     buy_nav?: FloatFilter<"investment_transaction"> | number
+    allotment_date?: DateTimeFilter<"investment_transaction"> | Date | string
+    units_lot_id?: StringFilter<"investment_transaction"> | string
+    transaction_id?: StringFilter<"investment_transaction"> | string
   }
 
   export type redemption_transactionUpsertWithWhereUniqueWithoutTo_accountInput = {
@@ -19999,17 +20202,20 @@ export namespace Prisma {
     id?: StringFilter<"redemption_transaction"> | string
     to_account_id?: StringFilter<"redemption_transaction"> | string
     sell_nav?: FloatFilter<"redemption_transaction"> | number
-    units_redeemed?: FloatFilter<"redemption_transaction"> | number
+    redemption_date?: DateTimeFilter<"redemption_transaction"> | Date | string
+    transaction_id?: StringFilter<"redemption_transaction"> | string
   }
 
   export type income_transactionCreateWithoutIncome_sourceInput = {
+    id?: string
     transaction: transactionCreateNestedOneWithoutIncome_transactionInput
     account: accountCreateNestedOneWithoutIncome_transactionsInput
   }
 
   export type income_transactionUncheckedCreateWithoutIncome_sourceInput = {
-    id: string
+    id?: string
     account_id: string
+    transaction_id: string
   }
 
   export type income_transactionCreateOrConnectWithoutIncome_sourceInput = {
@@ -20038,13 +20244,15 @@ export namespace Prisma {
   }
 
   export type expense_transactionCreateWithoutExpense_itemInput = {
+    id?: string
     transaction: transactionCreateNestedOneWithoutExpense_transactionInput
     account: accountCreateNestedOneWithoutExpense_transactionsInput
   }
 
   export type expense_transactionUncheckedCreateWithoutExpense_itemInput = {
-    id: string
+    id?: string
     account_id: string
+    transaction_id: string
   }
 
   export type expense_transactionCreateOrConnectWithoutExpense_itemInput = {
@@ -20072,168 +20280,155 @@ export namespace Prisma {
     data: XOR<expense_transactionUpdateManyMutationInput, expense_transactionUncheckedUpdateManyWithoutExpense_itemInput>
   }
 
-  export type mutual_fund_units_lotCreateWithoutMutual_fundInput = {
-    investment_transaction?: investment_transactionCreateNestedOneWithoutMutual_fund_units_lotInput
-    redemption_buckets?: redemption_bucketCreateNestedManyWithoutMutual_fund_units_lotInput
-  }
-
-  export type mutual_fund_units_lotUncheckedCreateWithoutMutual_fundInput = {
+  export type units_lotCreateWithoutMutual_fundInput = {
     id?: string
-    redemption_buckets?: redemption_bucketUncheckedCreateNestedManyWithoutMutual_fund_units_lotInput
+    investment_transaction?: investment_transactionCreateNestedOneWithoutUnits_lotInput
+    redemption_buckets?: redemption_bucketCreateNestedManyWithoutUnits_lotInput
   }
 
-  export type mutual_fund_units_lotCreateOrConnectWithoutMutual_fundInput = {
-    where: mutual_fund_units_lotWhereUniqueInput
-    create: XOR<mutual_fund_units_lotCreateWithoutMutual_fundInput, mutual_fund_units_lotUncheckedCreateWithoutMutual_fundInput>
-  }
-
-  export type mutual_fund_units_lotCreateManyMutual_fundInputEnvelope = {
-    data: mutual_fund_units_lotCreateManyMutual_fundInput | mutual_fund_units_lotCreateManyMutual_fundInput[]
-  }
-
-  export type mutual_fund_units_lotUpsertWithWhereUniqueWithoutMutual_fundInput = {
-    where: mutual_fund_units_lotWhereUniqueInput
-    update: XOR<mutual_fund_units_lotUpdateWithoutMutual_fundInput, mutual_fund_units_lotUncheckedUpdateWithoutMutual_fundInput>
-    create: XOR<mutual_fund_units_lotCreateWithoutMutual_fundInput, mutual_fund_units_lotUncheckedCreateWithoutMutual_fundInput>
-  }
-
-  export type mutual_fund_units_lotUpdateWithWhereUniqueWithoutMutual_fundInput = {
-    where: mutual_fund_units_lotWhereUniqueInput
-    data: XOR<mutual_fund_units_lotUpdateWithoutMutual_fundInput, mutual_fund_units_lotUncheckedUpdateWithoutMutual_fundInput>
-  }
-
-  export type mutual_fund_units_lotUpdateManyWithWhereWithoutMutual_fundInput = {
-    where: mutual_fund_units_lotScalarWhereInput
-    data: XOR<mutual_fund_units_lotUpdateManyMutationInput, mutual_fund_units_lotUncheckedUpdateManyWithoutMutual_fundInput>
-  }
-
-  export type mutual_fund_units_lotScalarWhereInput = {
-    AND?: mutual_fund_units_lotScalarWhereInput | mutual_fund_units_lotScalarWhereInput[]
-    OR?: mutual_fund_units_lotScalarWhereInput[]
-    NOT?: mutual_fund_units_lotScalarWhereInput | mutual_fund_units_lotScalarWhereInput[]
-    id?: StringFilter<"mutual_fund_units_lot"> | string
-    mutual_fund_id?: StringFilter<"mutual_fund_units_lot"> | string
-  }
-
-  export type mutual_fundCreateWithoutUnitsInput = {
+  export type units_lotUncheckedCreateWithoutMutual_fundInput = {
     id?: string
-    name: string
-    isin: string
+    investment_transaction?: investment_transactionUncheckedCreateNestedOneWithoutUnits_lotInput
+    redemption_buckets?: redemption_bucketUncheckedCreateNestedManyWithoutUnits_lotInput
   }
 
-  export type mutual_fundUncheckedCreateWithoutUnitsInput = {
+  export type units_lotCreateOrConnectWithoutMutual_fundInput = {
+    where: units_lotWhereUniqueInput
+    create: XOR<units_lotCreateWithoutMutual_fundInput, units_lotUncheckedCreateWithoutMutual_fundInput>
+  }
+
+  export type units_lotCreateManyMutual_fundInputEnvelope = {
+    data: units_lotCreateManyMutual_fundInput | units_lotCreateManyMutual_fundInput[]
+  }
+
+  export type units_lotUpsertWithWhereUniqueWithoutMutual_fundInput = {
+    where: units_lotWhereUniqueInput
+    update: XOR<units_lotUpdateWithoutMutual_fundInput, units_lotUncheckedUpdateWithoutMutual_fundInput>
+    create: XOR<units_lotCreateWithoutMutual_fundInput, units_lotUncheckedCreateWithoutMutual_fundInput>
+  }
+
+  export type units_lotUpdateWithWhereUniqueWithoutMutual_fundInput = {
+    where: units_lotWhereUniqueInput
+    data: XOR<units_lotUpdateWithoutMutual_fundInput, units_lotUncheckedUpdateWithoutMutual_fundInput>
+  }
+
+  export type units_lotUpdateManyWithWhereWithoutMutual_fundInput = {
+    where: units_lotScalarWhereInput
+    data: XOR<units_lotUpdateManyMutationInput, units_lotUncheckedUpdateManyWithoutMutual_fundInput>
+  }
+
+  export type units_lotScalarWhereInput = {
+    AND?: units_lotScalarWhereInput | units_lotScalarWhereInput[]
+    OR?: units_lotScalarWhereInput[]
+    NOT?: units_lotScalarWhereInput | units_lotScalarWhereInput[]
+    id?: StringFilter<"units_lot"> | string
+    mutual_fund_id?: StringFilter<"units_lot"> | string
+  }
+
+  export type investment_transactionCreateWithoutUnits_lotInput = {
     id?: string
-    name: string
-    isin: string
-  }
-
-  export type mutual_fundCreateOrConnectWithoutUnitsInput = {
-    where: mutual_fundWhereUniqueInput
-    create: XOR<mutual_fundCreateWithoutUnitsInput, mutual_fundUncheckedCreateWithoutUnitsInput>
-  }
-
-  export type investment_transactionCreateWithoutMutual_fund_units_lotInput = {
     units_bought: number
     buy_nav: number
-    transaction?: transactionCreateNestedOneWithoutInvestment_transactionInput
+    allotment_date: Date | string
+    transaction: transactionCreateNestedOneWithoutInvestment_transactionInput
     from_account: accountCreateNestedOneWithoutInvestment_transactionsInput
   }
 
-  export type investment_transactionUncheckedCreateWithoutMutual_fund_units_lotInput = {
+  export type investment_transactionUncheckedCreateWithoutUnits_lotInput = {
     id?: string
     from_account_id: string
     units_bought: number
     buy_nav: number
+    allotment_date: Date | string
+    transaction_id: string
   }
 
-  export type investment_transactionCreateOrConnectWithoutMutual_fund_units_lotInput = {
+  export type investment_transactionCreateOrConnectWithoutUnits_lotInput = {
     where: investment_transactionWhereUniqueInput
-    create: XOR<investment_transactionCreateWithoutMutual_fund_units_lotInput, investment_transactionUncheckedCreateWithoutMutual_fund_units_lotInput>
+    create: XOR<investment_transactionCreateWithoutUnits_lotInput, investment_transactionUncheckedCreateWithoutUnits_lotInput>
   }
 
-  export type redemption_bucketCreateWithoutMutual_fund_units_lotInput = {
+  export type redemption_bucketCreateWithoutUnits_lotInput = {
     id?: string
     units_redeemed: number
     redemption_transaction: redemption_transactionCreateNestedOneWithoutRedemption_bucketsInput
   }
 
-  export type redemption_bucketUncheckedCreateWithoutMutual_fund_units_lotInput = {
+  export type redemption_bucketUncheckedCreateWithoutUnits_lotInput = {
     id?: string
     redemption_transaction_id: string
     units_redeemed: number
   }
 
-  export type redemption_bucketCreateOrConnectWithoutMutual_fund_units_lotInput = {
+  export type redemption_bucketCreateOrConnectWithoutUnits_lotInput = {
     where: redemption_bucketWhereUniqueInput
-    create: XOR<redemption_bucketCreateWithoutMutual_fund_units_lotInput, redemption_bucketUncheckedCreateWithoutMutual_fund_units_lotInput>
+    create: XOR<redemption_bucketCreateWithoutUnits_lotInput, redemption_bucketUncheckedCreateWithoutUnits_lotInput>
   }
 
-  export type redemption_bucketCreateManyMutual_fund_units_lotInputEnvelope = {
-    data: redemption_bucketCreateManyMutual_fund_units_lotInput | redemption_bucketCreateManyMutual_fund_units_lotInput[]
+  export type redemption_bucketCreateManyUnits_lotInputEnvelope = {
+    data: redemption_bucketCreateManyUnits_lotInput | redemption_bucketCreateManyUnits_lotInput[]
   }
 
-  export type mutual_fundUpsertWithoutUnitsInput = {
-    update: XOR<mutual_fundUpdateWithoutUnitsInput, mutual_fundUncheckedUpdateWithoutUnitsInput>
-    create: XOR<mutual_fundCreateWithoutUnitsInput, mutual_fundUncheckedCreateWithoutUnitsInput>
-    where?: mutual_fundWhereInput
+  export type mutual_fundCreateWithoutUnits_lotsInput = {
+    id?: string
+    name: string
+    isin: string
   }
 
-  export type mutual_fundUpdateToOneWithWhereWithoutUnitsInput = {
-    where?: mutual_fundWhereInput
-    data: XOR<mutual_fundUpdateWithoutUnitsInput, mutual_fundUncheckedUpdateWithoutUnitsInput>
+  export type mutual_fundUncheckedCreateWithoutUnits_lotsInput = {
+    id?: string
+    name: string
+    isin: string
   }
 
-  export type mutual_fundUpdateWithoutUnitsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    isin?: StringFieldUpdateOperationsInput | string
+  export type mutual_fundCreateOrConnectWithoutUnits_lotsInput = {
+    where: mutual_fundWhereUniqueInput
+    create: XOR<mutual_fundCreateWithoutUnits_lotsInput, mutual_fundUncheckedCreateWithoutUnits_lotsInput>
   }
 
-  export type mutual_fundUncheckedUpdateWithoutUnitsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    isin?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type investment_transactionUpsertWithoutMutual_fund_units_lotInput = {
-    update: XOR<investment_transactionUpdateWithoutMutual_fund_units_lotInput, investment_transactionUncheckedUpdateWithoutMutual_fund_units_lotInput>
-    create: XOR<investment_transactionCreateWithoutMutual_fund_units_lotInput, investment_transactionUncheckedCreateWithoutMutual_fund_units_lotInput>
+  export type investment_transactionUpsertWithoutUnits_lotInput = {
+    update: XOR<investment_transactionUpdateWithoutUnits_lotInput, investment_transactionUncheckedUpdateWithoutUnits_lotInput>
+    create: XOR<investment_transactionCreateWithoutUnits_lotInput, investment_transactionUncheckedCreateWithoutUnits_lotInput>
     where?: investment_transactionWhereInput
   }
 
-  export type investment_transactionUpdateToOneWithWhereWithoutMutual_fund_units_lotInput = {
+  export type investment_transactionUpdateToOneWithWhereWithoutUnits_lotInput = {
     where?: investment_transactionWhereInput
-    data: XOR<investment_transactionUpdateWithoutMutual_fund_units_lotInput, investment_transactionUncheckedUpdateWithoutMutual_fund_units_lotInput>
+    data: XOR<investment_transactionUpdateWithoutUnits_lotInput, investment_transactionUncheckedUpdateWithoutUnits_lotInput>
   }
 
-  export type investment_transactionUpdateWithoutMutual_fund_units_lotInput = {
+  export type investment_transactionUpdateWithoutUnits_lotInput = {
+    id?: StringFieldUpdateOperationsInput | string
     units_bought?: FloatFieldUpdateOperationsInput | number
     buy_nav?: FloatFieldUpdateOperationsInput | number
+    allotment_date?: DateTimeFieldUpdateOperationsInput | Date | string
     transaction?: transactionUpdateOneRequiredWithoutInvestment_transactionNestedInput
     from_account?: accountUpdateOneRequiredWithoutInvestment_transactionsNestedInput
   }
 
-  export type investment_transactionUncheckedUpdateWithoutMutual_fund_units_lotInput = {
+  export type investment_transactionUncheckedUpdateWithoutUnits_lotInput = {
     id?: StringFieldUpdateOperationsInput | string
     from_account_id?: StringFieldUpdateOperationsInput | string
     units_bought?: FloatFieldUpdateOperationsInput | number
     buy_nav?: FloatFieldUpdateOperationsInput | number
+    allotment_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
-  export type redemption_bucketUpsertWithWhereUniqueWithoutMutual_fund_units_lotInput = {
+  export type redemption_bucketUpsertWithWhereUniqueWithoutUnits_lotInput = {
     where: redemption_bucketWhereUniqueInput
-    update: XOR<redemption_bucketUpdateWithoutMutual_fund_units_lotInput, redemption_bucketUncheckedUpdateWithoutMutual_fund_units_lotInput>
-    create: XOR<redemption_bucketCreateWithoutMutual_fund_units_lotInput, redemption_bucketUncheckedCreateWithoutMutual_fund_units_lotInput>
+    update: XOR<redemption_bucketUpdateWithoutUnits_lotInput, redemption_bucketUncheckedUpdateWithoutUnits_lotInput>
+    create: XOR<redemption_bucketCreateWithoutUnits_lotInput, redemption_bucketUncheckedCreateWithoutUnits_lotInput>
   }
 
-  export type redemption_bucketUpdateWithWhereUniqueWithoutMutual_fund_units_lotInput = {
+  export type redemption_bucketUpdateWithWhereUniqueWithoutUnits_lotInput = {
     where: redemption_bucketWhereUniqueInput
-    data: XOR<redemption_bucketUpdateWithoutMutual_fund_units_lotInput, redemption_bucketUncheckedUpdateWithoutMutual_fund_units_lotInput>
+    data: XOR<redemption_bucketUpdateWithoutUnits_lotInput, redemption_bucketUncheckedUpdateWithoutUnits_lotInput>
   }
 
-  export type redemption_bucketUpdateManyWithWhereWithoutMutual_fund_units_lotInput = {
+  export type redemption_bucketUpdateManyWithWhereWithoutUnits_lotInput = {
     where: redemption_bucketScalarWhereInput
-    data: XOR<redemption_bucketUpdateManyMutationInput, redemption_bucketUncheckedUpdateManyWithoutMutual_fund_units_lotInput>
+    data: XOR<redemption_bucketUpdateManyMutationInput, redemption_bucketUncheckedUpdateManyWithoutUnits_lotInput>
   }
 
   export type redemption_bucketScalarWhereInput = {
@@ -20242,8 +20437,31 @@ export namespace Prisma {
     NOT?: redemption_bucketScalarWhereInput | redemption_bucketScalarWhereInput[]
     id?: StringFilter<"redemption_bucket"> | string
     redemption_transaction_id?: StringFilter<"redemption_bucket"> | string
-    mutual_fund_units_lot_id?: StringFilter<"redemption_bucket"> | string
+    units_lot_id?: StringFilter<"redemption_bucket"> | string
     units_redeemed?: FloatFilter<"redemption_bucket"> | number
+  }
+
+  export type mutual_fundUpsertWithoutUnits_lotsInput = {
+    update: XOR<mutual_fundUpdateWithoutUnits_lotsInput, mutual_fundUncheckedUpdateWithoutUnits_lotsInput>
+    create: XOR<mutual_fundCreateWithoutUnits_lotsInput, mutual_fundUncheckedCreateWithoutUnits_lotsInput>
+    where?: mutual_fundWhereInput
+  }
+
+  export type mutual_fundUpdateToOneWithWhereWithoutUnits_lotsInput = {
+    where?: mutual_fundWhereInput
+    data: XOR<mutual_fundUpdateWithoutUnits_lotsInput, mutual_fundUncheckedUpdateWithoutUnits_lotsInput>
+  }
+
+  export type mutual_fundUpdateWithoutUnits_lotsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isin?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type mutual_fundUncheckedUpdateWithoutUnits_lotsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isin?: StringFieldUpdateOperationsInput | string
   }
 
   export type transactionCreateWithoutInvestment_transactionInput = {
@@ -20306,19 +20524,21 @@ export namespace Prisma {
     create: XOR<accountCreateWithoutInvestment_transactionsInput, accountUncheckedCreateWithoutInvestment_transactionsInput>
   }
 
-  export type mutual_fund_units_lotCreateWithoutInvestment_transactionInput = {
-    mutual_fund: mutual_fundCreateNestedOneWithoutUnitsInput
-    redemption_buckets?: redemption_bucketCreateNestedManyWithoutMutual_fund_units_lotInput
+  export type units_lotCreateWithoutInvestment_transactionInput = {
+    id?: string
+    redemption_buckets?: redemption_bucketCreateNestedManyWithoutUnits_lotInput
+    mutual_fund: mutual_fundCreateNestedOneWithoutUnits_lotsInput
   }
 
-  export type mutual_fund_units_lotUncheckedCreateWithoutInvestment_transactionInput = {
+  export type units_lotUncheckedCreateWithoutInvestment_transactionInput = {
+    id?: string
     mutual_fund_id: string
-    redemption_buckets?: redemption_bucketUncheckedCreateNestedManyWithoutMutual_fund_units_lotInput
+    redemption_buckets?: redemption_bucketUncheckedCreateNestedManyWithoutUnits_lotInput
   }
 
-  export type mutual_fund_units_lotCreateOrConnectWithoutInvestment_transactionInput = {
-    where: mutual_fund_units_lotWhereUniqueInput
-    create: XOR<mutual_fund_units_lotCreateWithoutInvestment_transactionInput, mutual_fund_units_lotUncheckedCreateWithoutInvestment_transactionInput>
+  export type units_lotCreateOrConnectWithoutInvestment_transactionInput = {
+    where: units_lotWhereUniqueInput
+    create: XOR<units_lotCreateWithoutInvestment_transactionInput, units_lotUncheckedCreateWithoutInvestment_transactionInput>
   }
 
   export type transactionUpsertWithoutInvestment_transactionInput = {
@@ -20393,25 +20613,27 @@ export namespace Prisma {
     redemption_transactions?: redemption_transactionUncheckedUpdateManyWithoutTo_accountNestedInput
   }
 
-  export type mutual_fund_units_lotUpsertWithoutInvestment_transactionInput = {
-    update: XOR<mutual_fund_units_lotUpdateWithoutInvestment_transactionInput, mutual_fund_units_lotUncheckedUpdateWithoutInvestment_transactionInput>
-    create: XOR<mutual_fund_units_lotCreateWithoutInvestment_transactionInput, mutual_fund_units_lotUncheckedCreateWithoutInvestment_transactionInput>
-    where?: mutual_fund_units_lotWhereInput
+  export type units_lotUpsertWithoutInvestment_transactionInput = {
+    update: XOR<units_lotUpdateWithoutInvestment_transactionInput, units_lotUncheckedUpdateWithoutInvestment_transactionInput>
+    create: XOR<units_lotCreateWithoutInvestment_transactionInput, units_lotUncheckedCreateWithoutInvestment_transactionInput>
+    where?: units_lotWhereInput
   }
 
-  export type mutual_fund_units_lotUpdateToOneWithWhereWithoutInvestment_transactionInput = {
-    where?: mutual_fund_units_lotWhereInput
-    data: XOR<mutual_fund_units_lotUpdateWithoutInvestment_transactionInput, mutual_fund_units_lotUncheckedUpdateWithoutInvestment_transactionInput>
+  export type units_lotUpdateToOneWithWhereWithoutInvestment_transactionInput = {
+    where?: units_lotWhereInput
+    data: XOR<units_lotUpdateWithoutInvestment_transactionInput, units_lotUncheckedUpdateWithoutInvestment_transactionInput>
   }
 
-  export type mutual_fund_units_lotUpdateWithoutInvestment_transactionInput = {
-    mutual_fund?: mutual_fundUpdateOneRequiredWithoutUnitsNestedInput
-    redemption_buckets?: redemption_bucketUpdateManyWithoutMutual_fund_units_lotNestedInput
+  export type units_lotUpdateWithoutInvestment_transactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    redemption_buckets?: redemption_bucketUpdateManyWithoutUnits_lotNestedInput
+    mutual_fund?: mutual_fundUpdateOneRequiredWithoutUnits_lotsNestedInput
   }
 
-  export type mutual_fund_units_lotUncheckedUpdateWithoutInvestment_transactionInput = {
+  export type units_lotUncheckedUpdateWithoutInvestment_transactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
     mutual_fund_id?: StringFieldUpdateOperationsInput | string
-    redemption_buckets?: redemption_bucketUncheckedUpdateManyWithoutMutual_fund_units_lotNestedInput
+    redemption_buckets?: redemption_bucketUncheckedUpdateManyWithoutUnits_lotNestedInput
   }
 
   export type transactionCreateWithoutRedemption_transactionInput = {
@@ -20477,12 +20699,12 @@ export namespace Prisma {
   export type redemption_bucketCreateWithoutRedemption_transactionInput = {
     id?: string
     units_redeemed: number
-    mutual_fund_units_lot: mutual_fund_units_lotCreateNestedOneWithoutRedemption_bucketsInput
+    units_lot: units_lotCreateNestedOneWithoutRedemption_bucketsInput
   }
 
   export type redemption_bucketUncheckedCreateWithoutRedemption_transactionInput = {
     id?: string
-    mutual_fund_units_lot_id: string
+    units_lot_id: string
     units_redeemed: number
   }
 
@@ -20584,9 +20806,10 @@ export namespace Prisma {
   }
 
   export type redemption_transactionCreateWithoutRedemption_bucketsInput = {
+    id?: string
     sell_nav: number
-    units_redeemed: number
-    transaction?: transactionCreateNestedOneWithoutRedemption_transactionInput
+    redemption_date: Date | string
+    transaction: transactionCreateNestedOneWithoutRedemption_transactionInput
     to_account: accountCreateNestedOneWithoutRedemption_transactionsInput
   }
 
@@ -20594,7 +20817,8 @@ export namespace Prisma {
     id?: string
     to_account_id: string
     sell_nav: number
-    units_redeemed: number
+    redemption_date: Date | string
+    transaction_id: string
   }
 
   export type redemption_transactionCreateOrConnectWithoutRedemption_bucketsInput = {
@@ -20602,19 +20826,21 @@ export namespace Prisma {
     create: XOR<redemption_transactionCreateWithoutRedemption_bucketsInput, redemption_transactionUncheckedCreateWithoutRedemption_bucketsInput>
   }
 
-  export type mutual_fund_units_lotCreateWithoutRedemption_bucketsInput = {
-    mutual_fund: mutual_fundCreateNestedOneWithoutUnitsInput
-    investment_transaction?: investment_transactionCreateNestedOneWithoutMutual_fund_units_lotInput
+  export type units_lotCreateWithoutRedemption_bucketsInput = {
+    id?: string
+    investment_transaction?: investment_transactionCreateNestedOneWithoutUnits_lotInput
+    mutual_fund: mutual_fundCreateNestedOneWithoutUnits_lotsInput
   }
 
-  export type mutual_fund_units_lotUncheckedCreateWithoutRedemption_bucketsInput = {
+  export type units_lotUncheckedCreateWithoutRedemption_bucketsInput = {
     id?: string
     mutual_fund_id: string
+    investment_transaction?: investment_transactionUncheckedCreateNestedOneWithoutUnits_lotInput
   }
 
-  export type mutual_fund_units_lotCreateOrConnectWithoutRedemption_bucketsInput = {
-    where: mutual_fund_units_lotWhereUniqueInput
-    create: XOR<mutual_fund_units_lotCreateWithoutRedemption_bucketsInput, mutual_fund_units_lotUncheckedCreateWithoutRedemption_bucketsInput>
+  export type units_lotCreateOrConnectWithoutRedemption_bucketsInput = {
+    where: units_lotWhereUniqueInput
+    create: XOR<units_lotCreateWithoutRedemption_bucketsInput, units_lotUncheckedCreateWithoutRedemption_bucketsInput>
   }
 
   export type redemption_transactionUpsertWithoutRedemption_bucketsInput = {
@@ -20629,8 +20855,9 @@ export namespace Prisma {
   }
 
   export type redemption_transactionUpdateWithoutRedemption_bucketsInput = {
+    id?: StringFieldUpdateOperationsInput | string
     sell_nav?: FloatFieldUpdateOperationsInput | number
-    units_redeemed?: FloatFieldUpdateOperationsInput | number
+    redemption_date?: DateTimeFieldUpdateOperationsInput | Date | string
     transaction?: transactionUpdateOneRequiredWithoutRedemption_transactionNestedInput
     to_account?: accountUpdateOneRequiredWithoutRedemption_transactionsNestedInput
   }
@@ -20639,36 +20866,41 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     to_account_id?: StringFieldUpdateOperationsInput | string
     sell_nav?: FloatFieldUpdateOperationsInput | number
-    units_redeemed?: FloatFieldUpdateOperationsInput | number
+    redemption_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
-  export type mutual_fund_units_lotUpsertWithoutRedemption_bucketsInput = {
-    update: XOR<mutual_fund_units_lotUpdateWithoutRedemption_bucketsInput, mutual_fund_units_lotUncheckedUpdateWithoutRedemption_bucketsInput>
-    create: XOR<mutual_fund_units_lotCreateWithoutRedemption_bucketsInput, mutual_fund_units_lotUncheckedCreateWithoutRedemption_bucketsInput>
-    where?: mutual_fund_units_lotWhereInput
+  export type units_lotUpsertWithoutRedemption_bucketsInput = {
+    update: XOR<units_lotUpdateWithoutRedemption_bucketsInput, units_lotUncheckedUpdateWithoutRedemption_bucketsInput>
+    create: XOR<units_lotCreateWithoutRedemption_bucketsInput, units_lotUncheckedCreateWithoutRedemption_bucketsInput>
+    where?: units_lotWhereInput
   }
 
-  export type mutual_fund_units_lotUpdateToOneWithWhereWithoutRedemption_bucketsInput = {
-    where?: mutual_fund_units_lotWhereInput
-    data: XOR<mutual_fund_units_lotUpdateWithoutRedemption_bucketsInput, mutual_fund_units_lotUncheckedUpdateWithoutRedemption_bucketsInput>
+  export type units_lotUpdateToOneWithWhereWithoutRedemption_bucketsInput = {
+    where?: units_lotWhereInput
+    data: XOR<units_lotUpdateWithoutRedemption_bucketsInput, units_lotUncheckedUpdateWithoutRedemption_bucketsInput>
   }
 
-  export type mutual_fund_units_lotUpdateWithoutRedemption_bucketsInput = {
-    mutual_fund?: mutual_fundUpdateOneRequiredWithoutUnitsNestedInput
-    investment_transaction?: investment_transactionUpdateOneRequiredWithoutMutual_fund_units_lotNestedInput
+  export type units_lotUpdateWithoutRedemption_bucketsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    investment_transaction?: investment_transactionUpdateOneWithoutUnits_lotNestedInput
+    mutual_fund?: mutual_fundUpdateOneRequiredWithoutUnits_lotsNestedInput
   }
 
-  export type mutual_fund_units_lotUncheckedUpdateWithoutRedemption_bucketsInput = {
+  export type units_lotUncheckedUpdateWithoutRedemption_bucketsInput = {
     id?: StringFieldUpdateOperationsInput | string
     mutual_fund_id?: StringFieldUpdateOperationsInput | string
+    investment_transaction?: investment_transactionUncheckedUpdateOneWithoutUnits_lotNestedInput
   }
 
   export type transfer_transactionCreateWithoutTransactionInput = {
+    id?: string
     from_account: accountCreateNestedOneWithoutFrom_transfersInput
     to_account: accountCreateNestedOneWithoutTo_transfersInput
   }
 
   export type transfer_transactionUncheckedCreateWithoutTransactionInput = {
+    id?: string
     from_account_id: string
     to_account_id: string
   }
@@ -20679,11 +20911,13 @@ export namespace Prisma {
   }
 
   export type expense_transactionCreateWithoutTransactionInput = {
+    id?: string
     account: accountCreateNestedOneWithoutExpense_transactionsInput
     expense_item: expense_itemCreateNestedOneWithoutTransactionsInput
   }
 
   export type expense_transactionUncheckedCreateWithoutTransactionInput = {
+    id?: string
     account_id: string
     expense_item_id: string
   }
@@ -20694,11 +20928,13 @@ export namespace Prisma {
   }
 
   export type income_transactionCreateWithoutTransactionInput = {
+    id?: string
     income_source: income_sourceCreateNestedOneWithoutTransactionsInput
     account: accountCreateNestedOneWithoutIncome_transactionsInput
   }
 
   export type income_transactionUncheckedCreateWithoutTransactionInput = {
+    id?: string
     income_source_id: string
     account_id: string
   }
@@ -20709,17 +20945,21 @@ export namespace Prisma {
   }
 
   export type investment_transactionCreateWithoutTransactionInput = {
+    id?: string
     units_bought: number
     buy_nav: number
+    allotment_date: Date | string
     from_account: accountCreateNestedOneWithoutInvestment_transactionsInput
-    mutual_fund_units_lot?: mutual_fund_units_lotCreateNestedOneWithoutInvestment_transactionInput
+    units_lot: units_lotCreateNestedOneWithoutInvestment_transactionInput
   }
 
   export type investment_transactionUncheckedCreateWithoutTransactionInput = {
+    id?: string
     from_account_id: string
     units_bought: number
     buy_nav: number
-    mutual_fund_units_lot?: mutual_fund_units_lotUncheckedCreateNestedOneWithoutInvestment_transactionInput
+    allotment_date: Date | string
+    units_lot_id: string
   }
 
   export type investment_transactionCreateOrConnectWithoutTransactionInput = {
@@ -20728,16 +20968,18 @@ export namespace Prisma {
   }
 
   export type redemption_transactionCreateWithoutTransactionInput = {
+    id?: string
     sell_nav: number
-    units_redeemed: number
+    redemption_date: Date | string
     to_account: accountCreateNestedOneWithoutRedemption_transactionsInput
     redemption_buckets?: redemption_bucketCreateNestedManyWithoutRedemption_transactionInput
   }
 
   export type redemption_transactionUncheckedCreateWithoutTransactionInput = {
+    id?: string
     to_account_id: string
     sell_nav: number
-    units_redeemed: number
+    redemption_date: Date | string
     redemption_buckets?: redemption_bucketUncheckedCreateNestedManyWithoutRedemption_transactionInput
   }
 
@@ -20758,11 +21000,13 @@ export namespace Prisma {
   }
 
   export type transfer_transactionUpdateWithoutTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
     from_account?: accountUpdateOneRequiredWithoutFrom_transfersNestedInput
     to_account?: accountUpdateOneRequiredWithoutTo_transfersNestedInput
   }
 
   export type transfer_transactionUncheckedUpdateWithoutTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
     from_account_id?: StringFieldUpdateOperationsInput | string
     to_account_id?: StringFieldUpdateOperationsInput | string
   }
@@ -20779,11 +21023,13 @@ export namespace Prisma {
   }
 
   export type expense_transactionUpdateWithoutTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
     account?: accountUpdateOneRequiredWithoutExpense_transactionsNestedInput
     expense_item?: expense_itemUpdateOneRequiredWithoutTransactionsNestedInput
   }
 
   export type expense_transactionUncheckedUpdateWithoutTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
     account_id?: StringFieldUpdateOperationsInput | string
     expense_item_id?: StringFieldUpdateOperationsInput | string
   }
@@ -20800,11 +21046,13 @@ export namespace Prisma {
   }
 
   export type income_transactionUpdateWithoutTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
     income_source?: income_sourceUpdateOneRequiredWithoutTransactionsNestedInput
     account?: accountUpdateOneRequiredWithoutIncome_transactionsNestedInput
   }
 
   export type income_transactionUncheckedUpdateWithoutTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
     income_source_id?: StringFieldUpdateOperationsInput | string
     account_id?: StringFieldUpdateOperationsInput | string
   }
@@ -20821,17 +21069,21 @@ export namespace Prisma {
   }
 
   export type investment_transactionUpdateWithoutTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
     units_bought?: FloatFieldUpdateOperationsInput | number
     buy_nav?: FloatFieldUpdateOperationsInput | number
+    allotment_date?: DateTimeFieldUpdateOperationsInput | Date | string
     from_account?: accountUpdateOneRequiredWithoutInvestment_transactionsNestedInput
-    mutual_fund_units_lot?: mutual_fund_units_lotUpdateOneWithoutInvestment_transactionNestedInput
+    units_lot?: units_lotUpdateOneRequiredWithoutInvestment_transactionNestedInput
   }
 
   export type investment_transactionUncheckedUpdateWithoutTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
     from_account_id?: StringFieldUpdateOperationsInput | string
     units_bought?: FloatFieldUpdateOperationsInput | number
     buy_nav?: FloatFieldUpdateOperationsInput | number
-    mutual_fund_units_lot?: mutual_fund_units_lotUncheckedUpdateOneWithoutInvestment_transactionNestedInput
+    allotment_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    units_lot_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type redemption_transactionUpsertWithoutTransactionInput = {
@@ -20846,16 +21098,18 @@ export namespace Prisma {
   }
 
   export type redemption_transactionUpdateWithoutTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
     sell_nav?: FloatFieldUpdateOperationsInput | number
-    units_redeemed?: FloatFieldUpdateOperationsInput | number
+    redemption_date?: DateTimeFieldUpdateOperationsInput | Date | string
     to_account?: accountUpdateOneRequiredWithoutRedemption_transactionsNestedInput
     redemption_buckets?: redemption_bucketUpdateManyWithoutRedemption_transactionNestedInput
   }
 
   export type redemption_transactionUncheckedUpdateWithoutTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
     to_account_id?: StringFieldUpdateOperationsInput | string
     sell_nav?: FloatFieldUpdateOperationsInput | number
-    units_redeemed?: FloatFieldUpdateOperationsInput | number
+    redemption_date?: DateTimeFieldUpdateOperationsInput | Date | string
     redemption_buckets?: redemption_bucketUncheckedUpdateManyWithoutRedemption_transactionNestedInput
   }
 
@@ -21396,38 +21650,47 @@ export namespace Prisma {
   }
 
   export type transfer_transactionCreateManyFrom_accountInput = {
-    id: string
+    id?: string
     to_account_id: string
+    transaction_id: string
   }
 
   export type transfer_transactionCreateManyTo_accountInput = {
-    id: string
+    id?: string
     from_account_id: string
+    transaction_id: string
   }
 
   export type income_transactionCreateManyAccountInput = {
-    id: string
+    id?: string
     income_source_id: string
+    transaction_id: string
   }
 
   export type expense_transactionCreateManyAccountInput = {
-    id: string
+    id?: string
     expense_item_id: string
+    transaction_id: string
   }
 
   export type investment_transactionCreateManyFrom_accountInput = {
     id?: string
     units_bought: number
     buy_nav: number
+    allotment_date: Date | string
+    units_lot_id: string
+    transaction_id: string
   }
 
   export type redemption_transactionCreateManyTo_accountInput = {
     id?: string
     sell_nav: number
-    units_redeemed: number
+    redemption_date: Date | string
+    transaction_id: string
   }
 
   export type transfer_transactionUpdateWithoutFrom_accountInput = {
+    id?: StringFieldUpdateOperationsInput | string
     transaction?: transactionUpdateOneRequiredWithoutTransfer_transactionNestedInput
     to_account?: accountUpdateOneRequiredWithoutTo_transfersNestedInput
   }
@@ -21435,14 +21698,17 @@ export namespace Prisma {
   export type transfer_transactionUncheckedUpdateWithoutFrom_accountInput = {
     id?: StringFieldUpdateOperationsInput | string
     to_account_id?: StringFieldUpdateOperationsInput | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type transfer_transactionUncheckedUpdateManyWithoutFrom_accountInput = {
     id?: StringFieldUpdateOperationsInput | string
     to_account_id?: StringFieldUpdateOperationsInput | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type transfer_transactionUpdateWithoutTo_accountInput = {
+    id?: StringFieldUpdateOperationsInput | string
     transaction?: transactionUpdateOneRequiredWithoutTransfer_transactionNestedInput
     from_account?: accountUpdateOneRequiredWithoutFrom_transfersNestedInput
   }
@@ -21450,14 +21716,17 @@ export namespace Prisma {
   export type transfer_transactionUncheckedUpdateWithoutTo_accountInput = {
     id?: StringFieldUpdateOperationsInput | string
     from_account_id?: StringFieldUpdateOperationsInput | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type transfer_transactionUncheckedUpdateManyWithoutTo_accountInput = {
     id?: StringFieldUpdateOperationsInput | string
     from_account_id?: StringFieldUpdateOperationsInput | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type income_transactionUpdateWithoutAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
     transaction?: transactionUpdateOneRequiredWithoutIncome_transactionNestedInput
     income_source?: income_sourceUpdateOneRequiredWithoutTransactionsNestedInput
   }
@@ -21465,14 +21734,17 @@ export namespace Prisma {
   export type income_transactionUncheckedUpdateWithoutAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
     income_source_id?: StringFieldUpdateOperationsInput | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type income_transactionUncheckedUpdateManyWithoutAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
     income_source_id?: StringFieldUpdateOperationsInput | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type expense_transactionUpdateWithoutAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
     transaction?: transactionUpdateOneRequiredWithoutExpense_transactionNestedInput
     expense_item?: expense_itemUpdateOneRequiredWithoutTransactionsNestedInput
   }
@@ -21480,36 +21752,46 @@ export namespace Prisma {
   export type expense_transactionUncheckedUpdateWithoutAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
     expense_item_id?: StringFieldUpdateOperationsInput | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type expense_transactionUncheckedUpdateManyWithoutAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
     expense_item_id?: StringFieldUpdateOperationsInput | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type investment_transactionUpdateWithoutFrom_accountInput = {
+    id?: StringFieldUpdateOperationsInput | string
     units_bought?: FloatFieldUpdateOperationsInput | number
     buy_nav?: FloatFieldUpdateOperationsInput | number
+    allotment_date?: DateTimeFieldUpdateOperationsInput | Date | string
     transaction?: transactionUpdateOneRequiredWithoutInvestment_transactionNestedInput
-    mutual_fund_units_lot?: mutual_fund_units_lotUpdateOneWithoutInvestment_transactionNestedInput
+    units_lot?: units_lotUpdateOneRequiredWithoutInvestment_transactionNestedInput
   }
 
   export type investment_transactionUncheckedUpdateWithoutFrom_accountInput = {
     id?: StringFieldUpdateOperationsInput | string
     units_bought?: FloatFieldUpdateOperationsInput | number
     buy_nav?: FloatFieldUpdateOperationsInput | number
-    mutual_fund_units_lot?: mutual_fund_units_lotUncheckedUpdateOneWithoutInvestment_transactionNestedInput
+    allotment_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    units_lot_id?: StringFieldUpdateOperationsInput | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type investment_transactionUncheckedUpdateManyWithoutFrom_accountInput = {
     id?: StringFieldUpdateOperationsInput | string
     units_bought?: FloatFieldUpdateOperationsInput | number
     buy_nav?: FloatFieldUpdateOperationsInput | number
+    allotment_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    units_lot_id?: StringFieldUpdateOperationsInput | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type redemption_transactionUpdateWithoutTo_accountInput = {
+    id?: StringFieldUpdateOperationsInput | string
     sell_nav?: FloatFieldUpdateOperationsInput | number
-    units_redeemed?: FloatFieldUpdateOperationsInput | number
+    redemption_date?: DateTimeFieldUpdateOperationsInput | Date | string
     transaction?: transactionUpdateOneRequiredWithoutRedemption_transactionNestedInput
     redemption_buckets?: redemption_bucketUpdateManyWithoutRedemption_transactionNestedInput
   }
@@ -21517,22 +21799,26 @@ export namespace Prisma {
   export type redemption_transactionUncheckedUpdateWithoutTo_accountInput = {
     id?: StringFieldUpdateOperationsInput | string
     sell_nav?: FloatFieldUpdateOperationsInput | number
-    units_redeemed?: FloatFieldUpdateOperationsInput | number
+    redemption_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
     redemption_buckets?: redemption_bucketUncheckedUpdateManyWithoutRedemption_transactionNestedInput
   }
 
   export type redemption_transactionUncheckedUpdateManyWithoutTo_accountInput = {
     id?: StringFieldUpdateOperationsInput | string
     sell_nav?: FloatFieldUpdateOperationsInput | number
-    units_redeemed?: FloatFieldUpdateOperationsInput | number
+    redemption_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type income_transactionCreateManyIncome_sourceInput = {
-    id: string
+    id?: string
     account_id: string
+    transaction_id: string
   }
 
   export type income_transactionUpdateWithoutIncome_sourceInput = {
+    id?: StringFieldUpdateOperationsInput | string
     transaction?: transactionUpdateOneRequiredWithoutIncome_transactionNestedInput
     account?: accountUpdateOneRequiredWithoutIncome_transactionsNestedInput
   }
@@ -21540,19 +21826,23 @@ export namespace Prisma {
   export type income_transactionUncheckedUpdateWithoutIncome_sourceInput = {
     id?: StringFieldUpdateOperationsInput | string
     account_id?: StringFieldUpdateOperationsInput | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type income_transactionUncheckedUpdateManyWithoutIncome_sourceInput = {
     id?: StringFieldUpdateOperationsInput | string
     account_id?: StringFieldUpdateOperationsInput | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type expense_transactionCreateManyExpense_itemInput = {
-    id: string
+    id?: string
     account_id: string
+    transaction_id: string
   }
 
   export type expense_transactionUpdateWithoutExpense_itemInput = {
+    id?: StringFieldUpdateOperationsInput | string
     transaction?: transactionUpdateOneRequiredWithoutExpense_transactionNestedInput
     account?: accountUpdateOneRequiredWithoutExpense_transactionsNestedInput
   }
@@ -21560,50 +21850,54 @@ export namespace Prisma {
   export type expense_transactionUncheckedUpdateWithoutExpense_itemInput = {
     id?: StringFieldUpdateOperationsInput | string
     account_id?: StringFieldUpdateOperationsInput | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type expense_transactionUncheckedUpdateManyWithoutExpense_itemInput = {
     id?: StringFieldUpdateOperationsInput | string
     account_id?: StringFieldUpdateOperationsInput | string
+    transaction_id?: StringFieldUpdateOperationsInput | string
   }
 
-  export type mutual_fund_units_lotCreateManyMutual_fundInput = {
+  export type units_lotCreateManyMutual_fundInput = {
     id?: string
   }
 
-  export type mutual_fund_units_lotUpdateWithoutMutual_fundInput = {
-    investment_transaction?: investment_transactionUpdateOneRequiredWithoutMutual_fund_units_lotNestedInput
-    redemption_buckets?: redemption_bucketUpdateManyWithoutMutual_fund_units_lotNestedInput
-  }
-
-  export type mutual_fund_units_lotUncheckedUpdateWithoutMutual_fundInput = {
+  export type units_lotUpdateWithoutMutual_fundInput = {
     id?: StringFieldUpdateOperationsInput | string
-    redemption_buckets?: redemption_bucketUncheckedUpdateManyWithoutMutual_fund_units_lotNestedInput
+    investment_transaction?: investment_transactionUpdateOneWithoutUnits_lotNestedInput
+    redemption_buckets?: redemption_bucketUpdateManyWithoutUnits_lotNestedInput
   }
 
-  export type mutual_fund_units_lotUncheckedUpdateManyWithoutMutual_fundInput = {
+  export type units_lotUncheckedUpdateWithoutMutual_fundInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    investment_transaction?: investment_transactionUncheckedUpdateOneWithoutUnits_lotNestedInput
+    redemption_buckets?: redemption_bucketUncheckedUpdateManyWithoutUnits_lotNestedInput
+  }
+
+  export type units_lotUncheckedUpdateManyWithoutMutual_fundInput = {
     id?: StringFieldUpdateOperationsInput | string
   }
 
-  export type redemption_bucketCreateManyMutual_fund_units_lotInput = {
+  export type redemption_bucketCreateManyUnits_lotInput = {
     id?: string
     redemption_transaction_id: string
     units_redeemed: number
   }
 
-  export type redemption_bucketUpdateWithoutMutual_fund_units_lotInput = {
+  export type redemption_bucketUpdateWithoutUnits_lotInput = {
     id?: StringFieldUpdateOperationsInput | string
     units_redeemed?: FloatFieldUpdateOperationsInput | number
     redemption_transaction?: redemption_transactionUpdateOneRequiredWithoutRedemption_bucketsNestedInput
   }
 
-  export type redemption_bucketUncheckedUpdateWithoutMutual_fund_units_lotInput = {
+  export type redemption_bucketUncheckedUpdateWithoutUnits_lotInput = {
     id?: StringFieldUpdateOperationsInput | string
     redemption_transaction_id?: StringFieldUpdateOperationsInput | string
     units_redeemed?: FloatFieldUpdateOperationsInput | number
   }
 
-  export type redemption_bucketUncheckedUpdateManyWithoutMutual_fund_units_lotInput = {
+  export type redemption_bucketUncheckedUpdateManyWithoutUnits_lotInput = {
     id?: StringFieldUpdateOperationsInput | string
     redemption_transaction_id?: StringFieldUpdateOperationsInput | string
     units_redeemed?: FloatFieldUpdateOperationsInput | number
@@ -21611,25 +21905,25 @@ export namespace Prisma {
 
   export type redemption_bucketCreateManyRedemption_transactionInput = {
     id?: string
-    mutual_fund_units_lot_id: string
+    units_lot_id: string
     units_redeemed: number
   }
 
   export type redemption_bucketUpdateWithoutRedemption_transactionInput = {
     id?: StringFieldUpdateOperationsInput | string
     units_redeemed?: FloatFieldUpdateOperationsInput | number
-    mutual_fund_units_lot?: mutual_fund_units_lotUpdateOneRequiredWithoutRedemption_bucketsNestedInput
+    units_lot?: units_lotUpdateOneRequiredWithoutRedemption_bucketsNestedInput
   }
 
   export type redemption_bucketUncheckedUpdateWithoutRedemption_transactionInput = {
     id?: StringFieldUpdateOperationsInput | string
-    mutual_fund_units_lot_id?: StringFieldUpdateOperationsInput | string
+    units_lot_id?: StringFieldUpdateOperationsInput | string
     units_redeemed?: FloatFieldUpdateOperationsInput | number
   }
 
   export type redemption_bucketUncheckedUpdateManyWithoutRedemption_transactionInput = {
     id?: StringFieldUpdateOperationsInput | string
-    mutual_fund_units_lot_id?: StringFieldUpdateOperationsInput | string
+    units_lot_id?: StringFieldUpdateOperationsInput | string
     units_redeemed?: FloatFieldUpdateOperationsInput | number
   }
 

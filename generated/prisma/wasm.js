@@ -141,7 +141,7 @@ exports.Prisma.Mutual_fundScalarFieldEnum = {
   isin: 'isin'
 };
 
-exports.Prisma.Mutual_fund_units_lotScalarFieldEnum = {
+exports.Prisma.Units_lotScalarFieldEnum = {
   id: 'id',
   mutual_fund_id: 'mutual_fund_id'
 };
@@ -150,20 +150,24 @@ exports.Prisma.Investment_transactionScalarFieldEnum = {
   id: 'id',
   from_account_id: 'from_account_id',
   units_bought: 'units_bought',
-  buy_nav: 'buy_nav'
+  buy_nav: 'buy_nav',
+  allotment_date: 'allotment_date',
+  units_lot_id: 'units_lot_id',
+  transaction_id: 'transaction_id'
 };
 
 exports.Prisma.Redemption_transactionScalarFieldEnum = {
   id: 'id',
   to_account_id: 'to_account_id',
   sell_nav: 'sell_nav',
-  units_redeemed: 'units_redeemed'
+  redemption_date: 'redemption_date',
+  transaction_id: 'transaction_id'
 };
 
 exports.Prisma.Redemption_bucketScalarFieldEnum = {
   id: 'id',
   redemption_transaction_id: 'redemption_transaction_id',
-  mutual_fund_units_lot_id: 'mutual_fund_units_lot_id',
+  units_lot_id: 'units_lot_id',
   units_redeemed: 'units_redeemed'
 };
 
@@ -180,19 +184,22 @@ exports.Prisma.TransactionScalarFieldEnum = {
 exports.Prisma.Transfer_transactionScalarFieldEnum = {
   id: 'id',
   from_account_id: 'from_account_id',
-  to_account_id: 'to_account_id'
+  to_account_id: 'to_account_id',
+  transaction_id: 'transaction_id'
 };
 
 exports.Prisma.Expense_transactionScalarFieldEnum = {
   id: 'id',
   account_id: 'account_id',
-  expense_item_id: 'expense_item_id'
+  expense_item_id: 'expense_item_id',
+  transaction_id: 'transaction_id'
 };
 
 exports.Prisma.Income_transactionScalarFieldEnum = {
   id: 'id',
   income_source_id: 'income_source_id',
-  account_id: 'account_id'
+  account_id: 'account_id',
+  transaction_id: 'transaction_id'
 };
 
 exports.Prisma.Db_historyScalarFieldEnum = {
@@ -263,7 +270,7 @@ exports.Prisma.ModelName = {
   income_source: 'income_source',
   expense_item: 'expense_item',
   mutual_fund: 'mutual_fund',
-  mutual_fund_units_lot: 'mutual_fund_units_lot',
+  units_lot: 'units_lot',
   investment_transaction: 'investment_transaction',
   redemption_transaction: 'redemption_transaction',
   redemption_bucket: 'redemption_bucket',

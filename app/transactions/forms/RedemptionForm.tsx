@@ -2,26 +2,13 @@ import React from 'react';
 import { AccountSelector } from '../components/AccountSelector';
 import { CustomDatePicker } from '../components/CustomDatePicker';
 import { createRedemptionTransaction, updateRedemptionTransaction } from '@/server actions/db';
-import { NoteField } from '../components/NoteField';
 import { FormButtonStack } from '../components/FormButtonStack';
-import { useLedgerData } from '../../LedgerContext';
+import { LedgerRedemptionTransaction, useLedgerData } from '../../LedgerContext';
 import { getTodayDDMMYYYY, toDDMMYYYY, toHHMM } from '../components/dateUtils';
 import { useFormState } from '../components/useFormState';
 import { FormStatusMessages } from '../components/FormStatusMessages';
 
-export interface RedemptionFormInitial {
-  id?: string;
-  mutual_fund_id?: string;
-  to_account_id?: string;
-  units_redeemed?: number;
-  sell_nav?: number;
-  date?: string | Date;
-  time?: string | Date;
-  note?: string;
-  amount?: number;
-}
-
-export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; initial?: RedemptionFormInitial }) {
+export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; initial?: LedgerRedemptionTransaction }) {
   const { accounts, mutualFunds, loading } = useLedgerData();
   const initialForm = {
     fromMutualFund: '',
@@ -30,6 +17,7 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
     sellNav: '',
     date: '',
     time: '',
+    redemptionDate: '',
     note: '',
     amount: '',
   };
@@ -41,6 +29,7 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
     sellNav: form.sellNav ?? '',
     date: form.date ?? '',
     time: form.time ?? '',
+    redemptionDate: form.redemptionDate ?? '',
     note: form.note ?? '',
     amount: form.amount ?? '',
   };
@@ -53,8 +42,16 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
     setForm({ ...form, date: val });
   };
 
+  const handleRedemptionDateChange = (val: string) => {
+    setForm({ ...form, redemptionDate: val });
+  };
+
   const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, time: e.target.value });
+  };
+
+  const handleNoteChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setForm({ ...form, note: e.target.value });
   };
 
   const handleReset = () => {
@@ -65,7 +62,15 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
     e.preventDefault();
     setError('');
     setSuccess('');
-    if (!safeForm.fromMutualFund || !safeForm.toAccount || !safeForm.units || !safeForm.sellNav || !safeForm.date || !safeForm.amount) {
+    if (
+      !safeForm.fromMutualFund ||
+      !safeForm.toAccount ||
+      !safeForm.units ||
+      !safeForm.sellNav ||
+      !safeForm.date ||
+      !safeForm.redemptionDate ||
+      !safeForm.amount
+    ) {
       setError('All fields are required.');
       return;
     }
@@ -76,6 +81,8 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
     try {
       const [day, month, year] = safeForm.date.split('/');
       const dateISO = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+      const [redemptionDay, redemptionMonth, redemptionYear] = safeForm.redemptionDate.split('/');
+      const redemptionDateISO = `${redemptionYear}-${redemptionMonth.padStart(2, '0')}-${redemptionDay.padStart(2, '0')}`;
       if (initial && initial.id) {
         await updateRedemptionTransaction(initial.id, {
           date: dateISO,
@@ -83,7 +90,6 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
           amount: parseFloat(safeForm.amount),
           note: safeForm.note || undefined,
           to_account_id: safeForm.toAccount,
-          units_sold: parseFloat(safeForm.units),
           sell_nav: parseFloat(safeForm.sellNav),
         });
         setSuccess('Redemption updated!');
@@ -97,6 +103,7 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
           to_account_id: safeForm.toAccount,
           units_sold: parseFloat(safeForm.units),
           sell_nav: parseFloat(safeForm.sellNav),
+          redemption_date: new Date(redemptionDateISO),
         });
         setSuccess('Redemption transaction saved!');
       }
@@ -114,13 +121,16 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
 
   React.useEffect(() => {
     if (initial) {
+      console.log(initial);
+      
       setForm({
-        fromMutualFund: initial.mutual_fund_id || '',
-        toAccount: initial.to_account_id || '',
-        units: initial.units_redeemed?.toString() || '',
-        sellNav: initial.sell_nav?.toString() || '',
+        fromMutualFund: initial.redemption_transaction.redemption_buckets[0].units_lot.mutual_fund_id || '',
+        toAccount: initial.redemption_transaction.to_account_id || '',
+        units: initial.redemption_transaction.redemption_buckets.reduce((total, bucket) => total + (bucket.units_redeemed || 0), 0)?.toString() || '',
+        sellNav: initial.redemption_transaction.sell_nav?.toString() || '',
         date: toDDMMYYYY(initial.date),
         time: toHHMM(initial.time),
+        redemptionDate: getTodayDDMMYYYY(), // Default to today for redemption date in edit mode
         note: initial.note || '',
         amount: initial.amount?.toString() || '',
       });
@@ -132,6 +142,7 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
         sellNav: '',
         date: getTodayDDMMYYYY(),
         time: '',
+        redemptionDate: getTodayDDMMYYYY(),
         note: '',
         amount: '',
       });
@@ -149,10 +160,6 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mutualFunds, accounts]);
 
-  const handleNoteChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setForm({ ...form, note: e.target.value });
-  };
-
   if (loading) return <div>Loading...</div>;
 
   // Find remaining units for selected mutual fund
@@ -160,8 +167,11 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
   let selectedRemainingUnits = '';
   let selectedRemainingUnitsNum = 0;
   if (selectedMF) {
-    const units_bought = selectedMF.units.reduce((total, unit) => total + (unit.investment_transaction.units_bought || 0), 0);
-    const units_sold = selectedMF.units.reduce((total, unit) => total + (unit.redemption_buckets.reduce((sum, bucket) => sum + bucket.units_redeemed, 0)), 0);
+    const units_bought = selectedMF.units_lots.reduce((total, unit) => total + (unit.investment_transaction?.units_bought || 0), 0);
+    const units_sold = selectedMF.units_lots.reduce(
+      (total, unit) => total + (unit.redemption_buckets?.reduce((sum, bucket) => sum + bucket.units_redeemed, 0) || 0),
+      0
+    );
     selectedRemainingUnitsNum = units_bought - units_sold;
     selectedRemainingUnits = selectedRemainingUnitsNum.toLocaleString(undefined, { maximumFractionDigits: 4 });
   }
@@ -230,11 +240,7 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             placeholder="0.0000"
           />
-          {selectedRemainingUnits && (
-            <div className="text-xs text-gray-500 mt-1">
-              Available: {selectedRemainingUnits}
-            </div>
-          )}
+          {selectedRemainingUnits && <div className="text-xs text-gray-500 mt-1">Available: {selectedRemainingUnits}</div>}
         </div>
         <div>
           <label htmlFor="sellNav" className="block text-sm font-medium mb-1">
@@ -258,7 +264,7 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
       <div className="flex gap-3 sm:gap-4">
         <div className="flex-[2] min-w-0">
           <label htmlFor="date" className="block text-sm font-medium mb-1">
-            Date
+            Transaction Date
           </label>
           <CustomDatePicker value={safeForm.date} onChange={handleCustomDateChange} />
         </div>
@@ -277,10 +283,31 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
         </div>
       </div>
 
+      {/* Redemption Date */}
+      <div>
+        <label htmlFor="redemptionDate" className="block text-sm font-medium mb-1">
+          Redemption Date
+        </label>
+        <CustomDatePicker value={safeForm.redemptionDate} onChange={handleRedemptionDateChange} />
+      </div>
+
       {/* Note and Buttons - Stack on mobile, side-by-side on desktop */}
       <div className="flex flex-col lg:flex-row lg:items-end gap-3 sm:gap-4">
         <div className="flex-1">
-          <NoteField value={safeForm.note} onChange={handleNoteChange} />
+          <div className="flex items-center gap-2">
+            <label htmlFor="note" className="block text-sm font-medium flex-shrink-0 w-12 sm:w-16">
+              Note
+            </label>
+            <textarea
+              id="note"
+              name="note"
+              value={safeForm.note}
+              onChange={handleNoteChange}
+              rows={2}
+              className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm resize-none"
+              placeholder="Optional note..."
+            />
+          </div>
         </div>
         <div className="flex-shrink-0">
           <FormButtonStack

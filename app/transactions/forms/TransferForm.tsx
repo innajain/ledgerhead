@@ -2,23 +2,12 @@ import React from 'react';
 import { AccountSelector } from '../components/AccountSelector';
 import { CustomDatePicker } from '../components/CustomDatePicker';
 import { updateTransferTransaction, createTransferTransaction } from '@/server actions/db';
-import { NoteField } from '../components/NoteField';
 import { FormButtonStack } from '../components/FormButtonStack';
-import { useLedgerData } from '../../LedgerContext';
+import { LedgerTransferTransaction, useLedgerData } from '../../LedgerContext';
 import { getTodayDDMMYYYY, toDDMMYYYY, toHHMM } from '../components/dateUtils';
 import { useFormState } from '../components/useFormState';
 
-export interface TransferFormInitial {
-  id?: string;
-  from_account_id?: string;
-  to_account_id?: string;
-  date?: string | Date;
-  time?: string | Date;
-  note?: string;
-  amount?: number;
-}
-
-export function TransferForm({ onSuccess, initial }: { onSuccess: () => void; initial?: TransferFormInitial }) {
+export function TransferForm({ onSuccess, initial }: { onSuccess: () => void; initial?: LedgerTransferTransaction }) {
   const { accounts, loading } = useLedgerData();
   const initialForm = {
     fromAccount: '',
@@ -36,8 +25,8 @@ export function TransferForm({ onSuccess, initial }: { onSuccess: () => void; in
   React.useEffect(() => {
     if (initial) {
       setForm({
-        fromAccount: initial.from_account_id || '',
-        toAccount: initial.to_account_id || '',
+        fromAccount: initial.transfer_transaction.from_account_id || '',
+        toAccount: initial.transfer_transaction.to_account_id || '',
         date: toDDMMYYYY(initial.date),
         time: toHHMM(initial.time),
         note: initial.note || '',
@@ -140,83 +129,92 @@ export function TransferForm({ onSuccess, initial }: { onSuccess: () => void; in
   if (loading) return <div>Loading...</div>;
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:gap-4">        
-        {/* Account Selection - Stack on mobile, side-by-side on desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
-          <AccountSelector
-            label="From Account"
-            value={safeForm.fromAccount}
-            onChange={(val: string) => setForm({ ...form, fromAccount: val })}
-            accounts={accounts}
-          />
-          <AccountSelector
-            label="To Account"
-            value={safeForm.toAccount}
-            onChange={(val: string) => setForm({ ...form, toAccount: val })}
-            accounts={accounts}
-          />
-        </div>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:gap-4">
+      {/* Account Selection - Stack on mobile, side-by-side on desktop */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+        <AccountSelector
+          label="From Account"
+          value={safeForm.fromAccount}
+          onChange={(val: string) => setForm({ ...form, fromAccount: val })}
+          accounts={accounts}
+        />
+        <AccountSelector
+          label="To Account"
+          value={safeForm.toAccount}
+          onChange={(val: string) => setForm({ ...form, toAccount: val })}
+          accounts={accounts}
+        />
+      </div>
 
-        {/* Amount, Date, Time Fields - Custom responsive layout */}
-        <div className="flex flex-col gap-3">
-          {/* Amount and Time on same row for mobile */}
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label htmlFor="amount" className="block text-sm font-medium mb-1">
-                Amount
-              </label>
-              <input
-                type="number"
-                id="amount"
-                name="amount"
-                value={safeForm.amount}
-                onChange={handleChange}
-                step="0.01"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="0.00"
-              />
-            </div>
-            <div>
-              <label htmlFor="time" className="block text-sm font-medium mb-1">
-                Time (Optional)
-              </label>
-              <input
-                type="time"
-                id="time"
-                name="time"
-                value={safeForm.time}
-                onChange={handleTimeChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-            </div>
-          </div>
-          {/* Date on its own row */}
+      {/* Amount, Date, Time Fields - Custom responsive layout */}
+      <div className="flex flex-col gap-3">
+        {/* Amount and Time on same row for mobile */}
+        <div className="grid grid-cols-2 gap-3">
           <div>
-            <label htmlFor="date" className="block text-sm font-medium mb-1">
-              Date
+            <label htmlFor="amount" className="block text-sm font-medium mb-1">
+              Amount
             </label>
-            <CustomDatePicker
-              value={safeForm.date}
-              onChange={handleCustomDateChange}
+            <input
+              type="number"
+              id="amount"
+              name="amount"
+              value={safeForm.amount}
+              onChange={handleChange}
+              step="0.01"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="0.00"
+            />
+          </div>
+          <div>
+            <label htmlFor="time" className="block text-sm font-medium mb-1">
+              Time (Optional)
+            </label>
+            <input
+              type="time"
+              id="time"
+              name="time"
+              value={safeForm.time}
+              onChange={handleTimeChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
         </div>
+        {/* Date on its own row */}
+        <div>
+          <label htmlFor="date" className="block text-sm font-medium mb-1">
+            Date
+          </label>
+          <CustomDatePicker value={safeForm.date} onChange={handleCustomDateChange} />
+        </div>
+      </div>
 
-        {/* Note and Buttons - Stack on mobile, side-by-side on desktop */}
-        <div className="flex flex-col lg:flex-row lg:items-end gap-3 sm:gap-4">
-          <div className="flex-1">
-            <NoteField value={safeForm.note} onChange={handleNoteChange} />
-          </div>
-          <div className="flex-shrink-0">
-            <FormButtonStack
-              onSubmitLabel={isEdit ? 'Update Transfer' : 'Create Transfer'}
-              onResetLabel="Reset"
-              submitType="submit"
-              onReset={handleReset}
+      {/* Note and Buttons - Stack on mobile, side-by-side on desktop */}
+      <div className="flex flex-col lg:flex-row lg:items-end gap-3 sm:gap-4">
+        <div className="flex-1">
+          <div className="flex items-center gap-2">
+            <label htmlFor="note" className="block text-sm font-medium flex-shrink-0 w-12 sm:w-16">
+              Note
+            </label>
+            <textarea
+              id="note"
+              name="note"
+              value={safeForm.note}
+              onChange={handleNoteChange}
+              rows={2}
+              className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm resize-none"
+              placeholder="Optional note..."
             />
           </div>
         </div>
-
-      </form>
+        <div className="flex-shrink-0">
+          <FormButtonStack
+            onSubmitLabel={isEdit ? 'Update Transfer' : 'Create Transfer'}
+            onResetLabel="Reset"
+            submitType="submit"
+            onReset={handleReset}
+          />
+        </div>
+      </div>
+    </form>
   );
 }
