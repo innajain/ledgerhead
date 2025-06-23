@@ -160,8 +160,33 @@ export default function Home() {
   }, [loading, mutualFunds]);
 
   // Disable all editing in preview mode
+  const mfWithHoldings = mutualFunds.filter(mf => getUnitsHeld(mf) > 0);
+  const totalCurrentValue = mfWithHoldings.reduce((sum, mf) => {
+    const navInfo = navs[mf.id];
+    const units = getUnitsHeld(mf);
+    const nav = navInfo && navInfo.nav ? parseFloat(navInfo.nav) : null;
+    const currentValue = nav !== null ? units * nav : 0;
+    return sum + currentValue;
+  }, 0);
+  const netWorth = totalBalance + totalCurrentValue;
+
   return (
     <div className="max-w-5xl mx-auto p-4">
+      {/* Net Worth Card */}
+      <div className="w-full max-w-3xl mx-auto mb-8">
+        {Object.keys(navs).length === mfWithHoldings.length || mutualFunds.length === 0 ? (
+          <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center border border-blue-200">
+            <div className="text-blue-700 text-lg font-semibold mb-1">Net Worth</div>
+            <div className="text-4xl font-bold text-gray-900">₹{netWorth.toLocaleString(undefined, { maximumFractionDigits: 2 })}</div>
+          </div>
+        ) : (
+          <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center border border-blue-200">
+            <div className="text-blue-700 text-lg font-semibold mb-1">Net Worth</div>
+            <div className="text-lg text-gray-500">Loading...</div>
+          </div>
+        )}
+      </div>
+
       {inPreview && (
         <div className="mb-4 p-2 bg-yellow-100 border border-yellow-400 text-yellow-800 rounded">
           <b>Preview mode:</b> You are viewing a snapshot. Editing is disabled.
