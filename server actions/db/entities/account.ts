@@ -5,7 +5,7 @@ import { create_db_history } from '../history/db_history';
 import { prisma } from '../prisma';
 
 
-export async function createAccount(data: { name: string; group: string; balance?: number }): Promise<account> {
+export async function createAccount(data: { name: string; group: string; balance?: number; note?: string }): Promise<account> {
   const account = await prisma.account.create({ data });
   await create_db_history('CREATE', 'ACCOUNT', account.id);
   return account;
@@ -15,7 +15,7 @@ export async function getAccounts(): Promise<account[]> {
   return prisma.account.findMany();
 }
 
-export async function updateAccount(id: string, data: { name?: string; group?: string }): Promise<account> {
+export async function updateAccount(id: string, data: { name?: string; group?: string; note?: string }): Promise<account> {
   const account = await prisma.account.update({ where: { id }, data });
   await create_db_history('MODIFY', 'ACCOUNT', account.id);
   return account;

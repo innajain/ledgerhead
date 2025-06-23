@@ -104,17 +104,17 @@ export function EntityCreateModal({
   entityType: 'ACCOUNT' | 'INCOME_SOURCE' | 'EXPENSE_ITEM' | 'MUTUAL_FUND';
   setEntityType: (t: 'ACCOUNT' | 'INCOME_SOURCE' | 'EXPENSE_ITEM' | 'MUTUAL_FUND') => void;
   forms: {
-    ACCOUNT: { name: string; group: string };
-    INCOME_SOURCE: { name: string; group: string };
-    EXPENSE_ITEM: { name: string; group: string };
-    MUTUAL_FUND: { name: string; isin: string };
+    ACCOUNT: { name: string; group: string; note?: string };
+    INCOME_SOURCE: { name: string; group: string; note?: string };
+    EXPENSE_ITEM: { name: string; group: string; note?: string };
+    MUTUAL_FUND: { name: string; isin: string; note?: string };
   };
   setForms: React.Dispatch<
     React.SetStateAction<{
-      ACCOUNT: { name: string; group: string };
-      INCOME_SOURCE: { name: string; group: string };
-      EXPENSE_ITEM: { name: string; group: string };
-      MUTUAL_FUND: { name: string; isin: string };
+      ACCOUNT: { name: string; group: string; note?: string };
+      INCOME_SOURCE: { name: string; group: string; note?: string };
+      EXPENSE_ITEM: { name: string; group: string; note?: string };
+      MUTUAL_FUND: { name: string; isin: string; note?: string };
     }>
   >;
   editId?: string | null;
@@ -128,14 +128,15 @@ export function EntityCreateModal({
         fields={[
           { name: 'name', label: 'Name' },
           { name: 'group', label: 'Group' },
+          { name: 'note', label: 'Note (optional)', type: 'text', readonly: false },
         ]}
         form={forms.ACCOUNT}
         setForm={f => setForms({ ...forms, ACCOUNT: f })}
         onSubmit={async data => {
           if (editId) {
-            await updateAccount(editId, { name: data.name, group: data.group });
+            await updateAccount(editId, { name: data.name, group: data.group, note: data.note });
           } else {
-            await createAccount({ name: data.name, group: data.group });
+            await createAccount({ name: data.name, group: data.group, note: data.note });
           }
         }}
         onSuccess={onAnyCreate}
@@ -149,10 +150,11 @@ export function EntityCreateModal({
         fields={[
           { name: 'name', label: 'Name' },
           { name: 'group', label: 'Group' },
+          { name: 'note', label: 'Note (optional)', type: 'text', readonly: false },
         ]}
         form={forms.INCOME_SOURCE}
         setForm={f => setForms({ ...forms, INCOME_SOURCE: f })}
-        onSubmit={async data => createIncomeSource({ name: data.name, group: data.group })}
+        onSubmit={async data => createIncomeSource({ name: data.name, group: data.group, note: data.note })}
         onSuccess={onAnyCreate}
       />
     );
@@ -163,10 +165,11 @@ export function EntityCreateModal({
         fields={[
           { name: 'name', label: 'Name' },
           { name: 'group', label: 'Group' },
+          { name: 'note', label: 'Note (optional)', type: 'text', readonly: false },
         ]}
         form={forms.EXPENSE_ITEM}
         setForm={f => setForms({ ...forms, EXPENSE_ITEM: f })}
-        onSubmit={async data => createExpenseItem({ name: data.name, group: data.group })}
+        onSubmit={async data => createExpenseItem({ name: data.name, group: data.group, note: data.note })}
         onSuccess={onAnyCreate}
       />
     );
@@ -177,14 +180,15 @@ export function EntityCreateModal({
         fields={[
           { name: 'name', label: 'Name' },
           { name: 'isin', label: 'ISIN', readonly: !!editId },
+          { name: 'note', label: 'Note (optional)', type: 'text', readonly: false },
         ]}
         form={forms.MUTUAL_FUND}
         setForm={f => setForms({ ...forms, MUTUAL_FUND: f })}
         onSubmit={async data => {
           if (editId) {
-            await updateMutualFund(editId, { name: data.name });
+            await updateMutualFund(editId, { name: data.name, note: data.note });
           } else {
-            await createMutualFund({ name: data.name, isin: data.isin });
+            await createMutualFund({ name: data.name, isin: data.isin, note: data.note });
           }
         }}
         onSuccess={onAnyCreate}

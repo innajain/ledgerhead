@@ -12,6 +12,7 @@ model account {
   id    String @id @default(cuid())
   name  String
   group String
+  note  String?
 
   from_transfers          transfer_transaction[]   @relation("from_account")
   to_transfers            transfer_transaction[]   @relation("to_account")
@@ -27,6 +28,7 @@ model income_source {
   id    String @id @default(cuid())
   name  String
   group String
+  note  String?
 
   transactions income_transaction[]
 }
@@ -35,6 +37,7 @@ model expense_item {
   id    String @id @default(cuid())
   name  String
   group String
+  note  String?
 
   transactions expense_transaction[]
 }
@@ -43,6 +46,7 @@ model mutual_fund {
   id   String @id @default(cuid())
   name String @unique
   isin String @unique
+  note String?
 
   units_lots units_lot[]
 }

@@ -4,7 +4,7 @@ import { prisma } from '../prisma';
 import type { investment_transaction, mutual_fund, units_lot, redemption_bucket, redemption_transaction, transaction } from '@/generated/prisma';
 import { create_db_history } from '../history/db_history';
 
-export async function createMutualFund(data: { name: string; isin: string }): Promise<mutual_fund> {
+export async function createMutualFund(data: { name: string; isin: string; note?: string }): Promise<mutual_fund> {
   const mf = await prisma.mutual_fund.create({ data });
   await create_db_history('CREATE', 'MUTUAL_FUND', mf.id);
   return mf;
@@ -12,7 +12,7 @@ export async function createMutualFund(data: { name: string; isin: string }): Pr
 
 export type LedgerMutualFund = mutual_fund & {
   units_lots: (units_lot & {
-    investment_transaction: investment_transaction & { transaction: transaction };
+    investment_transaction: (investment_transaction & { transaction: transaction }) | null;
     redemption_buckets: (redemption_bucket & { redemption_transaction: redemption_transaction & { transaction: transaction } })[];
   })[];
 };
@@ -30,7 +30,7 @@ export async function getMutualFunds(): Promise<LedgerMutualFund[]> {
   });
 }
 
-export async function updateMutualFund(id: string, data: { name?: string }): Promise<mutual_fund> {
+export async function updateMutualFund(id: string, data: { name?: string; note?: string }): Promise<mutual_fund> {
   const mf = await prisma.mutual_fund.update({ where: { id }, data });
   await create_db_history('MODIFY', 'MUTUAL_FUND', mf.id);
   return mf;
