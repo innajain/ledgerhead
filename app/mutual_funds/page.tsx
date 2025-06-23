@@ -6,6 +6,8 @@ import { usePreview } from '../PreviewContext';
 import { LedgerMutualFund } from '@/server actions/db';
 import { Modal } from '../components/Modal';
 import { FundCard } from './components/FundCard';
+import { createRedemptionVisualization } from './components/createRedemptionVisualization';
+import { calculateTotalUnits, calculateTotalInvested, calculateTotalRedeemed } from './components/fundCalculations';
 
 export default function MutualFundsPage() {
   const { mutualFunds, loading } = useLedgerData();
@@ -95,6 +97,140 @@ export default function MutualFundsPage() {
               {mutualFunds.map(mf => (
                 <FundCard key={mf.id} mf={mf} expanded={expandedFunds.has(mf.id)} onToggle={toggleExpanded} setModalLot={setModalLot} />
               ))}
+            </div>
+
+            {/* Desktop/Tablet view - Show table */}
+            <div className="hidden sm:block">
+              <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead className="bg-gray-50 border-b">
+                      <tr>
+                        <th className="text-left py-4 px-6 font-medium text-gray-900">Fund Details</th>
+                        <th className="text-left py-4 px-4 font-medium text-gray-900">Units</th>
+                        <th className="text-left py-4 px-4 font-medium text-gray-900">Invested</th>
+                        <th className="text-left py-4 px-4 font-medium text-gray-900">Redeemed</th>
+                        <th className="text-left py-4 px-6 font-medium text-gray-900">Net Value</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                      {mutualFunds.map(mf => {
+                        const totalUnits = calculateTotalUnits(mf);
+                        const totalInvested = calculateTotalInvested(mf);
+                        const totalRedeemed = calculateTotalRedeemed(mf);
+                        const currentValue = totalInvested - totalRedeemed;
+                        const isExpanded = expandedFunds.has(mf.id);
+                        const visualization = createRedemptionVisualization(mf);
+
+                        return (
+                          <React.Fragment key={mf.id}>
+                            <tr
+                              className={`hover:bg-gray-50 cursor-pointer transition-colors ${isExpanded ? 'bg-blue-50' : ''}`}
+                              onClick={() => toggleExpanded(mf.id)}
+                            >
+                              <td className="py-4 px-6">
+                                <div>
+                                  <div className="font-medium text-gray-900" title={mf.name}>
+                                    {mf.name}
+                                  </div>
+                                  <div className="text-sm text-gray-500 mt-1">{mf.isin}</div>
+                                </div>
+                              </td>
+                              <td className="py-4 px-4 font-medium text-gray-900">{totalUnits}</td>
+                              <td className="py-4 px-4 font-medium text-green-600">₹{totalInvested.toLocaleString('en-IN')}</td>
+                              <td className="py-4 px-4 font-medium text-red-600">₹{totalRedeemed.toLocaleString('en-IN')}</td>
+                              <td className="py-4 px-6 font-medium text-blue-600">₹{currentValue.toLocaleString('en-IN')}</td>
+                            </tr>
+                            {isExpanded && mf.units_lots && mf.units_lots.length > 0 && (
+                              <tr>
+                                <td colSpan={5} className="bg-gray-50 p-0">
+                                  <div className="p-6">
+                                    <div className="font-medium mb-4 text-gray-800">Units Lots Redemption Visualization</div>
+
+                                    {/* Visual representation of lots and redemptions */}
+                                    <div className="mb-6 space-y-4">
+                                      {visualization.lots.map(lot => (
+                                        <div
+                                          key={lot.id}
+                                          className="border rounded-lg p-4 bg-white cursor-pointer hover:bg-blue-50 transition-colors"
+                                          onClick={() => {
+                                            const lotIdx = mf.units_lots.findIndex(l => l.id === lot.id);
+                                            setModalLot({ lot: mf.units_lots[lotIdx], lotIndex: lotIdx });
+                                          }}
+                                          title="Click for detailed breakdown"
+                                        >
+                                          <div className="flex justify-between items-center mb-3">
+                                            <div className="font-medium text-gray-900">
+                                              Lot #{lot.index + 1}
+                                              {mf.units_lots[lot.index]?.investment_transaction?.allotment_date && (
+                                                <span className="text-xs text-gray-500 ml-2">
+                                                  (
+                                                  {mf.units_lots[lot.index]?.investment_transaction?.allotment_date
+                                                    ? new Date(
+                                                        String(mf.units_lots[lot.index]?.investment_transaction?.allotment_date)
+                                                      ).toLocaleDateString('en-IN')
+                                                    : ''}
+                                                  )
+                                                </span>
+                                              )}
+                                            </div>
+                                            <div className="text-sm text-gray-600">{lot.totalUnits} total units</div>
+                                          </div>
+
+                                          {/* Visual bar representation */}
+                                          <div className="mb-3">
+                                            <div className="flex h-8 rounded-lg overflow-hidden border border-gray-300 bg-gray-100">
+                                              {lot.segments.map((segment, segIndex) => (
+                                                <div
+                                                  key={segIndex}
+                                                  className={`flex items-center justify-center text-xs font-medium relative ${
+                                                    segment.type === 'remaining' ? 'text-gray-800' : 'text-white'
+                                                  }`}
+                                                  style={{ width: `${segment.percentage}%`, backgroundColor: segment.color }}
+                                                  title={`${segment.type === 'redeemed' ? 'Redeemed' : 'Remaining'}: ${
+                                                    segment.units
+                                                  } units (${segment.percentage.toFixed(1)}%)`}
+                                                >
+                                                  {segment.percentage > 15 && <span className="text-xs font-semibold">{segment.units}</span>}
+                                                </div>
+                                              ))}
+                                            </div>
+                                          </div>
+                                        </div>
+                                      ))}
+                                    </div>
+
+                                    {/* Legend for redemption transactions */}
+                                    {visualization.redemptionTransactions.length > 0 && (
+                                      <div>
+                                        <div className="font-medium mb-3 text-gray-800">Redemption Transactions Legend</div>
+                                        <div className="flex flex-wrap gap-4 text-sm">
+                                          {visualization.redemptionTransactions.map((txn, index) => (
+                                            <div key={txn.id} className="flex items-center gap-2">
+                                              <div className="w-4 h-4 rounded" style={{ backgroundColor: txn.color }}></div>
+                                              <span className="text-gray-600">
+                                                Redemption #{index + 1} ({new Date(txn.date).toLocaleDateString('en-IN')})
+                                              </span>
+                                            </div>
+                                          ))}
+                                          <div className="flex items-center gap-2">
+                                            <div className="w-4 h-4 rounded bg-gray-300"></div>
+                                            <span className="text-gray-600">Remaining Units</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    )}
+                                  </div>
+                                </td>
+                              </tr>
+                            )}
+                          </React.Fragment>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </>
         )}
