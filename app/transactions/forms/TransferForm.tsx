@@ -7,7 +7,7 @@ import { LedgerTransferTransaction, useLedgerData } from '../../LedgerContext';
 import { getTodayDDMMYYYY, toDDMMYYYY, toHHMM } from '../components/dateUtils';
 import { useFormState } from '../components/useFormState';
 
-export function TransferForm({ onSuccess, initial }: { onSuccess: () => void; initial?: LedgerTransferTransaction }) {
+export function TransferForm({ onSuccess, initial, viewOnly }: { onSuccess: () => void; initial?: LedgerTransferTransaction; viewOnly?: boolean }) {
   const { accounts, loading } = useLedgerData();
   const initialForm = {
     fromAccount: '',
@@ -137,12 +137,14 @@ export function TransferForm({ onSuccess, initial }: { onSuccess: () => void; in
           value={safeForm.fromAccount}
           onChange={(val: string) => setForm({ ...form, fromAccount: val })}
           accounts={accounts}
+          disabled={!!viewOnly}
         />
         <AccountSelector
           label="To Account"
           value={safeForm.toAccount}
           onChange={(val: string) => setForm({ ...form, toAccount: val })}
           accounts={accounts}
+          disabled={!!viewOnly}
         />
       </div>
 
@@ -163,6 +165,7 @@ export function TransferForm({ onSuccess, initial }: { onSuccess: () => void; in
               step="0.01"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               placeholder="0.00"
+              disabled={!!viewOnly}
             />
           </div>
           <div>
@@ -176,6 +179,7 @@ export function TransferForm({ onSuccess, initial }: { onSuccess: () => void; in
               value={safeForm.time}
               onChange={handleTimeChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              disabled={!!viewOnly}
             />
           </div>
         </div>
@@ -184,7 +188,7 @@ export function TransferForm({ onSuccess, initial }: { onSuccess: () => void; in
           <label htmlFor="date" className="block text-sm font-medium mb-1">
             Date
           </label>
-          <CustomDatePicker value={safeForm.date} onChange={handleCustomDateChange} />
+          <CustomDatePicker value={safeForm.date} onChange={handleCustomDateChange} disabled={!!viewOnly} />
         </div>
       </div>
 
@@ -203,17 +207,20 @@ export function TransferForm({ onSuccess, initial }: { onSuccess: () => void; in
               rows={2}
               className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm resize-none"
               placeholder="Optional note..."
+              disabled={!!viewOnly}
             />
           </div>
         </div>
-        <div className="flex-shrink-0">
-          <FormButtonStack
-            onSubmitLabel={isEdit ? 'Update Transfer' : 'Create Transfer'}
-            onResetLabel="Reset"
-            submitType="submit"
-            onReset={handleReset}
-          />
-        </div>
+        {!viewOnly && (
+          <div className="flex-shrink-0">
+            <FormButtonStack
+              onSubmitLabel={isEdit ? 'Update Transfer' : 'Create Transfer'}
+              onResetLabel="Reset"
+              submitType="submit"
+              onReset={handleReset}
+            />
+          </div>
+        )}
       </div>
     </form>
   );

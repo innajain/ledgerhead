@@ -116,7 +116,7 @@ model transfer_transaction {
   to_account_id   String
   transaction_id  String @unique
 
-  transaction  transaction @relation(fields: [transaction_id], references: [id])
+  transaction  transaction @relation(fields: [transaction_id], references: [id], onDelete: Cascade)
   from_account account     @relation("from_account", fields: [from_account_id], references: [id])
   to_account   account     @relation("to_account", fields: [to_account_id], references: [id])
 }
@@ -128,7 +128,7 @@ model expense_transaction {
   expense_item_id String
   transaction_id  String @unique
 
-  transaction  transaction  @relation(fields: [transaction_id], references: [id])
+  transaction  transaction  @relation(fields: [transaction_id], references: [id], onDelete: Cascade)
   account      account      @relation(fields: [account_id], references: [id])
   expense_item expense_item @relation(fields: [expense_item_id], references: [id])
 }
@@ -140,7 +140,7 @@ model income_transaction {
   account_id       String
   transaction_id   String @unique
 
-  transaction   transaction   @relation(fields: [transaction_id], references: [id])
+  transaction   transaction   @relation(fields: [transaction_id], references: [id], onDelete: Cascade)
   income_source income_source @relation(fields: [income_source_id], references: [id])
   account       account       @relation(fields: [account_id], references: [id])
 }

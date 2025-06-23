@@ -8,7 +8,7 @@ import { getTodayDDMMYYYY, toDDMMYYYY, toHHMM } from '../components/dateUtils';
 import { useFormState } from '../components/useFormState';
 import { FormStatusMessages } from '../components/FormStatusMessages';
 
-export function IncomeForm({ onSuccess, initial }: { onSuccess: () => void; initial?: LedgerIncomeTransaction }) {
+export function IncomeForm({ onSuccess, initial, viewOnly }: { onSuccess: () => void; initial?: LedgerIncomeTransaction; viewOnly?: boolean }) {
   const { accounts, incomeSources, loading } = useLedgerData();
   const initialForm = {
     fromSource: '',
@@ -136,12 +136,14 @@ export function IncomeForm({ onSuccess, initial }: { onSuccess: () => void; init
           value={safeForm.fromSource}
           onChange={(val: string) => setForm({ ...form, fromSource: val })}
           accounts={incomeSources}
+          disabled={!!viewOnly}
         />
         <AccountSelector
           label="To Account"
           value={safeForm.toAccount}
           onChange={(val: string) => setForm({ ...form, toAccount: val })}
           accounts={accounts}
+          disabled={!!viewOnly}
         />
       </div>
 
@@ -162,6 +164,7 @@ export function IncomeForm({ onSuccess, initial }: { onSuccess: () => void; init
               step="0.01"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               placeholder="0.00"
+              disabled={!!viewOnly}
             />
           </div>
           <div>
@@ -175,6 +178,7 @@ export function IncomeForm({ onSuccess, initial }: { onSuccess: () => void; init
               value={safeForm.time}
               onChange={handleTimeChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              disabled={!!viewOnly}
             />
           </div>
         </div>
@@ -183,7 +187,7 @@ export function IncomeForm({ onSuccess, initial }: { onSuccess: () => void; init
           <label htmlFor="date" className="block text-sm font-medium mb-1">
             Date
           </label>
-          <CustomDatePicker value={safeForm.date} onChange={handleCustomDateChange} />
+          <CustomDatePicker value={safeForm.date} onChange={handleCustomDateChange} disabled={!!viewOnly} />
         </div>
       </div>
 
@@ -202,17 +206,20 @@ export function IncomeForm({ onSuccess, initial }: { onSuccess: () => void; init
               rows={2}
               className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm resize-none"
               placeholder="Optional note..."
+              disabled={!!viewOnly}
             />
           </div>
         </div>
-        <div className="flex-shrink-0">
-          <FormButtonStack
-            onSubmitLabel={isEdit ? 'Update Income' : 'Create Income'}
-            onResetLabel="Reset"
-            submitType="submit"
-            onReset={handleReset}
-          />
-        </div>
+        {!viewOnly && (
+          <div className="flex-shrink-0">
+            <FormButtonStack
+              onSubmitLabel={isEdit ? 'Update Income' : 'Create Income'}
+              onResetLabel="Reset"
+              submitType="submit"
+              onReset={handleReset}
+            />
+          </div>
+        )}
       </div>
 
       {/* Status Messages */}

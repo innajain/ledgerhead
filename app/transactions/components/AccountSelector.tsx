@@ -16,11 +16,13 @@ export function AccountSelector({
   value,
   onChange,
   accounts,
+  disabled = false,
 }: {
   label: string;
   value: string;
   onChange: (id: string) => void;
   accounts: { id: string; name: string; group: string }[];
+  disabled?: boolean;
 }) {
   // Find the selected account if value is set
   const selected = value ? accounts.find(acc => acc.id === value) : undefined;
@@ -71,7 +73,7 @@ export function AccountSelector({
       </label>
       <div className="flex gap-2 mb-1">
         <div className="w-40">
-          <select className="border rounded px-2 py-1 w-full" value={name} onChange={e => setName(e.target.value)}>
+          <select className="border rounded px-2 py-1 w-full" value={name} onChange={e => setName(e.target.value)} disabled={disabled}>
             <option value="">Name</option>
             {filteredNames.map(n => (
               <option key={n} value={n}>
@@ -81,7 +83,7 @@ export function AccountSelector({
           </select>
         </div>
         <div className="w-40">
-          <select className="border rounded px-2 py-1 w-full" value={group} onChange={e => setGroup(e.target.value)}>
+          <select className="border rounded px-2 py-1 w-full" value={group} onChange={e => setGroup(e.target.value)} disabled={disabled}>
             <option value="">Group</option>
             {filteredGroups.map(g => (
               <option key={g} value={g}>

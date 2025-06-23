@@ -17,6 +17,7 @@ import {
 } from '@/app/LedgerContext';
 import { usePreview } from '@/app/PreviewContext';
 import { TransactionsList } from './TransactionsList';
+import { ViewTransactionForm } from './ViewTransactionForm';
 
 const TRANSACTION_TYPES = [
   { label: 'Transfer', value: 'TRANSFER' },
@@ -45,7 +46,9 @@ export default function TransactionsPage() {
   const { inPreview } = usePreview();
   const [type, setType] = useState<string>('EXPENSE');
   const [modalOpen, setModalOpen] = useState(false);
+  const [viewModalOpen, setViewModalOpen] = useState(false);
   const [editTx, setEditTx] = useState<LedgerTransaction | null>(null);
+  const [viewTx, setViewTx] = useState<LedgerTransaction | null>(null);
 
   const handleEdit = (tx: LedgerTransaction) => {
     setType(tx.type);
@@ -53,6 +56,12 @@ export default function TransactionsPage() {
     setModalOpen(true);
   };
 
+  const handleView = (tx: LedgerTransaction) => {
+    setViewTx(tx);
+    setViewModalOpen(true);
+  };
+
+  // Add a viewOnly prop to all form components and pass it in view mode
   let FormComponent = null;
   if (type === 'TRANSFER') {
     const formProps = editTx
@@ -195,7 +204,33 @@ export default function TransactionsPage() {
           </div>
         </Modal>
       </div>
-      <TransactionsList transactions={transactions} loading={loading} onEdit={handleEdit} onDelete={handleDelete} inPreview={inPreview} />
+      <TransactionsList transactions={transactions} loading={loading} onEdit={handleEdit} onDelete={handleDelete} onView={handleView} inPreview={inPreview} />
+      <Modal
+        open={viewModalOpen}
+        onClose={() => {
+          setViewModalOpen(false);
+          setViewTx(null);
+        }}
+      >
+        <div className="w-full max-w-xs sm:max-w-md md:max-w-lg">
+          {viewTx && (() => {
+            switch (viewTx.type) {
+              case 'TRANSFER':
+                return <TransferForm initial={viewTx as LedgerTransferTransaction} onSuccess={() => {}} viewOnly />;
+              case 'EXPENSE':
+                return <ExpenseForm initial={viewTx as LedgerExpenseTransaction} onSuccess={() => {}} viewOnly />;
+              case 'INCOME':
+                return <IncomeForm initial={viewTx as LedgerIncomeTransaction} onSuccess={() => {}} viewOnly />;
+              case 'MF_INVESTMENT':
+                return <InvestmentForm initial={viewTx as LedgerInvestmentTransaction} onSuccess={() => {}} viewOnly />;
+              case 'MF_REDEMPTION':
+                return <RedemptionForm initial={viewTx as LedgerRedemptionTransaction} onSuccess={() => {}} viewOnly />;
+              default:
+                return null;
+            }
+          })()}
+        </div>
+      </Modal>
     </div>
   );
 }

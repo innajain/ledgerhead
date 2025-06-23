@@ -14,11 +14,7 @@ export async function getTransactions(): Promise<LedgerTransaction[]> {
       transfer_transaction: true,
       investment_transaction: { include: { units_lot: true } },
       redemption_transaction: {
-        include: {
-          redemption_buckets: {
-            include: { units_lot: true },
-          },
-        },
+        include: { redemption_buckets: { include: { units_lot: true } } },
       },
     },
   });

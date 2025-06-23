@@ -8,7 +8,7 @@ import { getTodayDDMMYYYY, toDDMMYYYY, toHHMM } from '../components/dateUtils';
 import { useFormState } from '../components/useFormState';
 import { FormStatusMessages } from '../components/FormStatusMessages';
 
-export function ExpenseForm({ onSuccess, initial }: { onSuccess: () => void; initial?: LedgerExpenseTransaction }) {
+export function ExpenseForm({ onSuccess, initial, viewOnly }: { onSuccess: () => void; initial?: LedgerExpenseTransaction; viewOnly?: boolean }) {
   const { accounts, expenseItems, loading } = useLedgerData();
   const initialForm = {
     fromAccount: '',
@@ -136,12 +136,14 @@ export function ExpenseForm({ onSuccess, initial }: { onSuccess: () => void; ini
           value={safeForm.fromAccount}
           onChange={(val: string) => setForm({ ...form, fromAccount: val })}
           accounts={accounts}
+          disabled={!!viewOnly}
         />
         <AccountSelector
           label="To Expense Item"
           value={safeForm.toSink}
           onChange={(val: string) => setForm({ ...form, toSink: val })}
           accounts={expenseItems}
+          disabled={!!viewOnly}
         />
       </div>
 
@@ -162,6 +164,7 @@ export function ExpenseForm({ onSuccess, initial }: { onSuccess: () => void; ini
               step="0.01"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               placeholder="0.00"
+              disabled={!!viewOnly}
             />
           </div>
           <div>
@@ -175,6 +178,7 @@ export function ExpenseForm({ onSuccess, initial }: { onSuccess: () => void; ini
               value={safeForm.time}
               onChange={handleTimeChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              disabled={!!viewOnly}
             />
           </div>
         </div>
@@ -186,6 +190,7 @@ export function ExpenseForm({ onSuccess, initial }: { onSuccess: () => void; ini
           <CustomDatePicker
             value={safeForm.date}
             onChange={handleCustomDateChange}
+            disabled={!!viewOnly}
           />
         </div>
       </div>
@@ -205,17 +210,20 @@ export function ExpenseForm({ onSuccess, initial }: { onSuccess: () => void; ini
               rows={2}
               className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm resize-none"
               placeholder="Optional note..."
+              disabled={!!viewOnly}
             />
           </div>
         </div>
-        <div className="flex-shrink-0">
-          <FormButtonStack
-            onSubmitLabel={isEdit ? 'Update Expense' : 'Create Expense'}
-            onResetLabel="Reset"
-            submitType="submit"
-            onReset={handleReset}
-          />
-        </div>
+        {!viewOnly && (
+          <div className="flex-shrink-0">
+            <FormButtonStack
+              onSubmitLabel={isEdit ? 'Update Expense' : 'Create Expense'}
+              onResetLabel="Reset"
+              submitType="submit"
+              onReset={handleReset}
+            />
+          </div>
+        )}
       </div>
 
       {/* Status Messages */}

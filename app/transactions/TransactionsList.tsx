@@ -8,11 +8,12 @@ function formatDateForDisplay(iso: string) {
   return `${day}/${month}/${year}`;
 }
 
-export function TransactionsList({ transactions, loading, onEdit, onDelete, inPreview }: {
+export function TransactionsList({ transactions, loading, onEdit, onDelete, onView, inPreview }: {
   transactions: transaction[];
   loading: boolean;
   onEdit: (tx: transaction) => void;
   onDelete: (id: string) => void;
+  onView: (tx: transaction) => void;
   inPreview: boolean;
 }) {
   return (
@@ -67,6 +68,7 @@ export function TransactionsList({ transactions, loading, onEdit, onDelete, inPr
                     <td className="py-1 pr-2">{tx.type}</td>
                     <td className="py-1 pr-2">{tx.amount}</td>
                     <td className="py-1 pr-2 flex gap-2 flex-wrap">
+                      <button className="text-green-600 underline" onClick={() => onView(tx)}>View</button>
                       <button className="text-blue-600 underline" onClick={() => onEdit(tx)} disabled={inPreview}>Edit</button>
                       <button className="text-red-600 underline" onClick={() => onDelete(tx.id)} disabled={inPreview}>Delete</button>
                     </td>

@@ -9,7 +9,7 @@ function getTodayParts() {
   };
 }
 
-export function CustomDatePicker({ value, onChange }: { value: string; onChange: (val: string) => void }) {
+export function CustomDatePicker({ value, onChange, disabled = false }: { value: string; onChange: (val: string) => void; disabled?: boolean }) {
   const today = getTodayParts();
   const [day, month, year] = value && value.split('/').length === 3 ? value.split('/') : [today.day, today.month, today.year];
 
@@ -31,21 +31,21 @@ export function CustomDatePicker({ value, onChange }: { value: string; onChange:
 
   return (
     <div className="flex gap-2">
-      <select value={day} onChange={e => handleChange(e.target.value, month, year)} className="border rounded px-2 py-1">
+      <select value={day} onChange={e => handleChange(e.target.value, month, year)} className="border rounded px-2 py-1" disabled={disabled}>
         {days.map(d => (
           <option key={d} value={d}>
             {d}
           </option>
         ))}
       </select>
-      <select value={month} onChange={e => handleChange(day, e.target.value, year)} className="border rounded px-2 py-1">
+      <select value={month} onChange={e => handleChange(day, e.target.value, year)} className="border rounded px-2 py-1" disabled={disabled}>
         {months.map(m => (
           <option key={m} value={m}>
             {m}
           </option>
         ))}
       </select>
-      <select value={year} onChange={e => handleChange(day, month, e.target.value)} className="border rounded px-2 py-1">
+      <select value={year} onChange={e => handleChange(day, month, e.target.value)} className="border rounded px-2 py-1" disabled={disabled}>
         {years.map(y => (
           <option key={y} value={y}>
             {y}

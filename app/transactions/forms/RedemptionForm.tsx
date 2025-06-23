@@ -8,7 +8,7 @@ import { getTodayDDMMYYYY, toDDMMYYYY, toHHMM } from '../components/dateUtils';
 import { useFormState } from '../components/useFormState';
 import { FormStatusMessages } from '../components/FormStatusMessages';
 
-export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; initial?: LedgerRedemptionTransaction }) {
+export function RedemptionForm({ onSuccess, initial, viewOnly }: { onSuccess: () => void; initial?: LedgerRedemptionTransaction; viewOnly?: boolean }) {
   const { accounts, mutualFunds, loading } = useLedgerData();
   const initialForm = {
     fromMutualFund: '',
@@ -188,6 +188,7 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
             value={safeForm.fromMutualFund}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            disabled={viewOnly}
           >
             <option value="">Select Mutual Fund</option>
             {mutualFunds.map(mf => (
@@ -202,6 +203,7 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
           value={safeForm.toAccount}
           onChange={(val: string) => setForm({ ...form, toAccount: val })}
           accounts={accounts}
+          disabled={viewOnly}
         />
       </div>
 
@@ -220,6 +222,7 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
             step="0.01"
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             placeholder="0.00"
+            disabled={viewOnly}
           />
         </div>
         <div>
@@ -237,6 +240,7 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
             max={selectedRemainingUnitsNum || undefined}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             placeholder="0.0000"
+            disabled={viewOnly}
           />
           {selectedRemainingUnits && <div className="text-xs text-gray-500 mt-1">Available: {selectedRemainingUnits}</div>}
         </div>
@@ -254,6 +258,7 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
             step="0.0001"
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             placeholder="0.0000"
+            disabled={viewOnly}
           />
         </div>
       </div>
@@ -264,7 +269,7 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
           <label htmlFor="date" className="block text-sm font-medium mb-1">
             Transaction Date
           </label>
-          <CustomDatePicker value={safeForm.date} onChange={handleCustomDateChange} />
+          <CustomDatePicker value={safeForm.date} onChange={handleCustomDateChange} disabled={viewOnly} />
         </div>
         <div className="flex-1 min-w-0">
           <label htmlFor="time" className="block text-sm font-medium mb-1">
@@ -277,6 +282,7 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
             value={safeForm.time}
             onChange={handleTimeChange}
             className="w-full px-2 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            disabled={viewOnly}
           />
         </div>
       </div>
@@ -286,7 +292,7 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
         <label htmlFor="redemptionDate" className="block text-sm font-medium mb-1">
           Redemption Date
         </label>
-        <CustomDatePicker value={safeForm.redemptionDate} onChange={handleRedemptionDateChange} />
+        <CustomDatePicker value={safeForm.redemptionDate} onChange={handleRedemptionDateChange} disabled={viewOnly} />
       </div>
 
       {/* Note and Buttons - Stack on mobile, side-by-side on desktop */}
@@ -304,16 +310,19 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
               rows={2}
               className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm resize-none"
               placeholder="Optional note..."
+              disabled={viewOnly}
             />
           </div>
         </div>
         <div className="flex-shrink-0">
-          <FormButtonStack
-            onSubmitLabel={isEdit ? 'Update Redemption' : 'Create Redemption'}
-            onResetLabel="Reset"
-            submitType="submit"
-            onReset={handleReset}
-          />
+          {!viewOnly && (
+            <FormButtonStack
+              onSubmitLabel={isEdit ? 'Update Redemption' : 'Create Redemption'}
+              onResetLabel="Reset"
+              submitType="submit"
+              onReset={handleReset}
+            />
+          )}
         </div>
       </div>
 

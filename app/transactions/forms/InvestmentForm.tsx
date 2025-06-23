@@ -8,7 +8,7 @@ import { getTodayDDMMYYYY, toDDMMYYYY, toHHMM } from '../components/dateUtils';
 import { useFormState } from '../components/useFormState';
 import { FormStatusMessages } from '../components/FormStatusMessages';
 
-export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; initial?: LedgerInvestmentTransaction }) {
+export function InvestmentForm({ onSuccess, initial, viewOnly }: { onSuccess: () => void; initial?: LedgerInvestmentTransaction; viewOnly?: boolean }) {
   const { accounts, mutualFunds, loading } = useLedgerData();
   const initialForm = {
     fromAccount: '',
@@ -166,6 +166,7 @@ export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; 
           value={safeForm.fromAccount}
           onChange={(val: string) => setForm({ ...form, fromAccount: val })}
           accounts={accounts}
+          disabled={!!viewOnly}
         />
         <div>
           <label htmlFor="toMutualFund" className="block text-sm font-medium mb-1">
@@ -177,6 +178,7 @@ export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; 
             value={safeForm.toMutualFund}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            disabled={!!viewOnly}
           >
             <option value="">Select Mutual Fund</option>
             {mutualFunds.map(mf => (
@@ -203,6 +205,7 @@ export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; 
             step="0.01"
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             placeholder="0.00"
+            disabled={!!viewOnly}
           />
         </div>
         <div>
@@ -215,10 +218,10 @@ export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; 
             name="units"
             value={safeForm.units}
             onChange={handleChange}
-            min="0.0001"
             step="0.0001"
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             placeholder="0.0000"
+            disabled={!!viewOnly}
           />
         </div>
         <div>
@@ -231,10 +234,10 @@ export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; 
             name="buyNav"
             value={safeForm.buyNav}
             onChange={handleChange}
-            min="0.0001"
             step="0.0001"
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             placeholder="0.0000"
+            disabled={!!viewOnly}
           />
         </div>
       </div>
@@ -245,7 +248,7 @@ export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; 
           <label htmlFor="date" className="block text-sm font-medium mb-1">
             Transaction Date
           </label>
-          <CustomDatePicker value={safeForm.date} onChange={handleCustomDateChange} />
+          <CustomDatePicker value={safeForm.date} onChange={handleCustomDateChange} disabled={!!viewOnly} />
         </div>
         <div className="flex-1 min-w-0">
           <label htmlFor="time" className="block text-sm font-medium mb-1">
@@ -257,7 +260,8 @@ export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; 
             name="time"
             value={safeForm.time}
             onChange={handleTimeChange}
-            className="w-full px-2 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            disabled={!!viewOnly}
           />
         </div>
       </div>
@@ -267,7 +271,7 @@ export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; 
         <label htmlFor="allotmentDate" className="block text-sm font-medium mb-1">
           Allotment Date
         </label>
-        <CustomDatePicker value={safeForm.allotmentDate} onChange={handleAllotmentDateChange} />
+        <CustomDatePicker value={safeForm.allotmentDate} onChange={handleAllotmentDateChange} disabled={!!viewOnly} />
       </div>
 
       {/* Note and Buttons - Stack on mobile, side-by-side on desktop */}
@@ -285,17 +289,20 @@ export function InvestmentForm({ onSuccess, initial }: { onSuccess: () => void; 
               rows={2}
               className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm resize-none"
               placeholder="Optional note..."
+              disabled={!!viewOnly}
             />
           </div>
         </div>
-        <div className="flex-shrink-0">
-          <FormButtonStack
-            onSubmitLabel={isEdit ? 'Update Investment' : 'Create Investment'}
-            onResetLabel="Reset"
-            submitType="submit"
-            onReset={handleReset}
-          />
-        </div>
+        {!viewOnly && (
+          <div className="flex-shrink-0">
+            <FormButtonStack
+              onSubmitLabel={isEdit ? 'Update Investment' : 'Create Investment'}
+              onResetLabel="Reset"
+              submitType="submit"
+              onReset={handleReset}
+            />
+          </div>
+        )}
       </div>
 
       {/* Status Messages */}
