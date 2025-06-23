@@ -120,7 +120,7 @@ export function EntityCreateModal({
   editId?: string | null;
   onAnyCreate?: () => void;
 }) {
-  let formComponent = null;
+  let formComponent: React.ReactNode = null;
   if (entityType === 'ACCOUNT') {
     formComponent = (
       <SimpleForm

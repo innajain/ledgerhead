@@ -37,23 +37,23 @@ export default function Navbar() {
         )}
         <Link
           href="/transactions"
-          className={`${pathname.startsWith('/transactions') ? 'text-blue-400 font-bold' : 'hover:text-blue-400'} transition-colors`}
+          className={`${pathname?.startsWith('/transactions') ? 'text-blue-400 font-bold' : 'hover:text-blue-400'} transition-colors`}
         >
           Transactions
         </Link>
         <Link
           href="/entities"
-          className={`${pathname.startsWith('/entities') ? 'text-blue-400 font-bold' : 'hover:text-blue-400'} transition-colors`}
+          className={`${pathname?.startsWith('/entities') ? 'text-blue-400 font-bold' : 'hover:text-blue-400'} transition-colors`}
         >
           Entities
         </Link>
         <Link
           href="/mutual_funds"
-          className={`${pathname.startsWith('/mutual_funds') ? 'text-blue-400 font-bold' : 'hover:text-blue-400'} transition-colors`}
+          className={`${pathname?.startsWith('/mutual_funds') ? 'text-blue-400 font-bold' : 'hover:text-blue-400'} transition-colors`}
         >
           Mutual Funds
         </Link>
-        <Link href="/history" className={`${pathname.startsWith('/history') ? 'text-blue-400 font-bold' : 'hover:text-blue-400'} transition-colors`}>
+        <Link href="/history" className={`${pathname?.startsWith('/history') ? 'text-blue-400 font-bold' : 'hover:text-blue-400'} transition-colors`}>
           History
         </Link>
       </div>
@@ -78,28 +78,28 @@ export default function Navbar() {
           </Link>
           <Link
             href="/transactions"
-            className={`${pathname.startsWith('/transactions') ? 'text-blue-400 font-bold' : 'hover:text-blue-400'} transition-colors`}
+            className={`${pathname?.startsWith('/transactions') ? 'text-blue-400 font-bold' : 'hover:text-blue-400'} transition-colors`}
             onClick={() => setMenuOpen(false)}
           >
             Transactions
           </Link>
           <Link
             href="/entities"
-            className={`${pathname.startsWith('/entities') ? 'text-blue-400 font-bold' : 'hover:text-blue-400'} transition-colors`}
+            className={`${pathname?.startsWith('/entities') ? 'text-blue-400 font-bold' : 'hover:text-blue-400'} transition-colors`}
             onClick={() => setMenuOpen(false)}
           >
             Entities
           </Link>
           <Link
             href="/mutual_funds"
-            className={`${pathname.startsWith('/mutual_funds') ? 'text-blue-400 font-bold' : 'hover:text-blue-400'} transition-colors`}
+            className={`${pathname?.startsWith('/mutual_funds') ? 'text-blue-400 font-bold' : 'hover:text-blue-400'} transition-colors`}
             onClick={() => setMenuOpen(false)}
           >
             Mutual Funds
           </Link>
           <Link
             href="/history"
-            className={`${pathname.startsWith('/history') ? 'text-blue-400 font-bold' : 'hover:text-blue-400'} transition-colors`}
+            className={`${pathname?.startsWith('/history') ? 'text-blue-400 font-bold' : 'hover:text-blue-400'} transition-colors`}
             onClick={() => setMenuOpen(false)}
           >
             History

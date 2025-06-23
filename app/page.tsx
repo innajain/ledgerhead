@@ -9,8 +9,6 @@ import { calc_xirr, CashFlow, get_cash_flows } from '@/utils/xirr';
 import { getUnitsHeld } from '@/utils/getUnitsHeld';
 import JSZip from 'jszip';
 import { getDbHistory } from '@/server actions/db/history/db_history';
-import { getDbFilePath } from '@/server actions/getDbFilePath';
-import fs from 'fs';
 
 type TransactionWithRelations = {
   id: string;
@@ -168,7 +166,7 @@ export default function Home() {
     }
     if (!loading && mutualFunds.length > 0) fetchCashFlows();
     return () => { isMounted = false; };
-  }, [loading, mutualFunds, getUnitsHeld]);
+  }, [loading, mutualFunds]);
 
   // Disable all editing in preview mode
   return (
@@ -214,7 +212,7 @@ export default function Home() {
               });
               const dbHistoryCols = dbHistoryEncoded.length > 0 ? Object.keys(dbHistoryEncoded[0]) : [];
               dbHistoryCSV = toCSV(dbHistoryEncoded, dbHistoryCols);
-            } catch (e) {
+            } catch {
               dbHistoryCSV = 'Error fetching db_history';
             }
             // Create ZIP
@@ -228,7 +226,7 @@ export default function Home() {
             try {
               // Only works server-side; for client, use an API route or server action
               dbFileBuffer = await fetch('/api/get-db-file').then(r => r.arrayBuffer());
-            } catch (e) {
+            } catch {
               dbFileBuffer = null;
             }
             if (dbFileBuffer) {
