@@ -67,7 +67,7 @@ export function calc_xirr(cashFlows: CashFlow[]): number | null {
     // Check for convergence
     if (Math.abs(newXirr - xirr) < 1e-8) {
       console.log(`XIRR converged after ${i + 1} iterations: ${newXirr}`);
-      return newXirr;
+      return newXirr * 100;
     }
 
     // Prevent extreme values that could cause overflow
