@@ -52,7 +52,6 @@ export async function getFullDbSnapshot() {
   };
 }
 
-// Utility: Log db_history event
 export async function create_db_history(event_type: db_history_event_type, entity_type: db_history_entity_type, entity_id: string) {
   const snapshot = await getFullDbSnapshot();
   await prisma.db_history.create({
@@ -66,26 +65,15 @@ export async function create_db_history(event_type: db_history_event_type, entit
 }
 
 export async function emptyDb() {
-  // Delete all data from all tables (except db_history) in correct order to avoid foreign key violations
-  console.log('Emptying database...');
-  
-  // Define the correct deletion order (child tables first, then parent tables)
   const deletionOrder = [
-    // Most dependent tables first (tables that reference multiple other tables)
     'redemption_bucket',
-    
-    // Child tables that reference both parent and other child tables
     'investment_transaction',
     'redemption_transaction', 
     'transfer_transaction',
     'expense_transaction',
     'income_transaction',
-    
-    // Child tables that only reference parent tables
     'transaction',
     'units_lot',
-    
-    // Parent tables last (tables that don't reference other tables)
     'mutual_fund',
     'account',
     'income_source',
@@ -93,39 +81,26 @@ export async function emptyDb() {
   ];
   
   const deletionPromises = deletionOrder.map(table => {
-    console.log(`Deleting all records from ${table}...`);
     // @ts-ignore
     return prisma[table].deleteMany({});
   });
   
   await prisma.$transaction(deletionPromises);
-  console.log('Database emptying complete!');
 }
 
 export async function populateDbFromSnapshot(snapshot: Snapshot) {
-  // Restore all tables from snapshot in correct order (parent tables first)
-  console.log('Restoring database from snapshot...');
-  
-  // Define the correct insertion order (parent tables first, then child tables)
   const insertionOrder = [
-    // Parent tables first (tables that don't reference other tables)
     'account',
     'income_source', 
     'expense_item',
     'mutual_fund',
-    
-    // Child tables that only reference parent tables
     'units_lot',
     'transaction',
-    
-    // Child tables that reference both parent and other child tables
     'transfer_transaction',
     'expense_transaction', 
     'income_transaction',
     'investment_transaction',
     'redemption_transaction',
-    
-    // Child tables that reference multiple other child tables (most dependent)
     'redemption_bucket'
   ];
   
@@ -133,19 +108,15 @@ export async function populateDbFromSnapshot(snapshot: Snapshot) {
     const rows = snapshot[table as keyof Snapshot];
     if (!Array.isArray(rows)) continue;
     
-    console.log(`Inserting ${rows.length} rows into ${table}...`);
     for (const row of rows) {
       try {
         // @ts-ignore
         await prisma[table].create({ data: row });
-        console.log(`✓ Inserted record into ${table}`);
       } catch (error) {
-        console.error(`✗ Error inserting into ${table}:`, error);
-        console.error(`Failed record:`, JSON.stringify(row, null, 2));
+        // Silently continue on error
       }
     }
   }
-  console.log('Database restoration complete!');
 }
 export async function restoreDbFromSnapshot(historyId: string) {
   const history = await prisma.db_history.findUnique({ where: { id: historyId } });
@@ -153,7 +124,6 @@ export async function restoreDbFromSnapshot(historyId: string) {
   const snapshot = history.snapshot as any as Snapshot;
   await emptyDb();
   await populateDbFromSnapshot(snapshot);
-  // Log restore event
   await prisma.db_history.create({
     data: {
       event_type: 'RESTORE',

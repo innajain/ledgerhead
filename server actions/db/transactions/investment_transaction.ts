@@ -14,8 +14,6 @@ export async function createInvestmentTransaction(data: {
   buy_nav: number;
   allotment_date: Date;
 }) {
-  console.log(data);
-  
   const units_lot = await prisma.units_lot.create({
     data: {
       mutual_fund: {

@@ -121,8 +121,6 @@ export function RedemptionForm({ onSuccess, initial }: { onSuccess: () => void; 
 
   React.useEffect(() => {
     if (initial) {
-      console.log(initial);
-      
       setForm({
         fromMutualFund: initial.redemption_transaction.redemption_buckets[0].units_lot.mutual_fund_id || '',
         toAccount: initial.redemption_transaction.to_account_id || '',

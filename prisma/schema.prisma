@@ -162,11 +162,6 @@ enum transaction_type {
   MF_REDEMPTION
 }
 
-enum to_or_from {
-  FROM
-  TO
-}
-
 enum db_history_event_type {
   CREATE
   MODIFY

@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react';
 import { getAccounts, getExpenseItems, getIncomeSources, getMutualFunds, getTransactions, MutualFundWithUnits } from '@/server actions/db';
+import { mapMutualFundsWithUnits } from '@/utils';
 import type {
   account,
   expense_item,
@@ -87,30 +88,7 @@ export function LedgerDataProvider({ children }: { children: ReactNode }) {
   React.useEffect(() => {
     if (!inPreview) refreshEntities();
     else if (preview) {
-      const mutual_fund_with_units: MutualFundWithUnits[] = preview.mutual_fund.map(mf => {
-        const redemption_transactions_with_transaction = preview.redemption_transaction.map(rt => ({
-          ...rt,
-          transaction: preview.transaction.find(t => t.id === rt.transaction_id)!,
-        }));
-        const redemption_buckets_with_redemption_transaction = preview.redemption_bucket.map(rb => ({
-          ...rb,
-          redemption_transaction: redemption_transactions_with_transaction.find(rt => rt.id === rb.redemption_transaction_id)!,
-        }));
-        const investment_transactions_with_transaction = preview.investment_transaction.map(it => ({
-          ...it,
-          transaction: preview.transaction.find(t => t.id === it.transaction_id)!,
-        }));
-        const units = preview.units_lot.filter(u => u.mutual_fund_id === mf.id);
-        const units_with_investment_transaction_and_redemption_buckets = units.map(u => ({
-          ...u,
-          investment_transaction: investment_transactions_with_transaction.find(it => it.transaction_id === u.id)!,
-          redemption_buckets: redemption_buckets_with_redemption_transaction.filter(rb => rb.units_lot_id === u.id),
-        }));
-        return {
-          ...mf,
-          units_lots: units_with_investment_transaction_and_redemption_buckets,
-        };
-      });
+      const mutual_fund_with_units = mapMutualFundsWithUnits(preview);
 
       setAccounts(preview.account);
       setExpenseItems(preview.expense_item);

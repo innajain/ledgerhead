@@ -24,7 +24,6 @@ async function getNAVFromISIN(
 
     return null;
   } catch (error) {
-    console.error("Error fetching NAV:", error);
     return null;
   }
 }

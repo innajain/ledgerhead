@@ -34,7 +34,7 @@ export function TransactionsList({ transactions, loading, onEdit, onDelete, inPr
             </thead>
             <tbody>
               {[...transactions]
-                .sort((a, b) => {
+                .sort((a, b) => {                  
                   const dateA = a.date.getTime();
                   const dateB = b.date.getTime();
                   if (dateA !== dateB) {

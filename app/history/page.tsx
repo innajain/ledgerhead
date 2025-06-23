@@ -5,6 +5,7 @@ import { usePreview } from '../PreviewContext';
 import { getDbHistory, deleteLatestDbHistory } from '@/server actions/db';
 import { db_history } from '@/generated/prisma';
 import { restoreDbFromSnapshot } from '@/server actions/db/history/db_history';
+import { convert_json_to_snapshot } from '@/utils';
 
 function renderTable(name: string, rows: any[], key?: string) {
   if (!Array.isArray(rows) || rows.length === 0) return null;
@@ -91,7 +92,7 @@ export default function HistoryPage() {
 
       {/* Mobile Card Layout */}
       <div className="block md:hidden space-y-4">
-        {history.map((h: any) => (
+        {history.map((h) => (
           <div key={h.id} className="bg-white border rounded-lg shadow-sm">
             <div className="p-4">
               <div className="flex justify-between items-start mb-3">
@@ -118,7 +119,7 @@ export default function HistoryPage() {
               <div className="flex gap-2">
                 <button 
                   className="flex-1 bg-green-50 text-green-700 px-3 py-2 rounded text-sm font-medium border border-green-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                  onClick={() => setPreview(h.snapshot)} 
+                  onClick={() => setPreview(convert_json_to_snapshot(h.snapshot))} 
                   disabled={inPreview}
                 >
                   Preview
@@ -160,7 +161,7 @@ export default function HistoryPage() {
             </tr>
           </thead>
           <tbody>
-            {history.map((h: any) => (
+            {history.map((h) => (
               <React.Fragment key={h.id}>
                 <tr className="hover:bg-gray-50">
                   <td className="px-4 py-3 border whitespace-nowrap">
@@ -182,7 +183,7 @@ export default function HistoryPage() {
                   <td className="px-4 py-3 border">
                     <button 
                       className="text-green-600 hover:text-green-800 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-                      onClick={() => setPreview(h.snapshot)} 
+                      onClick={() => setPreview(convert_json_to_snapshot(h.snapshot))} 
                       disabled={inPreview}
                     >
                       Preview

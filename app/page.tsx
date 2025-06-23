@@ -81,7 +81,7 @@ export default function Home() {
   const { inPreview } = usePreview();
   const txs = transactions as unknown as TransactionWithRelations[];
   const balances = getAccountBalances(accounts, txs);
-  const totalBalance = Object.values(balances).reduce((a, b) => (a as number) + (b as number), 0);
+  const totalBalance = Math.round(Object.values(balances).reduce((a, b) => (a as number) + (b as number), 0) * 100) / 100;
   const monthwisePL = getMonthwisePL(txs);
   const [navs, setNavs] = React.useState<Record<string, { nav: string; date: string } | null>>({});
 
@@ -103,6 +103,7 @@ export default function Home() {
   function getUnitsHeld(mf: MutualFundWithUnits) {
     let bought = 0;
     let redeemed = 0;
+    
     mf.units_lots.forEach((lot) => {
       bought += lot.investment_transaction.units_bought;
       redeemed += lot.redemption_buckets.reduce((sum, b) => sum + b.units_redeemed, 0);
@@ -163,18 +164,21 @@ export default function Home() {
           // Group accounts by their group and calculate group totals
           const groupedAccounts: Record<string, any[]> = {};
           const groupBalances: Record<string, number> = {};
+          const EPSILON = 0.01; // Threshold for floating point comparison
           
-          accounts.filter(acc => balances[acc.id] !== 0).forEach(acc => {
+          accounts.filter(acc => Math.abs(balances[acc.id]) > EPSILON).forEach(acc => {
             if (!groupedAccounts[acc.group]) {
               groupedAccounts[acc.group] = [];
               groupBalances[acc.group] = 0;
             }
             groupedAccounts[acc.group].push(acc);
-            groupBalances[acc.group] += balances[acc.id];
+            groupBalances[acc.group] = Math.round((groupBalances[acc.group] + balances[acc.id]) * 100) / 100;
           });
 
-          const groups = Object.keys(groupedAccounts).sort();
-
+          const groups = Object.keys(groupedAccounts)
+            .filter(group => Math.abs(groupBalances[group]) > EPSILON)
+            .sort();
+          
           return (
             <table className="w-full text-left">
               <thead>

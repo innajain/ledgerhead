@@ -47,7 +47,6 @@ export async function createRedemptionTransaction(data: {
     });
     units_to_redeem -= units_from_lot;
   }
-  console.log('redemption_buckets', redemption_buckets);
 
   const tx = await prisma.transaction.create({
     data: {
