@@ -6,7 +6,6 @@ async function getNAVFromISIN(
   isin: string
 ): Promise<{ schemeName: string; nav: string; date: string } | null> {
   const url = "https://www.amfiindia.com/spages/NAVAll.txt";
-  console.log(`Fetching NAV for ISIN: ${isin} from ${url}`);
   
   try {
     const response = await axios.get(url);
