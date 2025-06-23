@@ -1,7 +1,7 @@
-import type { MutualFundWithUnits } from '@/server actions/db';
+import type { LedgerMutualFund } from '@/server actions/db';
 import type { Snapshot } from '@/server actions/db/history/db_history';
 
-export function mapMutualFundsWithUnits(snapshot: Snapshot): MutualFundWithUnits[] {
+export function mapMutualFundsWithUnits(snapshot: Snapshot): LedgerMutualFund[] {
   const redemptionTxs = snapshot.redemption_transaction.map(rt => ({
     ...rt,
     transaction: snapshot.transaction.find(t => t.id === rt.transaction_id)!,

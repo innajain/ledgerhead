@@ -92,58 +92,62 @@ export default function HistoryPage() {
 
       {/* Mobile Card Layout */}
       <div className="block md:hidden space-y-4">
-        {history.map((h) => (
-          <div key={h.id} className="bg-white border rounded-lg shadow-sm">
-            <div className="p-4">
-              <div className="flex justify-between items-start mb-3">
-                <div className="flex-1">
-                  <div className="text-sm font-medium text-gray-900 mb-1">
-                    {new Date(h.timestamp).toLocaleString()}
+        {history.map((h, idx) => {
+          const isLatest = idx === 0;
+          return (
+            <div key={h.id} className="bg-white border rounded-lg shadow-sm">
+              <div className="p-4">
+                <div className="flex justify-between items-start mb-3">
+                  <div className="flex-1">
+                    <div className="text-sm font-medium text-gray-900 mb-1">
+                      {new Date(h.timestamp).toLocaleString()}
+                    </div>
+                    <div className="text-xs text-gray-600">
+                      {h.event_type} • {h.entity_type}
+                    </div>
                   </div>
-                  <div className="text-xs text-gray-600">
-                    {h.event_type} • {h.entity_type}
-                  </div>
+                  <button 
+                    className="text-blue-600 text-sm font-medium ml-2"
+                    onClick={() => setOpenRow(openRow === h.id ? null : h.id)}
+                  >
+                    {openRow === h.id ? 'Hide' : 'View'}
+                  </button>
                 </div>
-                <button 
-                  className="text-blue-600 text-sm font-medium ml-2"
-                  onClick={() => setOpenRow(openRow === h.id ? null : h.id)}
-                >
-                  {openRow === h.id ? 'Hide' : 'View'}
-                </button>
+                <div className="text-xs text-gray-500 mb-3 font-mono break-all">
+                  ID: {h.entity_id}
+                </div>
+                <div className="flex gap-2">
+                  {!isLatest && (
+                    <>
+                      <button 
+                        className="flex-1 bg-green-50 text-green-700 px-3 py-2 rounded text-sm font-medium border border-green-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                        onClick={() => setPreview(convert_json_to_snapshot(h.snapshot))} 
+                        disabled={inPreview}
+                      >
+                        Preview
+                      </button>
+                      <button 
+                        className="flex-1 bg-red-50 text-red-700 px-3 py-2 rounded text-sm font-medium border border-red-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                        onClick={() => handleRestore(h.id)} 
+                        disabled={inPreview}
+                      >
+                        Restore
+                      </button>
+                    </>
+                  )}
+                </div>
               </div>
-              
-              <div className="text-xs text-gray-500 mb-3 font-mono break-all">
-                ID: {h.entity_id}
-              </div>
-              
-              <div className="flex gap-2">
-                <button 
-                  className="flex-1 bg-green-50 text-green-700 px-3 py-2 rounded text-sm font-medium border border-green-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                  onClick={() => setPreview(convert_json_to_snapshot(h.snapshot))} 
-                  disabled={inPreview}
-                >
-                  Preview
-                </button>
-                <button 
-                  className="flex-1 bg-red-50 text-red-700 px-3 py-2 rounded text-sm font-medium border border-red-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                  onClick={() => handleRestore(h.id)} 
-                  disabled={inPreview}
-                >
-                  Restore
-                </button>
-              </div>
+              {openRow === h.id && (
+                <div className="border-t bg-gray-50 p-4">
+                  <div className="text-sm font-medium text-gray-700 mb-3">Snapshot Data:</div>
+                  {Object.entries(h.snapshot ?? {}).map(([table, rows]) =>
+                    renderTable(table, Array.isArray(rows) ? rows : [], h.id + '-' + table)
+                  )}
+                </div>
+              )}
             </div>
-            
-            {openRow === h.id && (
-              <div className="border-t bg-gray-50 p-4">
-                <div className="text-sm font-medium text-gray-700 mb-3">Snapshot Data:</div>
-                {Object.entries(h.snapshot ?? {}).map(([table, rows]) =>
-                  renderTable(table, Array.isArray(rows) ? rows : [], h.id + '-' + table)
-                )}
-              </div>
-            )}
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Desktop Table Layout */}
@@ -161,58 +165,65 @@ export default function HistoryPage() {
             </tr>
           </thead>
           <tbody>
-            {history.map((h) => (
-              <React.Fragment key={h.id}>
-                <tr className="hover:bg-gray-50">
-                  <td className="px-4 py-3 border whitespace-nowrap">
-                    {new Date(h.timestamp).toLocaleString()}
-                  </td>
-                  <td className="px-4 py-3 border">{h.event_type}</td>
-                  <td className="px-4 py-3 border">{h.entity_type}</td>
-                  <td className="px-4 py-3 border font-mono text-xs max-w-xs truncate" title={h.entity_id}>
-                    {h.entity_id}
-                  </td>
-                  <td className="px-4 py-3 border">
-                    <button 
-                      className="text-blue-600 hover:text-blue-800 font-medium"
-                      onClick={() => setOpenRow(openRow === h.id ? null : h.id)}
-                    >
-                      {openRow === h.id ? 'Hide' : 'View'}
-                    </button>
-                  </td>
-                  <td className="px-4 py-3 border">
-                    <button 
-                      className="text-green-600 hover:text-green-800 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-                      onClick={() => setPreview(convert_json_to_snapshot(h.snapshot))} 
-                      disabled={inPreview}
-                    >
-                      Preview
-                    </button>
-                  </td>
-                  <td className="px-4 py-3 border">
-                    <button 
-                      className="text-red-600 hover:text-red-800 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-                      onClick={() => handleRestore(h.id)} 
-                      disabled={inPreview}
-                    >
-                      Restore
-                    </button>
-                  </td>
-                </tr>
-                {openRow === h.id && (
-                  <tr>
-                    <td colSpan={7} className="bg-gray-50 border-t p-0">
-                      <div className="p-4">
-                        <div className="text-sm font-medium text-gray-700 mb-3">Snapshot Data:</div>
-                        {Object.entries(h.snapshot ?? {}).map(([table, rows]) =>
-                          renderTable(table, Array.isArray(rows) ? rows : [], h.id + '-' + table)
-                        )}
-                      </div>
+            {history.map((h, idx) => {
+              const isLatest = idx === 0;
+              return (
+                <React.Fragment key={h.id}>
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-4 py-3 border whitespace-nowrap">
+                      {new Date(h.timestamp).toLocaleString()}
+                    </td>
+                    <td className="px-4 py-3 border">{h.event_type}</td>
+                    <td className="px-4 py-3 border">{h.entity_type}</td>
+                    <td className="px-4 py-3 border font-mono text-xs max-w-xs truncate" title={h.entity_id}>
+                      {h.entity_id}
+                    </td>
+                    <td className="px-4 py-3 border">
+                      <button 
+                        className="text-blue-600 hover:text-blue-800 font-medium"
+                        onClick={() => setOpenRow(openRow === h.id ? null : h.id)}
+                      >
+                        {openRow === h.id ? 'Hide' : 'View'}
+                      </button>
+                    </td>
+                    <td className="px-4 py-3 border">
+                      {!isLatest && (
+                        <button 
+                          className="text-green-600 hover:text-green-800 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                          onClick={() => setPreview(convert_json_to_snapshot(h.snapshot))} 
+                          disabled={inPreview}
+                        >
+                          Preview
+                        </button>
+                      )}
+                    </td>
+                    <td className="px-4 py-3 border">
+                      {!isLatest && (
+                        <button 
+                          className="text-red-600 hover:text-red-800 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                          onClick={() => handleRestore(h.id)} 
+                          disabled={inPreview}
+                        >
+                          Restore
+                        </button>
+                      )}
                     </td>
                   </tr>
-                )}
-              </React.Fragment>
-            ))}
+                  {openRow === h.id && (
+                    <tr>
+                      <td colSpan={7} className="bg-gray-50 border-t p-0">
+                        <div className="p-4">
+                          <div className="text-sm font-medium text-gray-700 mb-3">Snapshot Data:</div>
+                          {Object.entries(h.snapshot ?? {}).map(([table, rows]) =>
+                            renderTable(table, Array.isArray(rows) ? rows : [], h.id + '-' + table)
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </React.Fragment>
+              );
+            })}
           </tbody>
         </table>
       </div>

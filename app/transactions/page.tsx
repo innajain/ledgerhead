@@ -17,7 +17,7 @@ import {
 } from '@/app/LedgerContext';
 import { usePreview } from '@/app/PreviewContext';
 import { TransactionsList } from './TransactionsList';
-import { ViewTransactionForm } from './ViewTransactionForm';
+import { Modal } from '../components/Modal';
 
 const TRANSACTION_TYPES = [
   { label: 'Transfer', value: 'TRANSFER' },
@@ -26,20 +26,6 @@ const TRANSACTION_TYPES = [
   { label: 'Mutual Fund Investment', value: 'MF_INVESTMENT' },
   { label: 'Mutual Fund Redemption', value: 'MF_REDEMPTION' },
 ];
-
-function Modal({ open, onClose, children }: { open: boolean; onClose: () => void; children: React.ReactNode }) {
-  if (!open) return null;
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40" onClick={onClose}>
-      <div className="bg-white rounded-lg shadow-lg p-6 min-w-[350px] max-w-full relative" onClick={e => e.stopPropagation()}>
-        <button className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-xl font-bold" onClick={onClose} aria-label="Close">
-          ×
-        </button>
-        {children}
-      </div>
-    </div>
-  );
-}
 
 export default function TransactionsPage() {
   const { transactions, loading, refreshEntities } = useLedgerData();
@@ -204,7 +190,14 @@ export default function TransactionsPage() {
           </div>
         </Modal>
       </div>
-      <TransactionsList transactions={transactions} loading={loading} onEdit={handleEdit} onDelete={handleDelete} onView={handleView} inPreview={inPreview} />
+      <TransactionsList
+        transactions={transactions}
+        loading={loading}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+        onView={handleView}
+        inPreview={inPreview}
+      />
       <Modal
         open={viewModalOpen}
         onClose={() => {
@@ -213,22 +206,23 @@ export default function TransactionsPage() {
         }}
       >
         <div className="w-full max-w-xs sm:max-w-md md:max-w-lg">
-          {viewTx && (() => {
-            switch (viewTx.type) {
-              case 'TRANSFER':
-                return <TransferForm initial={viewTx as LedgerTransferTransaction} onSuccess={() => {}} viewOnly />;
-              case 'EXPENSE':
-                return <ExpenseForm initial={viewTx as LedgerExpenseTransaction} onSuccess={() => {}} viewOnly />;
-              case 'INCOME':
-                return <IncomeForm initial={viewTx as LedgerIncomeTransaction} onSuccess={() => {}} viewOnly />;
-              case 'MF_INVESTMENT':
-                return <InvestmentForm initial={viewTx as LedgerInvestmentTransaction} onSuccess={() => {}} viewOnly />;
-              case 'MF_REDEMPTION':
-                return <RedemptionForm initial={viewTx as LedgerRedemptionTransaction} onSuccess={() => {}} viewOnly />;
-              default:
-                return null;
-            }
-          })()}
+          {viewTx &&
+            (() => {
+              switch (viewTx.type) {
+                case 'TRANSFER':
+                  return <TransferForm initial={viewTx as LedgerTransferTransaction} onSuccess={() => {}} viewOnly />;
+                case 'EXPENSE':
+                  return <ExpenseForm initial={viewTx as LedgerExpenseTransaction} onSuccess={() => {}} viewOnly />;
+                case 'INCOME':
+                  return <IncomeForm initial={viewTx as LedgerIncomeTransaction} onSuccess={() => {}} viewOnly />;
+                case 'MF_INVESTMENT':
+                  return <InvestmentForm initial={viewTx as LedgerInvestmentTransaction} onSuccess={() => {}} viewOnly />;
+                case 'MF_REDEMPTION':
+                  return <RedemptionForm initial={viewTx as LedgerRedemptionTransaction} onSuccess={() => {}} viewOnly />;
+                default:
+                  return null;
+              }
+            })()}
         </div>
       </Modal>
     </div>

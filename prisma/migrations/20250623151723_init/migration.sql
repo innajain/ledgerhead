@@ -42,7 +42,7 @@ CREATE TABLE "investment_transaction" (
     "allotment_date" DATETIME NOT NULL,
     "units_lot_id" TEXT NOT NULL,
     "transaction_id" TEXT NOT NULL,
-    CONSTRAINT "investment_transaction_transaction_id_fkey" FOREIGN KEY ("transaction_id") REFERENCES "transaction" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "investment_transaction_transaction_id_fkey" FOREIGN KEY ("transaction_id") REFERENCES "transaction" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT "investment_transaction_from_account_id_fkey" FOREIGN KEY ("from_account_id") REFERENCES "account" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT "investment_transaction_units_lot_id_fkey" FOREIGN KEY ("units_lot_id") REFERENCES "units_lot" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );

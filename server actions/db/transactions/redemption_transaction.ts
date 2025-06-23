@@ -45,7 +45,7 @@ export async function createRedemptionTransaction(data: {
       units_lot_id: lot.id,
       units_redeemed: units_from_lot,
     });
-    units_to_redeem -= units_from_lot;
+    units_to_redeem = Math.round((units_to_redeem - units_from_lot) * 1e6) / 1e6;   // i don't understand this solution, but it works
   }
 
   const tx = await prisma.transaction.create({

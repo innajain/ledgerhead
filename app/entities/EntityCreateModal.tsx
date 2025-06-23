@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Modal } from '../components/Modal';
 import { createAccount, createIncomeSource, createExpenseItem, createMutualFund, updateAccount, updateMutualFund } from '@/server actions/db';
 
 const ENTITY_TYPES = [
@@ -7,20 +8,6 @@ const ENTITY_TYPES = [
   { label: 'Expense Item', value: 'EXPENSE_ITEM' },
   { label: 'Mutual Fund', value: 'MUTUAL_FUND' },
 ];
-
-function Modal({ open, onClose, children }: { open: boolean; onClose: () => void; children: React.ReactNode }) {
-  if (!open) return null;
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40" onClick={onClose}>
-      <div className="bg-white rounded-lg shadow-lg p-6 min-w-[350px] max-w-full relative" onClick={e => e.stopPropagation()}>
-        <button className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-xl font-bold" onClick={onClose} aria-label="Close">
-          ×
-        </button>
-        {children}
-      </div>
-    </div>
-  );
-}
 
 function SimpleForm<T extends Record<string, string>>({
   label,

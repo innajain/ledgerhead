@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react';
-import { getAccounts, getExpenseItems, getIncomeSources, getMutualFunds, getTransactions, MutualFundWithUnits } from '@/server actions/db';
+import { getAccounts, getExpenseItems, getIncomeSources, getMutualFunds, getTransactions, LedgerMutualFund } from '@/server actions/db';
 import { mapMutualFundsWithUnits, convert_transactions_to_ledger } from '@/utils';
 import type {
   account,
@@ -22,7 +22,7 @@ interface LedgerContextType {
   accounts: account[];
   expenseItems: expense_item[];
   incomeSources: income_source[];
-  mutualFunds: MutualFundWithUnits[];
+  mutualFunds: LedgerMutualFund[];
   transactions: LedgerTransaction[];
   refreshEntities: () => Promise<void>;
   loading: boolean;
@@ -32,7 +32,7 @@ interface InitialData {
   accounts: account[];
   expenseItems: expense_item[];
   incomeSources: income_source[];
-  mutualFunds: MutualFundWithUnits[];
+  mutualFunds: LedgerMutualFund[];
   transactions: LedgerTransaction[];
 }
 
@@ -76,7 +76,7 @@ export function LedgerDataProvider({ children, initialData }: { children: ReactN
   const [accounts, setAccounts] = useState<account[]>(initialData?.accounts || []);
   const [expenseItems, setExpenseItems] = useState<expense_item[]>(initialData?.expenseItems || []);
   const [incomeSources, setIncomeSources] = useState<income_source[]>(initialData?.incomeSources || []);
-  const [mutualFunds, setMutualFunds] = useState<MutualFundWithUnits[]>(initialData?.mutualFunds || []);
+  const [mutualFunds, setMutualFunds] = useState<LedgerMutualFund[]>(initialData?.mutualFunds || []);
   const [transactions, setTransactions] = useState<LedgerTransaction[]>(initialData?.transactions || []);
   const [loading, setLoading] = useState(!initialData);
   const { preview, inPreview } = usePreview();

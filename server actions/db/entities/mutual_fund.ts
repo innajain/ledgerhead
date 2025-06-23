@@ -10,14 +10,14 @@ export async function createMutualFund(data: { name: string; isin: string }): Pr
   return mf;
 }
 
-export type MutualFundWithUnits = mutual_fund & {
+export type LedgerMutualFund = mutual_fund & {
   units_lots: (units_lot & {
     investment_transaction: investment_transaction & { transaction: transaction };
     redemption_buckets: (redemption_bucket & { redemption_transaction: redemption_transaction & { transaction: transaction } })[];
   })[];
 };
 
-export async function getMutualFunds(): Promise<MutualFundWithUnits[]> {
+export async function getMutualFunds(): Promise<LedgerMutualFund[]> {
   return prisma.mutual_fund.findMany({
     include: {
       units_lots: {
