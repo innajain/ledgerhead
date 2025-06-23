@@ -7,9 +7,10 @@ interface MobileFundCardProps {
   expanded: boolean;
   onToggle: (id: string) => void;
   setModalLot: (val: { lot: LedgerMutualFund['units_lots'][0]; lotIndex: number } | null) => void;
+  nav?: { nav: string; date: string } | null; // optional nav prop
 }
 
-export function FundCard({ mf, expanded, onToggle, setModalLot }: MobileFundCardProps) {
+export function FundCard({ mf, expanded, onToggle, setModalLot,  }: MobileFundCardProps) {
   const calculateTotalUnits = (mf: LedgerMutualFund) => {
     let totalUnits = 0;
     mf.units_lots?.forEach(lot => {

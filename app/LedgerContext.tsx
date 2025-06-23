@@ -24,6 +24,7 @@ interface LedgerContextType {
   incomeSources: income_source[];
   mutualFunds: LedgerMutualFund[];
   transactions: LedgerTransaction[];
+  navs: Record<string, { nav: string; date: string } | null>;
   refreshEntities: () => Promise<void>;
   loading: boolean;
 }
@@ -34,6 +35,7 @@ interface InitialData {
   incomeSources: income_source[];
   mutualFunds: LedgerMutualFund[];
   transactions: LedgerTransaction[];
+  navs?: Record<string, { nav: string; date: string } | null>;
 }
 
 export type LedgerExpenseTransaction = transaction & {
@@ -61,14 +63,18 @@ export type LedgerTransaction = transaction & {
   expense_transaction: expense_transaction | null;
   income_transaction: income_transaction | null;
   transfer_transaction: transfer_transaction | null;
-  investment_transaction: null | investment_transaction & {
-    units_lot: units_lot;
-  };
-  redemption_transaction: null | redemption_transaction & {
-    redemption_buckets: (redemption_bucket & {
-      units_lot: units_lot;
-    })[];
-  };
+  investment_transaction:
+    | null
+    | (investment_transaction & {
+        units_lot: units_lot;
+      });
+  redemption_transaction:
+    | null
+    | (redemption_transaction & {
+        redemption_buckets: (redemption_bucket & {
+          units_lot: units_lot;
+        })[];
+      });
 };
 
 const LedgerContext = createContext<LedgerContextType | undefined>(undefined);
@@ -85,6 +91,7 @@ export function LedgerDataProvider({ children, initialData }: { children: ReactN
   const [incomeSources, setIncomeSources] = useState<income_source[]>(initialData?.incomeSources || []);
   const [mutualFunds, setMutualFunds] = useState<LedgerMutualFund[]>(initialData?.mutualFunds || []);
   const [transactions, setTransactions] = useState<LedgerTransaction[]>(initialData?.transactions || []);
+  const navs = initialData?.navs || {};
   const [loading, setLoading] = useState(!initialData);
   const { preview, inPreview } = usePreview();
 
@@ -117,7 +124,7 @@ export function LedgerDataProvider({ children, initialData }: { children: ReactN
   }, [inPreview, preview, refreshEntities, initialData]);
 
   return (
-    <LedgerContext.Provider value={{ accounts, expenseItems, incomeSources, mutualFunds, transactions, refreshEntities, loading }}>
+    <LedgerContext.Provider value={{ accounts, expenseItems, incomeSources, mutualFunds, transactions, navs, refreshEntities, loading }}>
       {children}
     </LedgerContext.Provider>
   );

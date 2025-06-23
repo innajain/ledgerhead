@@ -10,7 +10,7 @@ import { createRedemptionVisualization } from './components/createRedemptionVisu
 import { calculateTotalUnits, calculateTotalInvested, calculateTotalRedeemed } from './components/fundCalculations';
 
 export default function MutualFundsPage() {
-  const { mutualFunds, loading } = useLedgerData();
+  const { mutualFunds, loading} = useLedgerData();
   const { inPreview } = usePreview();
   const [expandedFunds, setExpandedFunds] = React.useState<Set<string>>(new Set());
   const [modalLot, setModalLot] = React.useState<{
@@ -30,6 +30,7 @@ export default function MutualFundsPage() {
     });
   };
 
+  // Pass navs to FundCard if needed, or use navs here for display
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">

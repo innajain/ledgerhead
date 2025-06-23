@@ -5,6 +5,7 @@ import { LedgerDataProvider } from "./LedgerContext";
 import { PreviewProvider } from "./PreviewContext";
 import CheckDbHistoryInit from "./CheckDbHistoryInit";
 import { getAccounts, getExpenseItems, getIncomeSources, getMutualFunds, getTransactions } from "@/server actions/db";
+import { getNAVFromISIN } from "@/server actions/getNAVFromISIN";
 import React from "react";
 
 export const metadata: Metadata = {
@@ -26,12 +27,23 @@ export default async function RootLayout({
     getTransactions()
   ]);
 
+  // Fetch NAVs for all mutual funds (by ISIN)
+  const navs: Record<string, { nav: string; date: string } | null> = {};
+  await Promise.all(
+    mutualFunds.map(async (mf) => {
+      if (mf.isin) {
+        navs[mf.id] = await getNAVFromISIN(mf.isin);
+      }
+    })
+  );
+
   const initialData = {
     accounts,
     expenseItems,
     incomeSources,
     mutualFunds,
-    transactions
+    transactions,
+    navs, // pass navs as part of initialData
   };
 
   return (

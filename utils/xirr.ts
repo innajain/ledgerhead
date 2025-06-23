@@ -8,8 +8,6 @@ export type CashFlow = {
   amount: number;
 };
 export function calc_xirr(cashFlows: CashFlow[]): number | null {
-  console.log('Calculating XIRR for cash flows:', cashFlows);
-
   // Input validation
   if (cashFlows.length < 2) {
     console.error('XIRR requires at least 2 cash flows');
@@ -66,7 +64,6 @@ export function calc_xirr(cashFlows: CashFlow[]): number | null {
 
     // Check for convergence
     if (Math.abs(newXirr - xirr) < 1e-8) {
-      console.log(`XIRR converged after ${i + 1} iterations: ${newXirr}`);
       return newXirr * 100;
     }
 
@@ -83,7 +80,7 @@ export function calc_xirr(cashFlows: CashFlow[]): number | null {
   return null;
 }
 
-export async function get_cash_flows(mf: LedgerMutualFund) {
+export function get_cash_flows(mf: LedgerMutualFund, nav: { nav: string; date: string }): CashFlow[] {
   const investments = mf.units_lots.map(lot => ({
     date: lot.investment_transaction!.allotment_date,
     amount: -1 * lot.investment_transaction!.transaction.amount,
@@ -98,11 +95,13 @@ export async function get_cash_flows(mf: LedgerMutualFund) {
     amount: r.transaction.amount,
   }));
 
-  const curr_nav = await getNAVFromISIN(mf.isin);
-  if (curr_nav !== null) {
+  // Use navs if provided, otherwise fallback to fetching
+  let navInfo: { nav: string; date: string } | null = null;
+  navInfo = nav;
+  if (navInfo !== null) {
     uniqueRedemptions.push({
       date: new Date(),
-      amount: parseFloat(curr_nav.nav) * getUnitsHeld(mf),
+      amount: parseFloat(navInfo.nav) * getUnitsHeld(mf),
     });
   }
 
