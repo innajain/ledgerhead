@@ -29,6 +29,6 @@ export async function createTransferTransaction(data: {
       transfer_transaction: true,
     },
   });
-  await create_db_history('CREATE', 'TRANSFER_TRANSACTION', tx.transfer_transaction.id);
+  await create_db_history('CREATE', 'TRANSFER_TRANSACTION', tx.transfer_transaction!.id);
   return tx;
 }

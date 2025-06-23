@@ -38,7 +38,7 @@ function SimpleForm<T extends Record<string, string>>({
     e.preventDefault();
     setError('');
     setSuccess('');
-    if (fields.some(f => !f.readonly && !form[f.name])) {
+    if (fields.some(f => !f.readonly && f.name !== 'note' && !form[f.name])) {
       setError('All required fields must be filled.');
       return;
     }
@@ -67,10 +67,10 @@ function SimpleForm<T extends Record<string, string>>({
           <input
             className={`border rounded px-2 py-1 w-full ${f.readonly ? 'bg-gray-100' : ''}`}
             name={f.name}
-            value={form[f.name]}
+            value={form[f.name] ?? ''}
             onChange={handleChange}
             type={f.type || 'text'}
-            required={!f.readonly}
+            required={f.name !== 'note' && !f.readonly}
             readOnly={f.readonly}
           />
         </div>

@@ -48,7 +48,7 @@ export default function TransactionsPage() {
   };
 
   // Add a viewOnly prop to all form components and pass it in view mode
-  let FormComponent = null;
+  let FormComponent: React.ReactNode = null;
   if (type === 'TRANSFER') {
     const formProps = editTx
       ? {

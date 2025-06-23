@@ -9,7 +9,7 @@ interface MobileFundCardProps {
   setModalLot: (val: { lot: LedgerMutualFund['units_lots'][0]; lotIndex: number } | null) => void;
 }
 
-export function MobileFundCard({ mf, expanded, onToggle, setModalLot }: MobileFundCardProps) {
+export function FundCard({ mf, expanded, onToggle, setModalLot }: MobileFundCardProps) {
   const calculateTotalUnits = (mf: LedgerMutualFund) => {
     let totalUnits = 0;
     mf.units_lots?.forEach(lot => {
@@ -97,7 +97,18 @@ export function MobileFundCard({ mf, expanded, onToggle, setModalLot }: MobileFu
                 }}
               >
                 <div className="flex justify-between items-center mb-3">
-                  <div className="font-medium text-gray-900">Lot #{lot.index + 1}</div>
+                  <div className="font-medium text-gray-900">
+                    Lot #{lot.index + 1}
+                    {mf.units_lots[lot.index]?.investment_transaction?.allotment_date && (
+                      <span className="text-xs text-gray-500 ml-2">
+                        (
+                        {mf.units_lots[lot.index]?.investment_transaction?.allotment_date
+                          ? new Date(String(mf.units_lots[lot.index]?.investment_transaction?.allotment_date)).toLocaleDateString('en-IN')
+                          : ''}
+                        )
+                      </span>
+                    )}
+                  </div>
                   <div className="text-sm text-gray-600">{lot.totalUnits} units</div>
                 </div>
                 <div className="mb-2">

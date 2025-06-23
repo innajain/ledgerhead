@@ -29,6 +29,6 @@ export async function createExpenseTransaction(data: {
       expense_transaction: true,
     },
   });
-  await create_db_history('CREATE', 'EXPENSE_TRANSACTION', tx.expense_transaction.id);
+  await create_db_history('CREATE', 'EXPENSE_TRANSACTION', tx.expense_transaction!.id);
   return tx;
 }

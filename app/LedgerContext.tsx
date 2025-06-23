@@ -57,12 +57,19 @@ export type LedgerRedemptionTransaction = transaction & {
     })[];
   };
 };
-export type LedgerTransaction =
-  | LedgerExpenseTransaction
-  | LedgerIncomeTransaction
-  | LedgerTransferTransaction
-  | LedgerInvestmentTransaction
-  | LedgerRedemptionTransaction;
+export type LedgerTransaction = transaction & {
+  expense_transaction: expense_transaction | null;
+  income_transaction: income_transaction | null;
+  transfer_transaction: transfer_transaction | null;
+  investment_transaction: null | investment_transaction & {
+    units_lot: units_lot;
+  };
+  redemption_transaction: null | redemption_transaction & {
+    redemption_buckets: (redemption_bucket & {
+      units_lot: units_lot;
+    })[];
+  };
+};
 
 const LedgerContext = createContext<LedgerContextType | undefined>(undefined);
 

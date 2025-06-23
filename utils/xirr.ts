@@ -85,8 +85,8 @@ export function calc_xirr(cashFlows: CashFlow[]): number | null {
 
 export async function get_cash_flows(mf: LedgerMutualFund) {
   const investments = mf.units_lots.map(lot => ({
-    date: lot.investment_transaction.allotment_date,
-    amount: -1 * lot.investment_transaction.transaction.amount,
+    date: lot.investment_transaction!.allotment_date,
+    amount: -1 * lot.investment_transaction!.transaction.amount,
   }));
   const redemptions = mf.units_lots.reduce((acc, lot) => {
     const lotRedemptions = lot.redemption_buckets.map(bucket => bucket.redemption_transaction);

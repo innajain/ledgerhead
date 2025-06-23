@@ -1,5 +1,6 @@
 'use server';
 
+import { redemption_bucket } from '@/generated/prisma';
 import { create_db_history } from '../history/db_history';
 import { prisma } from '../prisma';
 
@@ -26,17 +27,17 @@ export async function createRedemptionTransaction(data: {
 
   // Sort lots by date, then by time (FIFO)
   unit_lots.sort((a, b) => {
-    const ad = a.investment_transaction.allotment_date;
-    const bd = b.investment_transaction.allotment_date;
+    const ad = a.investment_transaction!.allotment_date;
+    const bd = b.investment_transaction!.allotment_date;
     return ad.getTime() - bd.getTime();
   });
 
   const remaining_units = unit_lots.map(lot => ({
     id: lot.id,
-    remaining_units: lot.investment_transaction.units_bought - lot.redemption_buckets.reduce((acc, bucket) => acc + bucket.units_redeemed, 0),
+    remaining_units: lot.investment_transaction!.units_bought - lot.redemption_buckets.reduce((acc, bucket) => acc + bucket.units_redeemed, 0),
   }));
   const filtered_lots = remaining_units.filter(lot => lot.remaining_units > 0);
-  const redemption_buckets = [];
+  const redemption_buckets: { units_lot_id: string; units_redeemed: number }[] = [];
   let units_to_redeem = data.units_sold;
   for (const lot of filtered_lots) {
     if (units_to_redeem <= 0) break;
@@ -68,6 +69,6 @@ export async function createRedemptionTransaction(data: {
       redemption_transaction: true,
     },
   });
-  await create_db_history('CREATE', 'REDEMPTION_TRANSACTION', tx.redemption_transaction.id);
+  await create_db_history('CREATE', 'REDEMPTION_TRANSACTION', tx.redemption_transaction!.id);
   return tx;
 }

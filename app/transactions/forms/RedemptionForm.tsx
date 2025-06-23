@@ -217,7 +217,7 @@ export function RedemptionForm({ onSuccess, initial, viewOnly }: { onSuccess: ()
             type="number"
             id="amount"
             name="amount"
-            value={safeForm.amount}
+            value={safeForm.amount ?? ''}
             onChange={handleChange}
             step="0.01"
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -233,7 +233,7 @@ export function RedemptionForm({ onSuccess, initial, viewOnly }: { onSuccess: ()
             type="number"
             id="units"
             name="units"
-            value={safeForm.units}
+            value={safeForm.units ?? ''}
             onChange={handleChange}
             min="0.0001"
             step="0.0001"
@@ -252,7 +252,7 @@ export function RedemptionForm({ onSuccess, initial, viewOnly }: { onSuccess: ()
             type="number"
             id="sellNav"
             name="sellNav"
-            value={safeForm.sellNav}
+            value={safeForm.sellNav ?? ''}
             onChange={handleChange}
             min="0.0001"
             step="0.0001"
@@ -279,9 +279,10 @@ export function RedemptionForm({ onSuccess, initial, viewOnly }: { onSuccess: ()
             type="time"
             id="time"
             name="time"
-            value={safeForm.time}
+            value={safeForm.time ?? ''}
             onChange={handleTimeChange}
-            className="w-full px-2 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="--:--"
             disabled={viewOnly}
           />
         </div>

@@ -45,7 +45,7 @@ export async function createInvestmentTransaction(data: {
     },
   });
 
-  await create_db_history('CREATE', 'INVESTMENT_TRANSACTION', tx.investment_transaction.id);
+  await create_db_history('CREATE', 'INVESTMENT_TRANSACTION', tx.investment_transaction!.id);
   return tx;
 }
 

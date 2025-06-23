@@ -159,7 +159,7 @@ export function ExpenseForm({ onSuccess, initial, viewOnly }: { onSuccess: () =>
               type="number"
               id="amount"
               name="amount"
-              value={safeForm.amount}
+              value={safeForm.amount ?? ''}
               onChange={handleChange}
               step="0.01"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -175,9 +175,10 @@ export function ExpenseForm({ onSuccess, initial, viewOnly }: { onSuccess: () =>
               type="time"
               id="time"
               name="time"
-              value={safeForm.time}
+              value={safeForm.time ?? ''}
               onChange={handleTimeChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="--:--"
               disabled={!!viewOnly}
             />
           </div>

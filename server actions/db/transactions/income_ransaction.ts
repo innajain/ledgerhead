@@ -29,6 +29,6 @@ export async function createIncomeTransaction(data: {
       income_transaction: true,
     },
   });
-  await create_db_history('CREATE', 'INCOME_TRANSACTION', tx.income_transaction.id);
+  await create_db_history('CREATE', 'INCOME_TRANSACTION', tx.income_transaction!.id);
   return tx;
 }

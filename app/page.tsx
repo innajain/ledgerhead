@@ -2,7 +2,7 @@
 
 import type { LedgerMutualFund } from '@/server actions/db';
 import { getNAVFromISIN } from '@/server actions/getNAVFromISIN';
-import { useLedgerData } from './LedgerContext';
+import { LedgerTransaction, useLedgerData } from './LedgerContext';
 import { usePreview } from './PreviewContext';
 import React from 'react';
 import { calc_xirr, CashFlow, get_cash_flows } from '@/utils/xirr';
@@ -10,27 +10,14 @@ import { getUnitsHeld } from '@/utils/getUnitsHeld';
 import JSZip from 'jszip';
 import { getDbHistory } from '@/server actions/db/history/db_history';
 
-type TransactionWithRelations = {
-  id: string;
-  created_at: Date;
-  date: Date;
-  time: Date | null;
-  amount: number;
-  type: string;
-  note: string | null;
-  income_transaction?: { account_id: string } | null;
-  expense_transaction?: { account_id: string } | null;
-  transfer_transaction?: { from_account_id: string; to_account_id: string } | null;
-  investment_transaction?: { from_account_id: string } | null;
-  redemption_transaction?: { to_account_id: string } | null;
-};
 
-function getAccountBalances(accounts: any[], transactions: TransactionWithRelations[]): Record<string, number> {
+
+function getAccountBalances(accounts: any[], transactions: LedgerTransaction[]): Record<string, number> {
   const balances: Record<string, number> = {};
   accounts.forEach((acc: any) => {
     balances[acc.id] = 0;
   });
-  transactions.forEach((tx: TransactionWithRelations) => {
+  transactions.forEach((tx: LedgerTransaction) => {
     switch (tx.type) {
       case 'INCOME':
         if (tx.income_transaction) {
@@ -65,9 +52,9 @@ function getAccountBalances(accounts: any[], transactions: TransactionWithRelati
   return balances;
 }
 
-function getMonthwisePL(transactions: TransactionWithRelations[]): [string, { income: number; expenses: number }][] {
+function getMonthwisePL(transactions: LedgerTransaction[]): [string, { income: number; expenses: number }][] {
   const pl: Record<string, { income: number; expenses: number }> = {};
-  transactions.forEach((tx: TransactionWithRelations) => {
+  transactions.forEach((tx: LedgerTransaction) => {
     const date = new Date(tx.date);
     const month = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
     if (!pl[month]) pl[month] = { income: 0, expenses: 0 };
@@ -83,7 +70,7 @@ function getMonthwisePL(transactions: TransactionWithRelations[]): [string, { in
 export default function Home() {
   const { accounts, transactions, mutualFunds, loading } = useLedgerData();
   const { inPreview } = usePreview();
-  const txs = transactions as unknown as TransactionWithRelations[];
+  const txs = transactions as unknown as LedgerTransaction[];
   const balances = getAccountBalances(accounts, txs);
   const totalBalance = Math.round(Object.values(balances).reduce((a, b) => (a as number) + (b as number), 0) * 100) / 100;
   const monthwisePL = getMonthwisePL(txs);
@@ -103,9 +90,11 @@ export default function Home() {
     // eslint-disable-next-line
   }, [loading, mutualFunds.length]);
 
-
   function getAmountInvested(mf: LedgerMutualFund) {
-    const invested = mf.units_lots.reduce((total, lot) => total + lot.investment_transaction.transaction.amount, 0);
+    const invested = mf.units_lots.reduce(
+      (total, lot) => (lot.investment_transaction ? total + lot.investment_transaction.transaction.amount : total),
+      0
+    );
     const redeemed = mf.units_lots.reduce((total, lot) => {
       return total + lot.redemption_buckets.reduce((sum, b) => sum + b.redemption_transaction.transaction.amount, 0);
     }, 0);
@@ -151,7 +140,7 @@ export default function Home() {
       const flows: Record<string, CashFlow[]> = {};
       const all: CashFlow[] = [];
       await Promise.all(
-        mutualFunds.map(async (mf) => {
+        mutualFunds.map(async mf => {
           if (getUnitsHeld(mf) > 0) {
             const mfFlows = await get_cash_flows(mf);
             flows[mf.id] = mfFlows;
@@ -165,7 +154,9 @@ export default function Home() {
       }
     }
     if (!loading && mutualFunds.length > 0) fetchCashFlows();
-    return () => { isMounted = false; };
+    return () => {
+      isMounted = false;
+    };
   }, [loading, mutualFunds]);
 
   // Disable all editing in preview mode
@@ -198,16 +189,14 @@ export default function Home() {
             try {
               const dbHistory = await getDbHistory();
               function base64EncodeUnicode(str: string) {
-                return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (_match, p1) =>
-                  String.fromCharCode(parseInt(p1, 16))
-                ));
+                return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (_match, p1) => String.fromCharCode(parseInt(p1, 16))));
               }
               const dbHistoryEncoded = dbHistory.map(row => {
                 let snap = row.snapshot;
                 if (typeof snap !== 'string') snap = JSON.stringify(snap);
                 return {
                   ...row,
-                  snapshot: snap ? base64EncodeUnicode(snap) : ''
+                  snapshot: snap ? base64EncodeUnicode(snap) : '',
                 };
               });
               const dbHistoryCols = dbHistoryEncoded.length > 0 ? Object.keys(dbHistoryEncoded[0]) : [];
@@ -400,7 +389,15 @@ export default function Home() {
                       {hasAnyCurrentValue ? `₹${totalCurrentValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}` : '—'}
                     </td>
                     <td className="py-3 pr-4 text-right">
-                      {allCashFlows ? calc_xirr(allCashFlows)?.toFixed(2) + '%' : <span className="text-gray-400">Loading…</span>}
+                      {allCashFlows ? (
+                        allCashFlows.length !== 0 ? (
+                          calc_xirr(allCashFlows)?.toFixed(2) + '%'
+                        ) : (
+                          '—'
+                        )
+                      ) : (
+                        <span className="text-gray-400">Loading…</span>
+                      )}
                     </td>
                   </tr>
                 </tbody>
