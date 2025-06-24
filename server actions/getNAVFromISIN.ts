@@ -2,7 +2,7 @@
 
 import axios from "axios";
 
-async function getNAVFromISIN(
+export async function getNAVFromISIN(
   isin: string
 ): Promise<{ schemeName: string; nav: string; date: string } | null> {
   const url = "https://www.amfiindia.com/spages/NAVAll.txt";
@@ -27,5 +27,3 @@ async function getNAVFromISIN(
     return null;
   }
 }
-
-export { getNAVFromISIN };

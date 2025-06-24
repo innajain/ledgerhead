@@ -25,6 +25,7 @@ interface LedgerContextType {
   mutualFunds: LedgerMutualFund[];
   transactions: LedgerTransaction[];
   navs: Record<string, { nav: string; date: string } | null>;
+  chartData: import('@/server actions/getPortfolioChartData').PortfolioChartPoint[];
   refreshEntities: () => Promise<void>;
   loading: boolean;
 }
@@ -35,7 +36,8 @@ interface InitialData {
   incomeSources: income_source[];
   mutualFunds: LedgerMutualFund[];
   transactions: LedgerTransaction[];
-  navs?: Record<string, { nav: string; date: string } | null>;
+  navs: Record<string, { nav: string; date: string } | null>;
+  chartData: import('@/server actions/getPortfolioChartData').PortfolioChartPoint[];
 }
 
 export type LedgerExpenseTransaction = transaction & {
@@ -85,15 +87,16 @@ export function useLedgerData() {
   return ctx;
 }
 
-export function LedgerDataProvider({ children, initialData }: { children: ReactNode; initialData?: InitialData }) {
-  const [accounts, setAccounts] = useState<account[]>(initialData?.accounts || []);
-  const [expenseItems, setExpenseItems] = useState<expense_item[]>(initialData?.expenseItems || []);
-  const [incomeSources, setIncomeSources] = useState<income_source[]>(initialData?.incomeSources || []);
-  const [mutualFunds, setMutualFunds] = useState<LedgerMutualFund[]>(initialData?.mutualFunds || []);
-  const [transactions, setTransactions] = useState<LedgerTransaction[]>(initialData?.transactions || []);
-  const navs = initialData?.navs || {};
+export function LedgerDataProvider({ children, initialData }: { children: ReactNode; initialData: InitialData }) {
+  const [accounts, setAccounts] = useState<account[]>(initialData.accounts || []);
+  const [expenseItems, setExpenseItems] = useState<expense_item[]>(initialData.expenseItems || []);
+  const [incomeSources, setIncomeSources] = useState<income_source[]>(initialData.incomeSources || []);
+  const [mutualFunds, setMutualFunds] = useState<LedgerMutualFund[]>(initialData.mutualFunds || []);
+  const [transactions, setTransactions] = useState<LedgerTransaction[]>(initialData.transactions || []);
+  const navs = initialData.navs || {};
   const [loading, setLoading] = useState(!initialData);
   const { preview, inPreview } = usePreview();
+  const chartData = initialData.chartData;
 
   const refreshEntities = useCallback(async () => {
     if (inPreview) return; // Don't refresh in preview mode
@@ -124,7 +127,7 @@ export function LedgerDataProvider({ children, initialData }: { children: ReactN
   }, [inPreview, preview, refreshEntities, initialData]);
 
   return (
-    <LedgerContext.Provider value={{ accounts, expenseItems, incomeSources, mutualFunds, transactions, navs, refreshEntities, loading }}>
+    <LedgerContext.Provider value={{ accounts, expenseItems, incomeSources, mutualFunds, transactions, navs, chartData, refreshEntities, loading }}>
       {children}
     </LedgerContext.Provider>
   );

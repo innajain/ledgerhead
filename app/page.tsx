@@ -12,9 +12,10 @@ import { BalanceSheet } from './components/BalanceSheet';
 import { MutualFundHoldings } from './components/MutualFundHoldings';
 import { MonthwisePL } from './components/MonthwisePL';
 import { ExportButton } from './components/ExportButton';
+import { PortfolioValueChart } from './components/PortfolioValueChart';
 
 export default function Home() {
-  const { accounts, transactions, mutualFunds, navs, loading } = useLedgerData();
+  const { accounts, transactions, mutualFunds, navs, loading, chartData } = useLedgerData();
   const { inPreview } = usePreview();
   const txs = transactions as unknown as LedgerTransaction[];
   const balances = getAccountBalances(accounts, txs);
@@ -63,7 +64,7 @@ export default function Home() {
       await Promise.all(
         mutualFunds.map(async mf => {
           if (getUnitsHeld(mf) > 0) {
-            const mfFlows = await get_cash_flows(mf, navs[mf.id]!);
+            const mfFlows = get_cash_flows(mf, navs[mf.id]!);
             flows[mf.id] = mfFlows;
             all.push(...mfFlows);
           }
@@ -121,6 +122,7 @@ export default function Home() {
         mfCashFlows={mfCashFlows}
         allCashFlows={allCashFlows}
       />
+      <PortfolioValueChart chartData={chartData} />
       <MonthwisePL
         monthwisePL={monthwisePL}
         loading={loading}

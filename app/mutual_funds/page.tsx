@@ -5,9 +5,9 @@ import { useLedgerData } from '@/app/LedgerContext';
 import { usePreview } from '../PreviewContext';
 import { LedgerMutualFund } from '@/server actions/db';
 import { Modal } from '../components/Modal';
-import { FundCard } from './components/FundCard';
+import { MobileFundCard } from './components/MobileFundCard';
 import { createRedemptionVisualization } from './components/createRedemptionVisualization';
-import { calculateTotalUnits, calculateTotalInvested, calculateTotalRedeemed } from './components/fundCalculations';
+import { calculateTotalUnits } from './components/fundCalculations';
 
 export default function MutualFundsPage() {
   const { mutualFunds, loading} = useLedgerData();
@@ -96,7 +96,7 @@ export default function MutualFundsPage() {
             {/* Mobile view - Show cards */}
             <div className="block sm:hidden">
               {mutualFunds.map(mf => (
-                <FundCard key={mf.id} mf={mf} expanded={expandedFunds.has(mf.id)} onToggle={toggleExpanded} setModalLot={setModalLot} />
+                <MobileFundCard key={mf.id} mf={mf} expanded={expandedFunds.has(mf.id)} onToggle={toggleExpanded} setModalLot={setModalLot} />
               ))}
             </div>
 
@@ -109,17 +109,12 @@ export default function MutualFundsPage() {
                       <tr>
                         <th className="text-left py-4 px-6 font-medium text-gray-900">Fund Details</th>
                         <th className="text-left py-4 px-4 font-medium text-gray-900">Units</th>
-                        <th className="text-left py-4 px-4 font-medium text-gray-900">Invested</th>
-                        <th className="text-left py-4 px-4 font-medium text-gray-900">Redeemed</th>
-                        <th className="text-left py-4 px-6 font-medium text-gray-900">Net Value</th>
+                        <th className="text-left py-4 px-4 font-medium text-gray-900">Current Investment</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200">
                       {mutualFunds.map(mf => {
                         const totalUnits = calculateTotalUnits(mf);
-                        const totalInvested = calculateTotalInvested(mf);
-                        const totalRedeemed = calculateTotalRedeemed(mf);
-                        const currentValue = totalInvested - totalRedeemed;
                         const isExpanded = expandedFunds.has(mf.id);
                         const visualization = createRedemptionVisualization(mf);
 
@@ -138,9 +133,13 @@ export default function MutualFundsPage() {
                                 </div>
                               </td>
                               <td className="py-4 px-4 font-medium text-gray-900">{totalUnits}</td>
-                              <td className="py-4 px-4 font-medium text-green-600">₹{totalInvested.toLocaleString('en-IN')}</td>
-                              <td className="py-4 px-4 font-medium text-red-600">₹{totalRedeemed.toLocaleString('en-IN')}</td>
-                              <td className="py-4 px-6 font-medium text-blue-600">₹{currentValue.toLocaleString('en-IN')}</td>
+                              <td className="py-4 px-4 font-medium text-green-600">
+                                ₹{mf.units_lots.reduce((sum, lot) => {
+                                  if (!lot.investment_transaction) return sum;
+                                  const unitsRemaining = lot.investment_transaction.units_bought - lot.redemption_buckets.reduce((rSum, b) => rSum + b.units_redeemed, 0);
+                                  return sum + unitsRemaining * lot.investment_transaction.buy_nav;
+                                }, 0).toLocaleString('en-IN')}
+                              </td>
                             </tr>
                             {isExpanded && mf.units_lots && mf.units_lots.length > 0 && (
                               <tr>

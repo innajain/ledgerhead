@@ -10,7 +10,7 @@ interface MobileFundCardProps {
   nav?: { nav: string; date: string } | null; // optional nav prop
 }
 
-export function FundCard({ mf, expanded, onToggle, setModalLot,  }: MobileFundCardProps) {
+export function MobileFundCard({ mf, expanded, onToggle, setModalLot,  }: MobileFundCardProps) {
   const calculateTotalUnits = (mf: LedgerMutualFund) => {
     let totalUnits = 0;
     mf.units_lots?.forEach(lot => {
@@ -21,30 +21,18 @@ export function FundCard({ mf, expanded, onToggle, setModalLot,  }: MobileFundCa
     });
     return totalUnits;
   };
-  const calculateTotalInvested = (mf: LedgerMutualFund) => {
-    let totalInvested = 0;
+  
+  const calculateCurrentInvestment = (mf: LedgerMutualFund) => {
+    let total = 0;
     mf.units_lots?.forEach(lot => {
-      if (lot.investment_transaction) {
-        totalInvested += lot.investment_transaction.transaction.amount;
-      }
+      if (!lot.investment_transaction) return;
+      const unitsRemaining = lot.investment_transaction.units_bought - lot.redemption_buckets.reduce((rSum, b) => rSum + b.units_redeemed, 0);
+      total += unitsRemaining * lot.investment_transaction.buy_nav;
     });
-    return totalInvested;
-  };
-  const calculateTotalRedeemed = (mf: LedgerMutualFund) => {
-    let totalRedeemed = 0;
-    mf.units_lots?.forEach(lot => {
-      lot.redemption_buckets?.forEach(bucket => {
-        if (bucket.redemption_transaction) {
-          totalRedeemed += bucket.redemption_transaction.transaction.amount;
-        }
-      });
-    });
-    return totalRedeemed;
+    return total;
   };
   const totalUnits = calculateTotalUnits(mf);
-  const totalInvested = calculateTotalInvested(mf);
-  const totalRedeemed = calculateTotalRedeemed(mf);
-  const currentValue = totalInvested - totalRedeemed;
+  const currentInvestment = calculateCurrentInvestment(mf);
   const visualization = createRedemptionVisualization(mf);
 
   return (
@@ -62,18 +50,10 @@ export function FundCard({ mf, expanded, onToggle, setModalLot,  }: MobileFundCa
             <div className="text-xs text-gray-500">Current</div>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-4 text-sm">
+        <div className="grid grid-cols-1 gap-4 text-sm">
           <div>
-            <div className="text-green-600 font-medium">₹{totalInvested.toLocaleString('en-IN')}</div>
-            <div className="text-xs text-gray-500">Invested</div>
-          </div>
-          <div>
-            <div className="text-red-600 font-medium">₹{totalRedeemed.toLocaleString('en-IN')}</div>
-            <div className="text-xs text-gray-500">Redeemed</div>
-          </div>
-          <div>
-            <div className="text-blue-600 font-medium">₹{currentValue.toLocaleString('en-IN')}</div>
-            <div className="text-xs text-gray-500">Net Value</div>
+            <div className="text-green-600 font-medium">₹{currentInvestment.toLocaleString('en-IN')}</div>
+            <div className="text-xs text-gray-500">Current Investment</div>
           </div>
         </div>
         <div className="mt-3 flex justify-center">
@@ -127,7 +107,6 @@ export function FundCard({ mf, expanded, onToggle, setModalLot,  }: MobileFundCa
                     ))}
                   </div>
                 </div>
-                <div className="text-xs text-gray-500 text-center">Tap for detailed breakdown</div>
               </div>
             ))}
           </div>

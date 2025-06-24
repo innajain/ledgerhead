@@ -6,7 +6,10 @@ import { PreviewProvider } from "./PreviewContext";
 import CheckDbHistoryInit from "./CheckDbHistoryInit";
 import { getAccounts, getExpenseItems, getIncomeSources, getMutualFunds, getTransactions } from "@/server actions/db";
 import { getNAVFromISIN } from "@/server actions/getNAVFromISIN";
+import { getPortfolioChartData } from '@/server actions/getPortfolioChartData';
 import React from "react";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "LedgerHead",
@@ -37,6 +40,8 @@ export default async function RootLayout({
     })
   );
 
+  const chartData = await getPortfolioChartData();
+
   const initialData = {
     accounts,
     expenseItems,
@@ -44,6 +49,7 @@ export default async function RootLayout({
     mutualFunds,
     transactions,
     navs, // pass navs as part of initialData
+    chartData
   };
 
   return (
